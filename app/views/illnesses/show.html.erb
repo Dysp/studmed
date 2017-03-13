@@ -1,8 +1,12 @@
 <br>
-<h4><%= @illness.name.humanize %></h4>
+<h2><%= @illness.name.humanize %></h2>
 <div class="row">
   <div class="col-md-8">
+    <h5>Beskrivelse:</h5>
     <p><%= @illness.description %></p>
+    <hr>
+    <h5>Anamnese:</h5>
+    <p><%= @illness.anamnesis %></p>
   </div>
   <div class="col-md-4">
     <div class="card">
@@ -17,30 +21,41 @@
     </div>
   </div>
 </div>
+<br>
 <!-- Nav tabs -->
-<ul class="nav nav-tabs" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" data-toggle="tab" href="#clinical" role="tab">Klinisk</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#paraclinical" role="tab">Paraklinisk</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#tests" role="tab">Billeddiagnostik</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#treatment" role="tab">Behandling?</a>
-  </li>
-</ul>
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#clinical" role="tab">Klinisk</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#paraclinical" role="tab">Paraklinisk</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#tests" role="tab">Billeddiagnostik</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#treatment" role="tab">Behandling?</a>
+      </li>
+    </ul>
+  </div>
 
 <!-- Tab panes -->
-<div class="tab-content">
-  <div class="tab-pane active" id="clinical" role="tabpanel">
-    <%= @illness.clinical %>
+  <div class="card-block">
+    <div class="tab-content">
+      <div class="tab-pane active" id="clinical" role="tabpanel">
+        <%= @illness.clinical.inspection %>
+      </div>
+      <div class="tab-pane" id="paraclinical" role="tabpanel">
+        <%= @illness.paraclinical.biopsy %>
+      </div>
+      <div class="tab-pane" id="tests" role="tabpanel">Billediagnostikken
+      </div>
+      <div class="tab-pane" id="treatment" role="tabpanel">Oooog behandling
+      </div>
+    </div>
   </div>
-  <div class="tab-pane" id="paraclinical" role="tabpanel">Paraklinisk</div>
-  <div class="tab-pane" id="tests" role="tabpanel">Billediagnostikken</div>
-  <div class="tab-pane" id="treatment" role="tabpanel">Oooog behandling</div>
 </div>
 
 <hr>

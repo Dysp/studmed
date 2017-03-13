@@ -14,6 +14,9 @@ class IllnessesController < ApplicationController
   def new
     @illness = Illness.new
     @illness.clinical = Clinical.new(illness_id: @illness.id)
+    @illness.paraclinical = Paraclinical.new(illness_id: @illness.id)
+
+    @categories = ['Tema D', 'Tema E', 'Whatever']
   end
 
   # GET /illness/1/edit
@@ -66,6 +69,7 @@ class IllnessesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def illness_params
       params.require(:illness).permit(:name, :description, :etiology, :patogenesis, :incidence, :prevalence, :category, :anamnesis,
-                                    clinical_attributes: [:id, :inspection, :palpation, :percussion, :auscultation, :_destroy])
+                                    clinical_attributes: [:id, :inspection, :palpation, :percussion, :auscultation, :_destroy],
+                                    paraclinical_attributes: [:id, :biopsy, :lfu, :ekg, :_destroy])
     end
 end

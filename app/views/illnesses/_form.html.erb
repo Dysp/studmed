@@ -1,7 +1,7 @@
-<%= simple_form_for(illness) do |f| %>
+<%= simple_form_for illness, defaults: { label_html: { class: 'lead' } } do |f| %>
   <% if illness.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(illness.errors.count, "error") %> prohibited this illness from being saved:</h2>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= illness.errors.count %> fejl forhindrede sygdommen i at blive gemt:</h2>
 
       <ul>
       <% illness.errors.full_messages.each do |message| %>
@@ -10,19 +10,20 @@
       </ul>
     </div>
   <% end %>
-<div class="card-group">
+<div class="card-columns">
   <div class="card">
     <div class="card-header">
       <h6>Sygdom</h6>
     </div>
     <div class="card-block">
-      <%= f.input :name %>
-      <%= f.input :description %>
-      <%= f.input :etiology %>
-      <%= f.input :patogenesis %>
-      <%= f.input :incidence %>
-      <%= f.input :prevalence %>
-      <%= f.input :category %>
+      <%= f.input :name, label: 'Sygdommens navn', placeholder: 'fx: aorta stenose', required: true %>
+      <%= f.input :description, label: 'Kort beskrivelse', hint: 'Beskriv kort sygdommen', required: true %>
+      <%= f.input :anamnesis, label: 'Anamnese', hint: 'Typisk anamnese', required: true %>
+      <%= f.input :etiology, label: 'Ætiologi', hint: 'Sygdommens årsag', required: true %>
+      <%= f.input :patogenesis, label: 'Patogenese', hint: 'Sygdomsprocessen', required: true %>
+      <%= f.input :incidence, label: 'Incidens', hint: 'Antallet af nye tilfælde pr. tidsperiode', required: true %>
+      <%= f.input :prevalence, label: 'Prevalens', hint: 'Antallet af tilfælde i populationen', required: true %>
+      <%= f.input :category, label: 'Hvilket tema?', collection: @categories, required: true %>
     </div>
   </div>
 
@@ -32,15 +33,27 @@
       <h6>Klinik</h6>
     </div>
     <div class="card-block">
-      <%= clinic.input :inspection %>
-      <%= clinic.input :palpation %>
-      <%= clinic.input :percussion %>
-      <%= clinic.input :auscultation %>
+      <%= clinic.input :inspection, label: 'Inspektionsfund', placeholder: 'fx: Fejlstilling' %>
+      <%= clinic.input :palpation, label: 'Palpationsfund', placeholder: 'fx: Brætstiv abdomen' %>
+      <%= clinic.input :percussion, label: 'Perkussionsfund', placeholder: 'fx: Rungende lyd?' %>
+      <%= clinic.input :auscultation, label: 'Auskultationsfund', placeholder: 'fx: Ronchi' %>
     </div>
   </div>
   <% end %>
+  <%= f.simple_fields_for :paraclinical do |paraclinic| %>
+      <div class="card">
+        <div class="card-header">
+          <h6>Paraklinik</h6>
+        </div>
+        <div class="card-block">
+          <%= paraclinic.input :biopsy, label: 'Biopsi?', placeholder: 'fx: Grovnålsbiopsi indikeret' %>
+          <%= paraclinic.input :lfu, label: 'Lungefunktionsundersøgelse' %>
+          <%= paraclinic.input :ekg, label: 'Elektrokardiogram' %>
+        </div>
+      </div>
+  <% end %>
 </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions card-block">
+    <%= f.button :submit, 'Gem', class: "btn btn-lg btn-success" %>
   </div>
 <% end %>
