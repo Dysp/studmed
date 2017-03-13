@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  paraclinical_id: 1
+  creatinine: false
+  creatinine_value: MyString
+
+two:
+  paraclinical_id: 1
+  creatinine: false
+  creatinine_value: MyString

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  inspection: MyText
+  palpation: MyText
+  percussion: MyText
+  auscultation: MyText
+  illness_id: 1
+
+two:
+  inspection: MyText
+  palpation: MyText
+  percussion: MyText
+  auscultation: MyText
+  illness_id: 1

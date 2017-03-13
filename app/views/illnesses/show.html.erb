@@ -1,0 +1,49 @@
+<br>
+<h4><%= @illness.name.humanize %></h4>
+<div class="row">
+  <div class="col-md-8">
+    <p><%= @illness.description %></p>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        Statistik
+      </div>
+      <div class="card-block">
+        <p>Kategori: <%= @illness.category %></p>
+        <p>Incidens: <%= @illness.incidence %></p>
+        <p>Prevalens: <%= @illness.prevalence %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#clinical" role="tab">Klinisk</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#paraclinical" role="tab">Paraklinisk</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#tests" role="tab">Billeddiagnostik</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#treatment" role="tab">Behandling?</a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="clinical" role="tabpanel">
+    <%= @illness.clinical %>
+  </div>
+  <div class="tab-pane" id="paraclinical" role="tabpanel">Paraklinisk</div>
+  <div class="tab-pane" id="tests" role="tabpanel">Billediagnostikken</div>
+  <div class="tab-pane" id="treatment" role="tabpanel">Oooog behandling</div>
+</div>
+
+<hr>
+
+<%= link_to 'Edit', edit_illness_path(@illness) %> |
+<%= link_to 'Back', illnesses_path %>

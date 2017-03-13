@@ -1,0 +1,46 @@
+<%= simple_form_for(illness) do |f| %>
+  <% if illness.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(illness.errors.count, "error") %> prohibited this illness from being saved:</h2>
+
+      <ul>
+      <% illness.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="card-group">
+  <div class="card">
+    <div class="card-header">
+      <h6>Sygdom</h6>
+    </div>
+    <div class="card-block">
+      <%= f.input :name %>
+      <%= f.input :description %>
+      <%= f.input :etiology %>
+      <%= f.input :patogenesis %>
+      <%= f.input :incidence %>
+      <%= f.input :prevalence %>
+      <%= f.input :category %>
+    </div>
+  </div>
+
+  <%= f.simple_fields_for :clinical do |clinic| %>
+  <div class="card">
+    <div class="card-header">
+      <h6>Klinik</h6>
+    </div>
+    <div class="card-block">
+      <%= clinic.input :inspection %>
+      <%= clinic.input :palpation %>
+      <%= clinic.input :percussion %>
+      <%= clinic.input :auscultation %>
+    </div>
+  </div>
+  <% end %>
+</div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

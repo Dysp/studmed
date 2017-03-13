@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  biopsy: MyString
+  lfu: false
+  ekg: false
+  illness_id: 1
+
+two:
+  biopsy: MyString
+  lfu: false
+  ekg: false
+  illness_id: 1

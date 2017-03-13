@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  etiology: MyText
+  patogenesis: MyText
+  incidence: 1
+  prevalence: 1
+  category: MyString
+  anamnesis: MyText
+
+two:
+  etiology: MyText
+  patogenesis: MyText
+  incidence: 1
+  prevalence: 1
+  category: MyString
+  anamnesis: MyText
