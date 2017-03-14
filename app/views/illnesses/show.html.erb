@@ -1,17 +1,23 @@
 <br>
-<h2><%= @illness.name.humanize %></h2>
 <div class="row">
-  <div class="col-md-8">
-    <h5>Beskrivelse:</h5>
-    <p><%= @illness.description %></p>
-    <hr>
-    <h5>Anamnese:</h5>
-    <p><%= @illness.anamnesis %></p>
-  </div>
-  <div class="col-md-4">
-    <div class="card">
+  <div class="col-md-10">
+    <div class="card card-outline-primary">
       <div class="card-header">
-        Statistik
+        <h3><span class="icon-i-first-aid badge badge-primary"> </span> <%= @illness.name.humanize %></h3>
+      </div>
+      <div class="card-block">
+        <h5 class="lead"><span class="fa fa-info-circle"></span> Beskrivelse:</h5>
+        <p><%= @illness.description %></p>
+        <hr>
+        <h5 class="lead"><span class="icon-i-family-practice"></span> Anamnese:</h5>
+        <p><%= @illness.anamnesis %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="card card-outline-info">
+      <div class="card-header">
+        <span class="fa fa-area-chart badge badge-primary pull-right"> </span><h4 class="pull-left">Hurtig info</h4>
       </div>
       <div class="card-block">
         <p>Kategori: <%= @illness.category %></p>
@@ -44,8 +50,35 @@
 <!-- Tab panes -->
   <div class="card-block">
     <div class="tab-content">
-      <div class="tab-pane active" id="clinical" role="tabpanel">
-        <%= @illness.clinical.inspection %>
+      <%= render 'clinical' %>
+      <div class="tab-pane" id="paraclinical" role="tabpanel">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card bg-faded">
+              <div class="card-block">
+                <h5>Biopsy</h5>
+                <p><%= @illness.paraclinical.biopsy %></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card bg-faded">
+              <div class="card-block">
+                <h5>Billeddiagnostiske indikationer (WIP)</h5>
+                <ul class="list-group bg-faded">
+                <% if @illness.paraclinical.ekg %>
+                  <li class="list-group-item">
+                    <h2><span class="icon-i-imaging-alternative-mri"> </span></h2>
+                    <p> EKG er indikeret ved... blabla. Og så er der MRI billed. jaja</p>
+                  </li>
+                <% end %>
+                </ul>
+                <p>EKG? <%= @illness.paraclinical.ekg %></p>
+                <p>LFU? <%= @illness.paraclinical.lfu %></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="tab-pane" id="paraclinical" role="tabpanel">
         <%= @illness.paraclinical.biopsy %>

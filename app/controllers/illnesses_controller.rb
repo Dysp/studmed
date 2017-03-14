@@ -15,6 +15,7 @@ class IllnessesController < ApplicationController
     @illness = Illness.new
     @illness.clinical = Clinical.new(illness_id: @illness.id)
     @illness.paraclinical = Paraclinical.new(illness_id: @illness.id)
+    @illness.paraclinical.test = Test.new(paraclinical_id: @illness.paraclinical.id)
 
     @categories = ['Tema D', 'Tema E', 'Whatever']
   end
@@ -70,6 +71,6 @@ class IllnessesController < ApplicationController
     def illness_params
       params.require(:illness).permit(:name, :description, :etiology, :patogenesis, :incidence, :prevalence, :category, :anamnesis,
                                     clinical_attributes: [:id, :inspection, :palpation, :percussion, :auscultation, :_destroy],
-                                    paraclinical_attributes: [:id, :biopsy, :lfu, :ekg, :_destroy])
+                                    paraclinical_attributes: [:id, :biopsy, :lfu, :ekg, :_destroy, test_attributes: [:id, :xray, :_destroy]])
     end
 end

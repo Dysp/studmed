@@ -51,6 +51,27 @@
           <%= paraclinic.input :ekg, label: 'Elektrokardiogram' %>
         </div>
       </div>
+      <%= paraclinic.simple_fields_for :test do |test| %>
+      <div class="card">
+        <div class="card-header">
+          <h6 class="lead">Billeddiagnostiske indikationer</h6>
+        </div>
+        <div class="card-block">
+          <%= test.input :xray %>
+          <%= test.input :xray_indication %>
+          <%= test.input :mri %>
+          <%= test.input :mri_indication %>
+          <%= test.input :pet %>
+          <%= test.input :pet_indication %>
+          <%= test.input :ct %>
+          <%= test.input :ct_indication %>
+          <%= test.input :pet_mri %>
+          <%= test.input :pet_mri_indication %>
+          <%= test.input :ultrasound %>
+          <%= test.input :ultrasound_indication %>
+        </div>
+      </div>
+      <% end %>
   <% end %>
 </div>
   <div class="actions card-block">
