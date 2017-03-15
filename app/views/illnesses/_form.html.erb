@@ -18,11 +18,8 @@
     <div class="card-block">
       <%= f.input :name, label: 'Sygdommens navn', placeholder: 'fx: aorta stenose', required: true %>
       <%= f.input :description, label: 'Kort beskrivelse', hint: 'Beskriv kort sygdommen', required: true %>
-      <%= f.input :anamnesis, label: 'Anamnese', hint: 'Typisk anamnese', required: true %>
-      <%= f.input :etiology, label: 'Ætiologi', hint: 'Sygdommens årsag', required: true %>
-      <%= f.input :patogenesis, label: 'Patogenese', hint: 'Sygdomsprocessen', required: true %>
+      <%= f.input :etio_and_pato, label: 'Ætiologi', hint: 'Sygdommens årsag', required: true %>
       <%= f.input :incidence, label: 'Incidens', hint: 'Antallet af nye tilfælde pr. tidsperiode', required: true %>
-      <%= f.input :prevalence, label: 'Prevalens', hint: 'Antallet af tilfælde i populationen', required: true %>
       <%= f.input :category, label: 'Hvilket tema?', collection: @categories, required: true %>
     </div>
   </div>
@@ -33,6 +30,7 @@
       <h6>Klinik</h6>
     </div>
     <div class="card-block">
+      <%= clinic.input :anamnesis, label: 'Anamnese', placeholder: 'fx: Siger noget...' %>
       <%= clinic.input :inspection, label: 'Inspektionsfund', placeholder: 'fx: Fejlstilling' %>
       <%= clinic.input :palpation, label: 'Palpationsfund', placeholder: 'fx: Brætstiv abdomen' %>
       <%= clinic.input :percussion, label: 'Perkussionsfund', placeholder: 'fx: Rungende lyd?' %>
@@ -58,17 +56,11 @@
         </div>
         <div class="card-block">
           <%= test.input :xray %>
-          <%= test.input :xray_indication %>
           <%= test.input :mri %>
-          <%= test.input :mri_indication %>
           <%= test.input :pet %>
-          <%= test.input :pet_indication %>
           <%= test.input :ct %>
-          <%= test.input :ct_indication %>
           <%= test.input :pet_mri %>
-          <%= test.input :pet_mri_indication %>
           <%= test.input :ultrasound %>
-          <%= test.input :ultrasound_indication %>
         </div>
       </div>
       <% end %>

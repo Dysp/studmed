@@ -69,8 +69,9 @@ class IllnessesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def illness_params
-      params.require(:illness).permit(:name, :description, :etiology, :patogenesis, :incidence, :prevalence, :category, :anamnesis,
-                                    clinical_attributes: [:id, :inspection, :palpation, :percussion, :auscultation, :_destroy],
-                                    paraclinical_attributes: [:id, :biopsy, :lfu, :ekg, :_destroy, test_attributes: [:id, :xray, :_destroy]])
+      params.require(:illness).permit(:name, :description, :etio_and_pato, :incidence, :prevalence, :category,
+                                    clinical_attributes: [:id, :anamnesis, :inspection, :palpation, :percussion, :auscultation, :_destroy],
+                                    paraclinical_attributes: [:id, :biopsy, :lfu, :ekg, :_destroy,
+                                                              test_attributes: [:id, :xray, :mri, :ct, :pet, :pet_mri, :ultrasound, :_destroy]])
     end
 end

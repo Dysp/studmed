@@ -5,5 +5,5 @@ class Illness < ApplicationRecord
   accepts_nested_attributes_for :clinical, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :paraclinical, :reject_if => :all_blank, :allow_destroy => true
 
-  validates_presence_of :etiology, :patogenesis, :incidence, :category, :anamnesis, :name, :description
+  validates_presence_of :etio_and_pato, :incidence, :category, :name, :description
 end

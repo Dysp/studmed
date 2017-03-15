@@ -1,96 +1,84 @@
-<br>
 <div class="row">
   <div class="col-md-10">
-    <div class="card card-outline-primary">
-      <div class="card-header">
+    <div class="card border-0">
+      <div class="card-block">
         <h3><span class="icon-i-first-aid badge badge-primary"> </span> <%= @illness.name.humanize %></h3>
+        <small>Synonymer: <%= @illness.synonyms %> </small>
       </div>
       <div class="card-block">
         <h5 class="lead"><span class="fa fa-info-circle"></span> Beskrivelse:</h5>
         <p><%= @illness.description %></p>
-        <hr>
-        <h5 class="lead"><span class="icon-i-family-practice"></span> Anamnese:</h5>
-        <p><%= @illness.anamnesis %></p>
       </div>
     </div>
   </div>
-  <div class="col-md-2">
-    <div class="card card-outline-info">
+    <div class="col-md-2">
+      <br>
+    <div class="card card-shadow">
       <div class="card-header">
-        <span class="fa fa-area-chart badge badge-primary pull-right"> </span><h4 class="pull-left">Hurtig info</h4>
+        <span class="fa fa-area-chart badge badge-warning pull-right"> </span><h4 class="pull-left">Hurtig info</h4>
       </div>
       <div class="card-block">
         <p>Kategori: <%= @illness.category %></p>
         <p>Incidens: <%= @illness.incidence %></p>
-        <p>Prevalens: <%= @illness.prevalence %></p>
       </div>
     </div>
   </div>
 </div>
 <br>
-<!-- Nav tabs -->
-<div class="card">
-  <div class="card-header">
-    <ul class="nav nav-tabs card-header-tabs" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#clinical" role="tab">Klinisk</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#paraclinical" role="tab">Paraklinisk</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#tests" role="tab">Billeddiagnostik</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#treatment" role="tab">Behandling?</a>
-      </li>
-    </ul>
-  </div>
-
-<!-- Tab panes -->
-  <div class="card-block">
-    <div class="tab-content">
-      <%= render 'clinical' %>
-      <div class="tab-pane" id="paraclinical" role="tabpanel">
+          <hr>
+<div id="accordion" role="tablist" aria-multiselectable="true">
+  <!-- Etiology and pathogenesis -->
+   <div class="card">
+    <div class="card-header" role="tab" id="headingPato">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsePato" aria-expanded="false" aria-controls="collapsePato">
+          Ætiologi og patogenese
+        </a>
+      </h5>
+    </div>
+    <div id="collapsePato" class="collapse show" role="tabpanel" aria-labelledby="headingPato">
+      <div class="card-block">
         <div class="row">
-          <div class="col-md-6">
-            <div class="card bg-faded">
-              <div class="card-block">
-                <h5>Biopsy</h5>
-                <p><%= @illness.paraclinical.biopsy %></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card bg-faded">
-              <div class="card-block">
-                <h5>Billeddiagnostiske indikationer (WIP)</h5>
-                <ul class="list-group bg-faded">
-                <% if @illness.paraclinical.ekg %>
-                  <li class="list-group-item">
-                    <h2><span class="icon-i-imaging-alternative-mri"> </span></h2>
-                    <p> EKG er indikeret ved... blabla. Og så er der MRI billed. jaja</p>
-                  </li>
-                <% end %>
-                </ul>
-                <p>EKG? <%= @illness.paraclinical.ekg %></p>
-                <p>LFU? <%= @illness.paraclinical.lfu %></p>
-              </div>
-            </div>
+          <div class="col-md-12">
+              <p><%= @illness.etio_and_pato %></p>
           </div>
         </div>
       </div>
-      <div class="tab-pane" id="paraclinical" role="tabpanel">
-        <%= @illness.paraclinical.biopsy %>
+    </div>
+  </div>
+
+  <!-- Clinical and paraclinical -->
+  <div class="card">
+    <div class="card-header" role="tab" id="headingClinical">
+      <h5 class="mb-0">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseClinical" aria-expanded="true" aria-controls="collapseClinical">
+          Klinik og paraklinik
+        </a>
+      </h5>
+    </div>
+    <div id="collapseClinical" class="collapse" role="tabpanel" aria-labelledby="headingClinical">
+      <div class="card-block">
+        <%= render 'clinical' %>
       </div>
-      <div class="tab-pane" id="tests" role="tabpanel">Billediagnostikken
-      </div>
-      <div class="tab-pane" id="treatment" role="tabpanel">Oooog behandling
+    </div>
+  </div>
+
+  <!-- Clinical and paraclinical -->
+  <div class="card">
+    <div class="card-header" role="tab" id="headingTreatment">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTreatment" aria-expanded="false" aria-controls="collapseTreatment">
+          Behandling, forløb og prognose
+        </a>
+      </h5>
+    </div>
+    <div id="collapseTreatment" class="collapse" role="tabpanel" aria-labelledby="headingTreatment">
+      <div class="card-block">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
       </div>
     </div>
   </div>
 </div>
-
 <hr>
 
 <%= link_to 'Edit', edit_illness_path(@illness) %> |

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314181053) do
+ActiveRecord::Schema.define(version: 20170315202511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,25 +31,24 @@ ActiveRecord::Schema.define(version: 20170314181053) do
     t.integer  "illness_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "anamnesis"
   end
 
   create_table "illnesses", force: :cascade do |t|
-    t.text     "etiology"
-    t.text     "patogenesis"
-    t.integer  "incidence"
-    t.integer  "prevalence"
+    t.text     "etio_and_pato"
+    t.string   "incidence"
     t.string   "category"
-    t.text     "anamnesis"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.string   "name"
     t.string   "description"
+    t.string   "synonyms"
   end
 
   create_table "paraclinicals", force: :cascade do |t|
     t.string   "biopsy"
-    t.boolean  "lfu"
-    t.boolean  "ekg"
+    t.string   "lfu"
+    t.string   "ekg"
     t.integer  "illness_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -57,20 +56,14 @@ ActiveRecord::Schema.define(version: 20170314181053) do
 
   create_table "tests", force: :cascade do |t|
     t.integer  "paraclinical_id"
-    t.boolean  "xray"
-    t.string   "xray_indication"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.boolean  "mri"
-    t.string   "mri_indication"
-    t.boolean  "ct"
-    t.string   "ct_indication"
-    t.boolean  "pet"
-    t.string   "pet_indication"
-    t.boolean  "pet_mri"
-    t.string   "pet_mri_indication"
-    t.boolean  "ultrasound"
-    t.string   "ultrasound_indication"
+    t.string   "xray"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "mri"
+    t.string   "ct"
+    t.string   "pet"
+    t.string   "pet_mri"
+    t.string   "ultrasound"
   end
 
   create_table "treatments", force: :cascade do |t|

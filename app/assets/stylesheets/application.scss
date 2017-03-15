@@ -1,3 +1,26 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "wfmi-style";
+
+// Box shadow helper
+@mixin BoxShadowHelper($level: 1){
+  @if $level == 1 {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .16), 0 1px 3px 0 rgba(0, 0, 0, .12);
+  }
+  @if $level == 2 {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .18), 0 2px 5px 0 rgba(0, 0, 0, .15);
+  }
+}
+
+a {transition: .25s all;}
+.card-shadow {
+  overflow: hidden;
+  @include BoxShadowHelper(1);
+  transition: .25s box-shadow;
+  &:focus,
+  &:hover {@include BoxShadowHelper(2);}
+}
+.card-inverse .card-img-overlay {
+  background-color: rgba(#333,.85);
+  border-color: rgba(#333,.85);
+}
