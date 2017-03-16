@@ -2,28 +2,25 @@
 <%= link_to 'Ny sygdom', new_illness_path, class: "btn btn-lg btn-success" %>
 <br>
 <br>
-<div class="card-group">
+<table class="table table-hover">
+  <thead class="thead-default">
+    <tr>
+      <th>Sygdommens navn</th>
+      <th>Kort beskrivelse</th>
+      <th>Kategori</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
   <% for illness in @illnesses %>
-      <div class="card">
-        <div class="card-header">
-          <%= link_to illness.name, illness, class: "lead" %>
-          <%= link_to 'Destroy', illness, method: :delete, class: "btn btn-sm btn-outline-danger pull-right", data: { confirm: 'Are you sure?' } %>
-          <p class="pull-right" style="margin-left: 10px; margin-right: 10px;"> | </p>
-          <%= link_to 'Edit', edit_illness_path(illness), class: "btn btn-sm btn-outline-warning pull-right" %>
-        </div>
-        <div class="card-block">
-          <p class="card-text">
-            Lavet d. <%= illness.created_at.strftime("%d-%m-%y kl. %H:%M") %>.
-            <% if illness.created_at != illness.updated_at %>
-                <br>
-                <br>
-                <i>Desuden opdateret <%= illness.updated_at.strftime("%d-%m-%y kl. %H:%M") %></i>
-            <% end %>
-          </p>
-        </div>
-        <div class="card-footer">
-          <%= link_to 'Gå til sygdom', illness, class: "btn btn-sm btn-outline-primary pull-left" %>
-        </div>
-      </div>
-  <% end %>
-</div>
+    <tr>
+      <td><%= illness.name %></td>
+      <td><%= illness.description %></td>
+      <td><%= illness.category %></td>
+      <td><%= link_to('Gå til sygdom', illness_path(illness), class: "btn btn-sm btn-primary")%></td>
+      <td><%= link_to('Edit', edit_illness_path(illness), class: "btn btn-sm btn-warning")%></td>
+      <td><%= link_to "Add diff", differentials_path(differential_id: illness), :method => :post, class: 'btn btn-sm btn-primary disabled' %></td>
+    </tr>
+      <% end %>
+  </tbody>
+</table>

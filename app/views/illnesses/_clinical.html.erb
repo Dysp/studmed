@@ -56,42 +56,42 @@
     <div class="card-block">
       <div id="imaging" role="tablist" aria-multiselectable="true">
             <a data-toggle="collapse" data-parent="#imaging" href="#collapseMRI" aria-expanded="true" aria-controls="collapseMRI">
-              <span class="badge <%= imaging_badge(test, :mri) %> badge-pill">MRI</span>
+              <span class="badge <%= imaging_badge(test.mri) %> badge-pill">MRI</span>
             </a>
             <div id="collapseMRI" class="collapse" role="tabpanel" aria-labelledby="headingMRI">
               <%= test.try(:mri) %>
             </div>
         <hr>
             <a data-toggle="collapse" data-parent="#imaging" href="#collapseXray" aria-expanded="true" aria-controls="collapseXray">
-              <span class="badge <%= imaging_badge(test, :xray) %> badge-pill">Røntgen</span>
+              <span class="badge <%= imaging_badge(test.xray) %> badge-pill">Røntgen</span>
             </a>
             <div id="collapseXray" class="collapse" role="tabpanel" aria-labelledby="headingXray">
               <%= test.try(:xray) %>
             </div>
         <hr>
             <a data-toggle="collapse" data-parent="#imaging" href="#collapseCt" aria-expanded="true" aria-controls="collapseCt">
-              <span class="badge <%= imaging_badge(test, :ct) %> badge-pill">CT</span>
+              <span class="badge <%= imaging_badge(test.ct) %> badge-pill">CT</span>
             </a>
             <div id="collapseCt" class="collapse" role="tabpanel" aria-labelledby="headingCt">
               <%= test.try(:ct) %>
             </div>
         <hr>
             <a data-toggle="collapse" data-parent="#imaging" href="#collapsePet" aria-expanded="true" aria-controls="collapsePet">
-              <span class="badge <%= imaging_badge(test, :pet) %> badge-pill">PET</span>
+              <span class="badge <%= imaging_badge(test.pet) %> badge-pill">PET</span>
             </a>
             <div id="collapsePet" class="collapse" role="tabpanel" aria-labelledby="headingPet">
               <%= test.try(:pet) %>
             </div>
         <hr>
             <a data-toggle="collapse" data-parent="#imaging" href="#collapsePet_mri" aria-expanded="true" aria-controls="collapsePet_mri">
-              <span class="badge <%= imaging_badge(test, :pet_mri) %> badge-pill">PET MRI</span>
+              <span class="badge <%= imaging_badge(test.pet_mri) %> badge-pill">PET MRI</span>
             </a>
             <div id="collapsePet_mri" class="collapse" role="tabpanel" aria-labelledby="headingPet_mri">
               <%= test.try(:pet_mri) %>
             </div>
         <hr>
             <a data-toggle="collapse" data-parent="#imaging" href="#collapseUltrasound" aria-expanded="true" aria-controls="collapseUltrasound">
-              <span class="badge <%= imaging_badge(test, :ultrasound) %> badge-pill">Ultralyd</span>
+              <span class="badge <%= imaging_badge(test.ultrasound) %> badge-pill">Ultralyd</span>
             </a>
             <div id="collapseUltrasound" class="collapse" role="tabpanel" aria-labelledby="headingUltrasound">
               <%= test.try(:ultrasound) %>
