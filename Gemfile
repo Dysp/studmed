@@ -49,6 +49,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap', '~> 4.0.0.alpha5'
 gem 'font-awesome-rails'
+gem 'breadcrumbs_on_rails'
 
 ruby '2.3.1'
 gem 'simple_form'

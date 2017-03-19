@@ -44,6 +44,7 @@ GEM
     bootstrap (4.0.0.alpha6)
       autoprefixer-rails (>= 6.0.3)
       sass (>= 3.4.19)
+    breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
@@ -154,6 +155,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap (~> 4.0.0.alpha5)
+  breadcrumbs_on_rails
   byebug
   coffee-rails (~> 4.2)
   font-awesome-rails

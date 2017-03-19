@@ -10,18 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316162052) do
+ActiveRecord::Schema.define(version: 20170317203252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "bloodsamples", force: :cascade do |t|
-    t.integer  "paraclinical_id"
-    t.boolean  "creatinine"
-    t.string   "creatinine_value"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
 
   create_table "clinicals", force: :cascade do |t|
     t.text     "inspection"
@@ -50,6 +42,7 @@ ActiveRecord::Schema.define(version: 20170316162052) do
     t.string   "name"
     t.string   "description"
     t.string   "synonyms"
+    t.text     "blood_sample"
   end
 
   create_table "paraclinicals", force: :cascade do |t|

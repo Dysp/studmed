@@ -1,4 +1,4 @@
-<%= simple_form_for illness, defaults: { label_html: { class: 'lead' } } do |f| %>
+<%= simple_form_for illness do |f| %>
   <% if illness.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <h2><%= illness.errors.count %> fejl forhindrede sygdommen i at blive gemt:</h2>
@@ -13,28 +13,59 @@
 <div class="card-columns">
   <div class="card">
     <div class="card-header">
-      <h6>Sygdom</h6>
+      <%= f.button :submit, 'Gem', class: "btn btn-sm btn-success pull-right" %><h6>Sygdom</h6>
     </div>
     <div class="card-block">
-      <%= f.input :name, label: 'Sygdommens navn', placeholder: 'fx: aorta stenose', required: true %>
-      <%= f.input :description, label: 'Kort beskrivelse', hint: 'Beskriv kort sygdommen', required: true %>
-      <%= f.input :etio_and_pato, label: 'Ætiologi', hint: 'Sygdommens årsag', required: true %>
-      <%= f.input :incidence, label: 'Incidens', hint: 'Antallet af nye tilfælde pr. tidsperiode', required: true %>
-      <%= f.input :category, label: 'Hvilket tema?', collection: @categories, required: true %>
+      <div class="form-group">
+        <h1 class="lead"><span class="form-control-feedback fa fa-id-card"></span> Sygdommens navn</h1>
+        <p><%= f.input_field :name, placeholder: 'fx: aorta stenose', class: 'form-control' %></p>
+
+        <h1 class="lead"><span class="form-control-feedback fa fa-comments-o"></span> Synonymer</h1>
+        <p><%= f.input_field :synonyms, placeholder: 'Synonymer adskilt med komma', class: 'form-control' %></p>
+
+        <h1 class="lead"><span class="form-control-feedback fa fa-sitemap"></span> Kategori</h1>
+        <p><%= f.input_field :category, collection: @categories, class: 'form-control' %></p>
+
+        <h1 class="lead"><span class="form-control-feedback fa fa-file-text-o"></span> Beskrivelse</h1>
+        <p><%= f.input_field :description, hint: 'Beskriv kort sygdommen', class: 'form-control' %></p>
+
+        <h1 class="lead"><span class="form-control-feedback fa fa-gavel"></span> Ætiologi og patogenese</h1>
+        <p><%= f.input_field :etio_and_pato, hint: 'Sygdommens årsag', class: 'form-control' %></p>
+
+        <h1 class="lead"><span class="form-control-feedback fa fa-pie-chart"></span> Incidens</h1>
+        <p><%= f.input_field :incidence, hint: 'Antallet af nye tilfælde pr. tidsperiode', class: 'form-control' %></p>
+
+      <% if !@differential_diagnoses.nil? %>
+        <h1 class="lead"><span class="form-control-feedback fa fa-exchange"></span> Differentialdiagnoser</h1>
+        <%= select_tag 'differential_id', options_from_collection_for_select(@differential_diagnoses, "id", "name"), prompt: "Vælg differential diagnoser", class: 'form-control', multiple: true %>
+          <i> Vælg flere ved at holde CTRL i bund</i>
+        <% end %>
+      </div>
     </div>
   </div>
-
   <%= f.simple_fields_for :clinical do |clinic| %>
   <div class="card">
     <div class="card-header">
       <h6>Klinik</h6>
     </div>
     <div class="card-block">
-      <%= clinic.input :anamnesis, label: 'Anamnese', placeholder: 'fx: Siger noget...' %>
-      <%= clinic.input :inspection, label: 'Inspektionsfund', placeholder: 'fx: Fejlstilling' %>
-      <%= clinic.input :palpation, label: 'Palpationsfund', placeholder: 'fx: Brætstiv abdomen' %>
-      <%= clinic.input :percussion, label: 'Perkussionsfund', placeholder: 'fx: Rungende lyd?' %>
-      <%= clinic.input :auscultation, label: 'Auskultationsfund', placeholder: 'fx: Ronchi' %>
+      <h1 class="lead"><span class="form-control-feedback fa fa-commenting"></span> Anamnese</h1>
+      <p><%= clinic.input_field :anamnesis, placeholder: 'Hvad fortæller patienten?', class: 'form-control' %></p>
+
+      <h1 class="lead"><span class="form-control-feedback fa fa-search"></span> Inspektionsfund</h1>
+      <p><%= clinic.input_field :inspection, placeholder: 'Hvad kan man se?', class: 'form-control' %></p>
+
+      <h1 class="lead"><span class="form-control-feedback fa fa-hand-o-down"></span> Palpationsfund</h1>
+      <p><%= clinic.input_field :palpation, placeholder: 'Hvad kan man føle og mærke?', class: 'form-control' %></p>
+
+      <h1 class="lead"><span class="form-control-feedback fa fa-hand-rock-o"></span> Perkussionsfund</h1>
+      <p><%= clinic.input_field :percussion, placeholder: 'Hvad kan man høre ved banken?', class: 'form-control' %></p>
+
+      <h1 class="lead"><span class="form-control-feedback fa fa-stethoscope"></span> Auskultationsfund</h1>
+      <p><%= clinic.input_field :auscultation, placeholder: 'Hvad kan man høre gennem stetoskop?', class: 'form-control' %></p>
+
+      <h1 class="lead"><span class="form-control-feedback fa fa-flask"></span> Blodprøver</h1>
+      <p><%= f.input_field :blood_sample, placeholder: 'Hvilke blodprøver er indikerede?', class: 'form-control' %></p>
     </div>
   </div>
   <% end %>
@@ -66,7 +97,4 @@
       <% end %>
   <% end %>
 </div>
-  <div class="actions card-block">
-    <%= f.button :submit, 'Gem', class: "btn btn-lg btn-success" %>
-  </div>
 <% end %>

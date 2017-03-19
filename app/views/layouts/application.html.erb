@@ -19,6 +19,9 @@
 <% if notice %>
     <p id="notice" class="alert alert-info"><%= notice %></p>
 <% end %>
+<ol class="breadcrumb">
+  <%= render_breadcrumbs :separator => "<span class='lead'> » </span>".html_safe %>
+</ol>
 <div class="container-fluid">
   <%= yield %>
 </div>

@@ -1,31 +1,72 @@
+<h3><span class="icon-i-first-aid badge badge-primary"> </span> <%= @illness.try(:name).humanize %></h3>
+<small>Synonymer: <%= @illness.try(:synonyms) %></small>
 <div class="row">
-  <div class="col-md-10">
-    <div class="card border-0">
-      <div class="card-block">
-        <h3><span class="icon-i-first-aid badge badge-primary"> </span> <%= @illness.name.humanize %></h3>
-        <small>Synonymer: <%= @illness.synonyms %></small>
-      </div>
-      <div class="card-block">
-        <h5 class="lead"><span class="fa fa-info-circle"></span> Beskrivelse:</h5>
-        <p><%= @illness.description %></p>
-      </div>
-    </div>
-  </div>
-    <div class="col-md-2">
-      <br>
-    <div class="card card-shadow">
+  <div class="col-md-6">
+    <div class="card bg">
       <div class="card-header">
-        <span class="fa fa-area-chart badge badge-warning pull-right"> </span><h4 class="pull-left">Hurtig info</h4>
+        <h4 class="lead"><span class="fa fa-info-circle"></span> Beskrivelse:</h4>
       </div>
       <div class="card-block">
-        <p>Kategori: <%= @illness.category %></p>
-        <p>Incidens: <%= @illness.incidence %></p>
+        <p><%= @illness.try(:description) %></p>
       </div>
     </div>
   </div>
+  <div class="col-md-2">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="lead"><span class="icon-i-cath-lab"> </span> Differentialdiagnoser</h4>
+      </div>
+      <% if @illness.differentials.empty? %>
+        <div class="card-block">
+          <div class="alert alert-danger">
+            <center><p class="lead" style="font-size: large">Ingen differentialdiagnoser.</p></center>
+          </div>
+        </div>
+      <% end %>
+      <div class="list-group">
+        <% @illness.differentials.each do |diff| %>
+          <%= link_to diff.differential.name, illness_path(diff.differential.id), class: "list-group-item list-group-item-action border-0" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card-group">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="lead"><span class="icon-i-cath-lab"> </span> Indikerede blodprøver</h4>
+      </div>
+      <div class="card-block">
+        <%= @illness.blood_sample %>
+        <% if @illness.blood_sample.empty? %>
+            <div class="alert alert-danger">
+              <center><p class="lead" style="font-size: large">Ingen blodprøver.</p></center>
+            </div>
+        <% end %>
+      </div>
+    </div>
+      <div class="card">
+        <div class="card-header">
+          <h4 class="lead"><span class="icon-i-cath-lab"> </span> Indikeret billediagnostik</h4>
+        </div>
+        <div class="card-block">
+          <% if imaging_indicated %>
+            <%= render 'test_list_item', test: @test, type: :mri %>
+            <%= render 'test_list_item', test: @test, type: :xray %>
+            <%= render 'test_list_item', test: @test, type: :ct %>
+            <%= render 'test_list_item', test: @test, type: :pet %>
+            <%= render 'test_list_item', test: @test, type: :pet_mri %>
+            <%= render 'test_list_item', test: @test, type: :ultrasound %>
+          <% else %>
+            Ingen indikationer
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- End for row -->
 </div>
 <br>
-          <hr>
 <div id="accordion" role="tablist" aria-multiselectable="true">
   <!-- Etiology and pathogenesis -->
    <div class="card">
