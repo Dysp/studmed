@@ -1,13 +1,13 @@
 require 'test_helper'
 
-class CategorizationsControllerTest < ActionDispatch::IntegrationTest
+class DifferentialsControllerTest < ActionDispatch::IntegrationTest
   test "should get create" do
-    get categorizations_create_url
+    get differentials_create_url
     assert_response :success
   end
 
   test "should get destroy" do
-    get categorizations_destroy_url
+    get differentials_destroy_url
     assert_response :success
   end
 

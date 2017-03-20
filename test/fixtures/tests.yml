@@ -2,10 +2,8 @@
 
 one:
   paraclinical_id: 1
-  xray: false
-  xray_finding: MyText
+  xray: MyText
 
 two:
-  paraclinical_id: 1
-  xray: false
-  xray_finding: MyText
+  paraclinical_id: 2
+  xray: XrayTest

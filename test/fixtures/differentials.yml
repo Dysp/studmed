@@ -2,8 +2,8 @@
 
 one:
   illness_id: 1
-  diff_id: MyString
+  differential_id: MyString
 
 two:
   illness_id: 1
-  diff_id: MyString
+  differential_id: MyString
