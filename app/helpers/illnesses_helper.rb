@@ -1,9 +1,9 @@
 module IllnessesHelper
   def imaging_badge(object)
     if !object.empty?
-      'btn-success'.html_safe
+      'btn-outline-primary'.html_safe
     else
-      'btn-danger'.html_safe
+      'btn-outline-danger'.html_safe
     end
   end
 

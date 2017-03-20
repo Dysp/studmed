@@ -64,8 +64,6 @@
       <h1 class="lead"><span class="form-control-feedback fa fa-stethoscope"></span> Auskultationsfund</h1>
       <p><%= clinic.input_field :auscultation, placeholder: 'Hvad kan man høre gennem stetoskop?', class: 'form-control' %></p>
 
-      <h1 class="lead"><span class="form-control-feedback fa fa-flask"></span> Blodprøver</h1>
-      <p><%= f.input_field :blood_sample, placeholder: 'Hvilke blodprøver er indikerede?', class: 'form-control' %></p>
     </div>
   </div>
   <% end %>
@@ -75,9 +73,11 @@
           <h6>Paraklinik</h6>
         </div>
         <div class="card-block">
-          <%= paraclinic.input :biopsy, label: 'Biopsi?', placeholder: 'fx: Grovnålsbiopsi indikeret' %>
-          <%= paraclinic.input :lfu, label: 'Lungefunktionsundersøgelse' %>
-          <%= paraclinic.input :ekg, label: 'Elektrokardiogram' %>
+          <h1 class="lead"><span class="form-control-feedback icon-i-pathology"></span> Biopsi</h1>
+          <p><%= paraclinic.input_field :biopsy, placeholder: 'Er biopsi er indikeret?', class: 'form-control' %></p>
+
+          <h1 class="lead"><span class="form-control-feedback fa fa-flask"></span> Blodprøver</h1>
+          <p><%= f.input_field :blood_sample, placeholder: 'Hvilke blodprøver er indikerede?', class: 'form-control' %></p>
         </div>
       </div>
       <%= paraclinic.simple_fields_for :test do |test| %>

@@ -4,7 +4,7 @@
     <span class="btn <%= imaging_badge(test.try(type)) %> btn-block"><%= type.to_s.humanize.upcase %></span>
     </a>
   </center>
-  <div id="collapse<%= type.upcase %>" class="collapse card-blockquote" role="tabpanel" aria-labelledby="heading<%= type.upcase %>">
+  <div id="collapse<%= type.upcase %>" class="collapse" role="tabpanel" aria-labelledby="heading<%= type.upcase %>">
     <%= test.try(type) %>
   </div>
   <hr>
