@@ -2,7 +2,7 @@ class IllnessesController < ApplicationController
   before_action :set_illness, only: [:show, :edit, :update, :destroy]
   add_breadcrumb "<span class='lead' style='font-size: medium;'>Forsiden</span>".html_safe, :root_path
 
-  CATEGORIES = ['Tema A', 'Tema B', 'Tema C', 'Tema D']
+  CATEGORIES = ['Tema A', 'Tema B', 'Tema C', 'Tema D', 'Tema E', 'Tema F', 'Tema G', 'Tema H', 'Tema I', 'Tema J', 'Tema K']
 
   # GET /illnesses
   def index
