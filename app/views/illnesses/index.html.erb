@@ -3,7 +3,6 @@
   <thead class="thead-default">
     <tr>
       <th>Sygdommens navn</th>
-      <th>Kort beskrivelse</th>
       <th>Kategori</th>
     </tr>
   </thead>
@@ -11,7 +10,6 @@
   <% for illness in @illnesses %>
     <tr onclick="window.location='<%= illness_path(illness) %>'">
       <td><%= illness.name %></td>
-      <td><%= illness.description %></td>
       <td><%= illness.category %></td>
     </tr>
   <% end %>
