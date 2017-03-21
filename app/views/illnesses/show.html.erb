@@ -7,7 +7,9 @@
         <h4 class="lead"><span class="fa fa-info-circle"></span> Beskrivelse:</h4>
       </div>
       <div class="card-block">
-        <p><%= @illness.try(:description) %></p>
+        <div class="fr-view">
+          <%= @illness.try(:description).html_safe %>
+        </div>
       </div>
     </div>
   </div>
@@ -81,7 +83,9 @@
       <div class="card-block">
         <div class="row">
           <div class="col-md-12">
-              <p><%= @illness.etio_and_pato %></p>
+              <div class="fr-view">
+                <%= @illness.etio_and_pato.html_safe %>
+              </div>
           </div>
         </div>
       </div>
