@@ -9,8 +9,8 @@ module IllnessesHelper
 
   def imaging_indicated
     #TODO: Virker ikke. Returnerer altid true eller false.
-    if !@test.nil?
-      @test.attributes.all? do |key, value|
+    if !@illness.test.nil?
+      @illness.test.attributes.all? do |key, value|
         key.inspect
       end
     end

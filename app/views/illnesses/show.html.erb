@@ -53,12 +53,12 @@
         </div>
         <div class="card-block">
           <% if imaging_indicated %>
-            <%= render 'test_list_item', test: @test, type: :mri %>
-            <%= render 'test_list_item', test: @test, type: :xray %>
-            <%= render 'test_list_item', test: @test, type: :ct %>
-            <%= render 'test_list_item', test: @test, type: :pet %>
-            <%= render 'test_list_item', test: @test, type: :pet_mri %>
-            <%= render 'test_list_item', test: @test, type: :ultrasound %>
+            <%= render 'test_list_item', test: @illness.test, type: :mri %>
+            <%= render 'test_list_item', test: @illness.test, type: :xray %>
+            <%= render 'test_list_item', test: @illness.test, type: :ct %>
+            <%= render 'test_list_item', test: @illness.test, type: :pet %>
+            <%= render 'test_list_item', test: @illness.test, type: :pet_mri %>
+            <%= render 'test_list_item', test: @illness.test, type: :ultrasound %>
           <% else %>
             Ingen indikationer
           <% end %>

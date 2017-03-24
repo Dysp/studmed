@@ -97,25 +97,31 @@
     </div>
   </div>
   <% end %>
-  <%= f.simple_fields_for :paraclinical do |paraclinic| %>
       <div class="card">
         <div class="card-header">
           <h6>Paraklinik</h6>
         </div>
         <div class="card-block">
           <h1 class="lead"><span class="form-control-feedback icon-i-pathology"></span> Biopsi</h1>
-          <p><%= paraclinic.input_field :biopsy, placeholder: 'Er biopsi er indikeret?', class: 'form-control' %></p>
+          <p>biopsi. Fjern mig?</p>
 
           <h1 class="lead"><span class="form-control-feedback fa fa-flask"></span> Blodprøver</h1>
           <p><%= f.input_field :blood_sample, placeholder: 'Hvilke blodprøver er indikerede?', class: 'form-control' %></p>
         </div>
       </div>
-      <%= paraclinic.simple_fields_for :test do |test| %>
+      <%= f.simple_fields_for :test do |test| %>
       <div class="card">
         <div class="card-header">
           <h6 class="lead">Billeddiagnostiske indikationer</h6>
         </div>
         <div class="card-block">
+            <a data-toggle="collapse" data-parent="#imaging" href="#collapseXRAY" aria-expanded="true" aria-controls="collapseXRAY">XRAY</a>
+          <div id="collapseXRAY>" class="collapse" role="tabpanel" aria-labelledby="headingXRAY">
+            yaw
+            <%= test.input :xray %>
+          </div>
+
+          <br>
           <%= test.input :xray %>
           <%= test.input :mri %>
           <%= test.input :pet %>
@@ -125,7 +131,6 @@
         </div>
       </div>
       <% end %>
-  <% end %>
 </div>
 <% end %>
 

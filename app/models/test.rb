@@ -1,3 +1,3 @@
 class Test < ApplicationRecord
-  belongs_to :paraclinical
+  belongs_to :illness
 end

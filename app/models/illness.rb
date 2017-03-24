@@ -2,6 +2,7 @@ class Illness < ApplicationRecord
   has_one :clinical, inverse_of: :illness
   has_one :paraclinical, inverse_of: :illness
   has_one :treatment, inverse_of: :illness
+  has_one :test, inverse_of: :illness
 
   has_many :differentials
   has_many :diffs, :through => :differentials
@@ -9,7 +10,7 @@ class Illness < ApplicationRecord
   has_many :inverse_diffs, :through => :inverse_differentials, source: :illness
 
   accepts_nested_attributes_for :clinical, :reject_if => :all_blank, :allow_destroy => true
-  accepts_nested_attributes_for :paraclinical, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :test, :reject_if => :all_blank, :allow_destroy => true
 
   validates_presence_of :etio_and_pato, :incidence, :category, :name, :description
 end

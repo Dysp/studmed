@@ -1,6 +1,6 @@
 <% if !test[type].empty? %>
   <center>
-    <a data-toggle="collapse" data-parent="#imaging" href="#collapse<%= type.upcase %>" aria-expanded="true" aria-controls="collapse<%= type.upcase %>">
+    <a data-toggle="collapse" href="#collapse<%= type.upcase %>" aria-expanded="true" aria-controls="collapse<%= type.upcase %>">
     <span class="btn <%= imaging_badge(test.try(type)) %> btn-block"><%= type.to_s.humanize.upcase %></span>
     </a>
   </center>

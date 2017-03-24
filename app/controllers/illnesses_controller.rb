@@ -12,7 +12,6 @@ class IllnessesController < ApplicationController
   # GET /illness/1
   def show
     add_breadcrumb "<span class='lead' style='font-size: medium;'>#{@illness.name}</span>".html_safe, :illness_path
-    @test = @illness.paraclinical.test
   end
 
   # GET /illness/new
@@ -20,8 +19,7 @@ class IllnessesController < ApplicationController
     add_breadcrumb "<span class='lead' style='font-size: medium;'>Opret ny sygdom</span>".html_safe
     @illness = Illness.new
     @illness.clinical = Clinical.new(illness_id: @illness.id)
-    @illness.paraclinical = Paraclinical.new(illness_id: @illness.id)
-    @illness.paraclinical.test = Test.new(paraclinical_id: @illness.paraclinical.id)
+    @illness.test = Test.new(illness_id: @illness.id)
 
     @differential_diagnoses = get_differential_diagnoses
     @categories = CATEGORIES
@@ -91,19 +89,15 @@ class IllnessesController < ApplicationController
     def illness_params
       params.require(:illness).permit(:name, :description, :synonyms, :etio_and_pato, :incidence, :prevalence, :category, :blood_sample, :differential_id,
                                     clinical_attributes: [:id, :anamnesis, :inspection, :palpation, :percussion, :auscultation, :_destroy],
-                                    paraclinical_attributes: [:id, :biopsy, :lfu, :ekg, :_destroy,
-                                                              test_attributes: [:id, :xray, :mri, :ct, :pet, :pet_mri, :ultrasound, :_destroy]])
+                                    test_attributes: [:id, :xray, :mri, :ct, :pet, :pet_mri, :ultrasound, :_destroy])
     end
 
     def get_differential_diagnoses
-      tema_a = Illness.where(category: CATEGORIES[0])
-      tema_b = Illness.where(category: CATEGORIES[1])
       differential_diagnoses = []
-      tema_a.collect { |x| differential_diagnoses << x}
-      tema_b.collect { |x| differential_diagnoses << x}
-      differential_diagnoses
-
-      #!!!!! LAv motherfucking "relation" om til array af name og id som akn sendes til select_tag i view
+      CATEGORIES.each do |category|
+        differential_diagnoses << Illness.where(category: category)
+      end
+      differential_diagnoses.flatten!
     end
 
     def save_differential(diff)
