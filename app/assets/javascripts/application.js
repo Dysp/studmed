@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require tether.min.js
 //= require bootstrap
 //= require jquery_ujs
 //= require froala_editor.min.js
@@ -19,6 +20,5 @@
 //= require plugins/align.min.js
 //= require plugins/table.min.js
 //= require turbolinks
-//= require_tree .
+// require_tree .
 
-$('selector').froalaEditor({});
