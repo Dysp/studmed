@@ -8,8 +8,8 @@ class Illness < ApplicationRecord
   has_many :inverse_differentials, class_name: "Differential", :foreign_key => "differential_id"
   has_many :inverse_diffs, :through => :inverse_differentials, source: :illness
 
-  accepts_nested_attributes_for :clinical, :reject_if => :all_blank, :allow_destroy => true
-  accepts_nested_attributes_for :test, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :clinical, :allow_destroy => true
+  accepts_nested_attributes_for :test, :allow_destroy => true
 
   validates_presence_of :etio_and_pato, :incidence, :category, :name, :description
 end
