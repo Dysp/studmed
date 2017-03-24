@@ -1,72 +1,67 @@
 <h3><span class="icon-i-first-aid badge badge-primary"> </span> <%= @illness.try(:name).humanize %> <%= link_to('Edit', edit_illness_path(@illness), class: "btn btn-sm btn-warning") if user_signed_in? %></h3>
 <small>Synonymer: <%= @illness.try(:synonyms) %></small>
-<div class="row">
-  <div class="col-md-6">
-    <div class="card bg">
-      <div class="card-header">
-        <h4 class="lead"><span class="fa fa-info-circle"></span> Beskrivelse:</h4>
-      </div>
-      <div class="card-block">
-        <div class="fr-view">
-          <%= @illness.try(:description).html_safe %>
-        </div>
-      </div>
+<br>
+<br>
+<div class="card">
+  <div class="card-header">
+    <h4 class="lead"><span class="fa fa-info-circle"></span> Beskrivelse</h4>
+  </div>
+  <div class="card-block">
+    <div class="fr-view">
+      <%= @illness.try(:description).html_safe %>
     </div>
   </div>
-  <div class="col-md-2">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="lead"><span class="icon-i-cath-lab"> </span> Differentialdiagnoser</h4>
+</div>
+<br>
+<div class="card">
+  <div class="card-header">
+    <h4 class="lead"><span class="icon-i-cath-lab"> </span> Differentialdiagnoser</h4>
+  </div>
+  <% if @illness.differentials.empty? %>
+    <div class="card-block">
+      <div class="alert alert-danger">
+        <center><p class="lead" style="font-size: large">Ingen differentialdiagnoser.</p></center>
       </div>
-      <% if @illness.differentials.empty? %>
-        <div class="card-block">
+    </div>
+  <% end %>
+  <div class="list-group">
+    <% @illness.differentials.each do |diff| %>
+      <%= link_to diff.differential.name, illness_path(diff.differential.id), class: "list-group-item list-group-item-action border-0" %>
+    <% end %>
+  </div>
+</div>
+<br>
+<div class="card-group">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="lead"><span class="icon-i-cath-lab"> </span> Indikerede blodprøver</h4>
+    </div>
+    <div class="card-block">
+      <%= @illness.blood_sample %>
+      <% if @illness.blood_sample.empty? %>
           <div class="alert alert-danger">
-            <center><p class="lead" style="font-size: large">Ingen differentialdiagnoser.</p></center>
+            <center><p class="lead" style="font-size: large">Ingen blodprøver.</p></center>
           </div>
-        </div>
       <% end %>
-      <div class="list-group">
-        <% @illness.differentials.each do |diff| %>
-          <%= link_to diff.differential.name, illness_path(diff.differential.id), class: "list-group-item list-group-item-action border-0" %>
-        <% end %>
-      </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <div class="card-group">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="lead"><span class="icon-i-cath-lab"> </span> Indikerede blodprøver</h4>
-      </div>
-      <div class="card-block">
-        <%= @illness.blood_sample %>
-        <% if @illness.blood_sample.empty? %>
-            <div class="alert alert-danger">
-              <center><p class="lead" style="font-size: large">Ingen blodprøver.</p></center>
-            </div>
-        <% end %>
-      </div>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="lead"><span class="icon-i-cath-lab"> </span> Indikeret billediagnostik</h4>
     </div>
-      <div class="card">
-        <div class="card-header">
-          <h4 class="lead"><span class="icon-i-cath-lab"> </span> Indikeret billediagnostik</h4>
-        </div>
-        <div class="card-block">
-          <% if imaging_indicated %>
-            <%= render 'test_list_item', test: @illness.test, type: :mri %>
-            <%= render 'test_list_item', test: @illness.test, type: :xray %>
-            <%= render 'test_list_item', test: @illness.test, type: :ct %>
-            <%= render 'test_list_item', test: @illness.test, type: :pet %>
-            <%= render 'test_list_item', test: @illness.test, type: :pet_mri %>
-            <%= render 'test_list_item', test: @illness.test, type: :ultrasound %>
-          <% else %>
-            Ingen indikationer
-          <% end %>
-        </div>
-      </div>
+    <div class="card-block">
+      <% if imaging_indicated %>
+        <%= render 'test_list_item', test: @illness.test, type: :mri %>
+        <%= render 'test_list_item', test: @illness.test, type: :xray %>
+        <%= render 'test_list_item', test: @illness.test, type: :ct %>
+        <%= render 'test_list_item', test: @illness.test, type: :pet %>
+        <%= render 'test_list_item', test: @illness.test, type: :pet_mri %>
+        <%= render 'test_list_item', test: @illness.test, type: :ultrasound %>
+      <% else %>
+        Ingen indikationer
+      <% end %>
     </div>
   </div>
- <!-- End for row -->
 </div>
 <br>
 <div id="accordion" role="tablist" aria-multiselectable="true">
@@ -92,23 +87,7 @@
     </div>
   </div>
 
-  <!-- Clinical and paraclinical -->
-  <div class="card">
-    <div class="card-header" role="tab" id="headingClinical">
-      <h5 class="mb-0">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseClinical" aria-expanded="true" aria-controls="collapseClinical">
-          Klinik og paraklinik
-        </a>
-      </h5>
-    </div>
-    <div id="collapseClinical" class="collapse" role="tabpanel" aria-labelledby="headingClinical">
-      <div class="card-block">
-        <%= render 'clinical' %>
-      </div>
-    </div>
-  </div>
-
-  <!-- Clinical and paraclinical -->
+  <!-- Treatment and prognosis -->
   <div class="card">
     <div class="card-header" role="tab" id="headingTreatment">
       <h5 class="mb-0">
@@ -119,12 +98,8 @@
     </div>
     <div id="collapseTreatment" class="collapse" role="tabpanel" aria-labelledby="headingTreatment">
       <div class="card-block">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        Der kommer nok noget engang.
       </div>
     </div>
   </div>
 </div>
-<hr>
-
-<%= link_to 'Edit', edit_illness_path(@illness) %> |
-<%= link_to 'Back', illnesses_path %>
