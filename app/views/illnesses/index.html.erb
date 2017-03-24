@@ -4,6 +4,8 @@
     <tr>
       <th>Sygdommens navn</th>
       <th>Kategori</th>
+      <th>Oprettet</th>
+      <th>Opdateret</th>
     </tr>
   </thead>
   <tbody>
@@ -11,6 +13,8 @@
     <tr onclick="window.location='<%= illness_path(illness) %>'">
       <td><%= illness.name %></td>
       <td><%= illness.category %></td>
+      <td><%= illness.created_at.strftime('%d-%m-%Y') %></td>
+      <td><% if illness.created_at != illness.updated_at %><%= illness.updated_at.strftime('%d-%m-%Y') %><% end %></td>
     </tr>
   <% end %>
   </tbody>

@@ -58,9 +58,6 @@ class IllnessesController < ApplicationController
     #@differential = @illness.differentials.build(:differential_id => params[:differential_id])
     respond_to do |format|
       if @illness.update(illness_params)
-        #if params[:differential_id].each do |diff|
-        #  save_differential(diff)
-        #end
         format.html { redirect_to @illness, notice: 'Illness was successfully updated.' }
         format.json { render :show, status: :ok, location: @illness }
       else
@@ -87,7 +84,7 @@ class IllnessesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def illness_params
-      params.require(:illness).permit(:name, :description, :synonyms, :etio_and_pato, :incidence, :prevalence, :category, :blood_sample, :differential_id,
+      params.require(:illness).permit(:name, :description, :synonyms, :etio_and_pato, :incidence, :prevalence, :category, :blood_sample, :biopsy, :differential_id,
                                     clinical_attributes: [:id, :anamnesis, :inspection, :palpation, :percussion, :auscultation, :_destroy],
                                     test_attributes: [:id, :xray, :mri, :ct, :pet, :pet_mri, :ultrasound, :_destroy])
     end

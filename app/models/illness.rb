@@ -1,6 +1,5 @@
 class Illness < ApplicationRecord
   has_one :clinical, inverse_of: :illness
-  has_one :paraclinical, inverse_of: :illness
   has_one :treatment, inverse_of: :illness
   has_one :test, inverse_of: :illness
 
