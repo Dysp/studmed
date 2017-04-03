@@ -51,7 +51,6 @@ gem 'bootstrap', '~> 4.0.0.alpha5'
 gem 'font-awesome-rails'
 gem 'breadcrumbs_on_rails'
 
-ruby '2.3.1'
 gem 'simple_form'
 gem 'devise'
 gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt'

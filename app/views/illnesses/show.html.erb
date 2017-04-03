@@ -1,3 +1,5 @@
+<div class="container">
+
 <h3><span class="icon-i-first-aid badge badge-primary"> </span> <%= @illness.try(:name).humanize %> <%= link_to('Edit', edit_illness_path(@illness), class: "btn btn-sm btn-warning") if user_signed_in? %></h3>
 <small>Synonymer: <%= @illness.try(:synonyms) %></small>
 <br>
@@ -102,4 +104,8 @@
       </div>
     </div>
   </div>
+</div>
+<br>
+
+<!-- end of container -->
 </div>
