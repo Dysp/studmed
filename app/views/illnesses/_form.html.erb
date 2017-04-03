@@ -44,116 +44,141 @@
               <p><%= f.input_field :incidence, hint: 'Antallet af nye tilfælde pr. tidsperiode', class: 'form-control' %></p>
             </div>
             <div class="col-md-6">
-            <% if !@differential_diagnoses.nil? %>
-                <h1 class="lead"><span class="form-control-feedback fa fa-exchange"></span> Differentialdiagnoser</h1>
-                <%= select_tag 'differential_id', options_from_collection_for_select(@differential_diagnoses, 'id', 'name'), prompt: "Vælg differential diagnoser", class: 'form-control', multiple: true %>
-                <i> Vælg flere ved at holde CTRL i bund</i>
-            <% end %>
-            </div>
+             <% unless @differential_diagnoses.nil? %>
+              <h1 class="lead"><span class="form-control-feedback fa fa-exchange"></span> Differentialdiagnoser</h1>
+              <%= select_tag 'differential_id', options_from_collection_for_select(@differential_diagnoses, 'id', 'name'), prompt: "Vælg differential diagnoser", class: 'form-control', multiple: true %>
+              <i> Vælg flere ved at holde CTRL i bund</i>
+             <% end %>
             </div>
           </div>
         </div>
       </div>
+    </div>
   </div>
   <div class="col-md-8">
-    <div class="row">
-      <div class="col-md-6">
-        <h1 class="lead"><span class="form-control-feedback fa fa-file-text-o"></span> Beskrivelse</h1>
-        <p><%= f.input_field :description, hint: 'Beskriv kort sygdommen', class: 'form-control', id: 'description', as: :text %></p>
-      </div>
-      <div class="col-md-6">
-        <h1 class="lead"><span class="form-control-feedback fa fa-gavel"></span> Ætiologi og patogenese</h1>
-        <p><%= f.input_field :etio_and_pato, hint: 'Sygdommens årsag', class: 'form-control', id: 'etio_and_pato', as: :text %></p>
-      </div>
-      <!-- End of row -->
-    </div>
-  </div>
-<!-- End of row -->
-</div>
-    <br>
-
-  <div class="card-columns">
-  <%= f.simple_fields_for :clinical do |clinic| %>
-  <div class="card">
-    <div class="card-header">
-      <h6 class="lead">Klinik</h6>
-    </div>
-    <div class="card-block">
-      <h1 class="lead"><span class="form-control-feedback fa fa-commenting"></span> Anamnese</h1>
-      <p><%= clinic.input_field :anamnesis, placeholder: 'Hvad fortæller patienten?', class: 'form-control' %></p>
-
-      <h1 class="lead"><span class="form-control-feedback fa fa-search"></span> Inspektionsfund</h1>
-      <p><%= clinic.input_field :inspection, placeholder: 'Hvad kan man se?', class: 'form-control' %></p>
-
-      <h1 class="lead"><span class="form-control-feedback fa fa-hand-o-down"></span> Palpationsfund</h1>
-      <p><%= clinic.input_field :palpation, placeholder: 'Hvad kan man føle og mærke?', class: 'form-control' %></p>
-
-      <h1 class="lead"><span class="form-control-feedback fa fa-hand-rock-o"></span> Perkussionsfund</h1>
-      <p><%= clinic.input_field :percussion, placeholder: 'Hvad kan man høre ved banken?', class: 'form-control' %></p>
-
-      <h1 class="lead"><span class="form-control-feedback fa fa-stethoscope"></span> Auskultationsfund</h1>
-      <p><%= clinic.input_field :auscultation, placeholder: 'Hvad kan man høre gennem stetoskop?', class: 'form-control' %></p>
-
-    </div>
-  </div>
-  <% end %>
+    <div class="card-group">
       <div class="card">
         <div class="card-header">
-          <h6 class="lead">Paraklinik</h6>
+          <h1 class="lead"><span class="form-control-feedback fa fa-file-text-o"></span> Beskrivelse</h1>
         </div>
-        <div class="card-block">
-          <h1 class="lead"><span class="form-control-feedback icon-i-pathology"></span> Biopsi</h1>
-          <p><%= f.input_field :biopsy, placeholder: 'Er biopsi indikeret? Hvilken?', class: 'form-control' %></p>
-
-          <h1 class="lead"><span class="form-control-feedback fa fa-flask"></span> Blodprøver</h1>
-          <p><%= f.input_field :blood_sample, placeholder: 'Hvilke blodprøver er indikerede? Hvad forventes?', class: 'form-control' %></p>
+          <%= f.input_field :description, hint: 'Beskriv kort sygdommen', class: 'form-control', id: 'description', as: :text %>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h1 class="lead"><span class="form-control-feedback fa fa-gavel"></span> Ætiologi og patogenese</h1>
         </div>
-        <div class="card-header"><h3 class="lead">Billeddiagnostiske indikationer</h3></div>
-        <div class="card-block">
-        <%= f.simple_fields_for :test do |test| %>
-              <span class="form-control-feedback icon-radiology h1"></span>
-          <a data-toggle="collapse" data-parent="#imaging" href="#collapseXRAY" aria-expanded="true" aria-controls="collapseXRAY" class="lead"> Røntgen</a>
-          <div id="collapseXRAY" class="collapse" role="tabpanel" aria-labelledby="headingXRAY">
-            <%= test.input_field :xray, placeholder: 'Hvilke fund forventes at ses på røntgen?', class: 'form-control' %>
-          </div>
-          <br>
-              <span class="form-control-feedback icon-imaging-alternative-mri h1"></span>
-          <a data-toggle="collapse" data-parent="#imaging" href="#collapseMRI" aria-expanded="true" aria-controls="collapseMRI" class="lead"> MRI</a>
-          <div id="collapseMRI" class="collapse" role="tabpanel" aria-labelledby="headingMRI">
-            <%= test.input_field :mri, placeholder: 'Hvilke fund forventes at ses ved MRI?', class: 'form-control' %>
-          </div>
-          <br>
-
-          <span class="form-control-feedback icon-imaging-alternative-pet h1"></span>
-          <a data-toggle="collapse" data-parent="#imaging" href="#collapsePET" aria-expanded="true" aria-controls="collapsePET" class="lead"> PET</a>
-          <div id="collapsePET" class="collapse" role="tabpanel" aria-labelledby="headingPET">
-            <%= test.input_field :pet, placeholder: 'Hvilke fund forventes at ses ved PET?', class: 'form-control' %>
-          </div>
-          <br>
-
-          <span class="form-control-feedback icon-imaging-alternative-ct h1"></span>
-          <a data-toggle="collapse" data-parent="#imaging" href="#collapseCT" aria-expanded="true" aria-controls="collapseCT" class="lead"> CT</a>
-          <div id="collapseCT" class="collapse" role="tabpanel" aria-labelledby="headingCT">
-            <%= test.input_field :ct, placeholder: 'Hvilke fund forventes at ses på CT?', class: 'form-control' %>
-          </div>
-          <br>
-
-          <span class="form-control-feedback icon-mri-pet h1"></span>
-          <a data-toggle="collapse" data-parent="#imaging" href="#collapsePET_MRI" aria-expanded="true" aria-controls="collapsePET_MRI" class="lead"> PET MRI</a>
-          <div id="collapsePET_MRI" class="collapse" role="tabpanel" aria-labelledby="headingPET_MRI">
-            <%= test.input_field :pet_mri, placeholder: 'Hvilke fund forventes at ses på PET-MRI?', class: 'form-control' %>
-          </div>
-          <br>
-
-          <span class="form-control-feedback icon-ultrasound h1"></span>
-          <a data-toggle="collapse" data-parent="#imaging" href="#collapseULTRASOUND" aria-expanded="true" aria-controls="collapseULTRASOUND" class="lead">Ultralyd</a>
-          <div id="collapseULTRASOUND" class="collapse" role="tabpanel" aria-labelledby="headingULTRASOUND">
-            <%= test.input_field :ultrasound, placeholder: 'Hvilke fund forventes at ses med ultralyd?', class: 'form-control' %>
-          </div>
+          <%= f.input_field :etio_and_pato, hint: 'Sygdommens årsag', class: 'form-control', id: 'etio_and_pato', as: :text %>
       </div>
-      <% end %>
+    </div>
+  </div>
+  <!-- End of row -->
+</div>
+
+<br>
+
+<div id="accordion" role="tablist" aria-multiselectable="true">
+  <!-- Clinical & Paraclinical -->
+  <div class="card">
+    <div class="card-header" role="tab" id="headingClinic">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseClinic" aria-expanded="false" aria-controls="collapseClinic">
+          Klinik & Paraklinik
+        </a>
+      </h5>
+    </div>
+    <div id="collapseClinic" class="collapse" role="tabpanel" aria-labelledby="headingClinic">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-4">
+            <%= f.simple_fields_for :clinical do |clinic| %>
+              <h1 class="lead"><span class="form-control-feedback fa fa-commenting"></span> Symptomer</h1>
+              <p><%= clinic.input_field :symptoms, placeholder: 'Hvad fortæller patienten?', class: 'form-control' %></p>
+
+              <h1 class="lead"><span class="form-control-feedback fa fa-search"></span> Endoskopi</h1>
+              <p><%= clinic.input_field :endoscopy, placeholder: 'Hvad kan man se?', class: 'form-control' %></p>
+
+              <h1 class="lead"><span class="form-control-feedback fa fa-hand-o-down"></span> Andet</h1>
+              <p><%= clinic.input_field :other, placeholder: 'Hvad kan man føle og mærke?', class: 'form-control' %></p>
+            <% end %>
+          </div>
+          <div class="col-md-4">
+            <h1 class="lead"><span class="form-control-feedback icon-i-pathology"></span> Biopsi</h1>
+            <p><%= f.input_field :biopsy, placeholder: 'Er biopsi indikeret? Hvilken?', class: 'form-control' %></p>
+
+            <h1 class="lead"><span class="form-control-feedback fa fa-flask"></span> Blodprøver</h1>
+            <p><%= f.input_field :blood_sample, placeholder: 'Hvilke blodprøver er indikerede? Hvad forventes?', class: 'form-control' %></p>
+          </div>
+          <div class="col-md-4">
+            <%= f.simple_fields_for :test do |test| %>
+              <a data-toggle="collapse" data-parent="#imaging" href="#collapseXRAY" aria-expanded="true" aria-controls="collapseXRAY" class="lead"> Røntgen</a>
+              <div id="collapseXRAY" class="collapse" role="tabpanel" aria-labelledby="headingXRAY">
+                <%= test.input_field :xray, placeholder: 'Hvilke fund forventes at ses på røntgen?', class: 'form-control' %>
+              </div>
+              <br>
+              <a data-toggle="collapse" data-parent="#imaging" href="#collapseMRI" aria-expanded="true" aria-controls="collapseMRI" class="lead"> MRI</a>
+              <div id="collapseMRI" class="collapse" role="tabpanel" aria-labelledby="headingMRI">
+                <%= test.input_field :mri, placeholder: 'Hvilke fund forventes at ses ved MRI?', class: 'form-control' %>
+              </div>
+              <br>
+
+              <a data-toggle="collapse" data-parent="#imaging" href="#collapsePET" aria-expanded="true" aria-controls="collapsePET" class="lead"> PET</a>
+              <div id="collapsePET" class="collapse" role="tabpanel" aria-labelledby="headingPET">
+                <%= test.input_field :pet, placeholder: 'Hvilke fund forventes at ses ved PET?', class: 'form-control' %>
+              </div>
+              <br>
+
+              <a data-toggle="collapse" data-parent="#imaging" href="#collapseCT" aria-expanded="true" aria-controls="collapseCT" class="lead"> CT</a>
+              <div id="collapseCT" class="collapse" role="tabpanel" aria-labelledby="headingCT">
+                <%= test.input_field :ct, placeholder: 'Hvilke fund forventes at ses på CT?', class: 'form-control' %>
+              </div>
+              <br>
+
+              <a data-toggle="collapse" data-parent="#imaging" href="#collapsePET_MRI" aria-expanded="true" aria-controls="collapsePET_MRI" class="lead"> PET MRI</a>
+              <div id="collapsePET_MRI" class="collapse" role="tabpanel" aria-labelledby="headingPET_MRI">
+                <%= test.input_field :pet_mri, placeholder: 'Hvilke fund forventes at ses på PET-MRI?', class: 'form-control' %>
+              </div>
+              <br>
+
+              <a data-toggle="collapse" data-parent="#imaging" href="#collapseULTRASOUND" aria-expanded="true" aria-controls="collapseULTRASOUND" class="lead">Ultralyd</a>
+              <div id="collapseULTRASOUND" class="collapse" role="tabpanel" aria-labelledby="headingULTRASOUND">
+                <%= test.input_field :ultrasound, placeholder: 'Hvilke fund forventes at ses med ultralyd?', class: 'form-control' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
+  <!-- Treatment and prognosis -->
+  <div class="card">
+    <div class="card-header" role="tab" id="headingTreatment">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTreatment" aria-expanded="false" aria-controls="collapseTreatment">
+          Diagnose, behandling & prognose
+        </a>
+      </h5>
+    </div>
+    <div id="collapseTreatment" class="collapse" role="tabpanel" aria-labelledby="headingTreatment">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-4">
+            <h1 class="lead"><span class="form-control-feedback fa fa-commenting"></span> Diagnose</h1>
+            <p><%= f.input_field :diagnosis, placeholder: 'Hvad er de diagnostiske kriterier?', class: 'form-control' %></p>
+          </div>
+          <div class="col-md-4">
+            <h1 class="lead"><span class="form-control-feedback fa fa-commenting"></span> Behandling</h1>
+            <p><%= f.input_field :treatment, placeholder: 'Hvilke behandlingsretningslinjer er der?', class: 'form-control' %></p>
+          </div>
+          <div class="col-md-4">
+            <h1 class="lead"><span class="form-control-feedback fa fa-commenting"></span> Prognose</h1>
+            <p><%= f.input_field :prognosis, placeholder: 'Hvad er prognosen?', class: 'form-control' %></p>
+          </div>
+        </div>
+      <!-- End of card block -->
+      </div>
+    </div>
+  </div>
+
+<!-- End of Accordion -->
 </div>
 <% end %>
-
-</div>
