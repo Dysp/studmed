@@ -1,0 +1,18 @@
+<div class="col-md-3">
+  <div class="card">
+    <% if @illness.differentials.empty? %>
+      <div class="card-header">
+        <h4 class="lead"><span class="fa fa-book"> </span> <del>Differentialdiagnoser</del></h4>
+      </div>
+    <% else %>
+      <div class="card-header">
+        <h4 class="lead"><span class="fa fa-book"> </span> Differentialdiagnoser</h4>
+      </div>
+      <div class="list-group">
+        <% @illness.differentials.each do |diff| %>
+            <%= link_to diff.differential.name, illness_path(diff.differential.id), class: "list-group-item list-group-item-action border-0" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

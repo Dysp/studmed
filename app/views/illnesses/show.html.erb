@@ -1,42 +1,41 @@
 <div class="container">
-
-<h3><span class="icon-i-first-aid badge badge-primary"> </span> <%= @illness.try(:name).humanize %> <%= link_to('Edit', edit_illness_path(@illness), class: "btn btn-sm btn-warning") if user_signed_in? %></h3>
+<!-- Title -->
+<h3><span class="icon-i-first-aid badge badge-primary"> </span>
+  <%= @illness.try(:name).humanize %> <%= link_to('Edit', edit_illness_path(@illness), class: "btn btn-sm btn-warning") if user_signed_in? %>
+</h3>
 <small>Synonymer: <%= @illness.try(:synonyms) %></small>
 <br>
 <br>
-<div class="card">
-  <div class="card-header">
-    <h4 class="lead"><span class="fa fa-info-circle"></span> Beskrivelse</h4>
-  </div>
-  <div class="card-block">
-    <div class="fr-view">
-      <%= @illness.try(:description).html_safe %>
+<!-- ------------- -->
+
+<div class="row">
+<!-- Description -->
+<div class="col-md-9">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="lead"><span class="fa fa-info-circle"></span> Beskrivelse</h4>
     </div>
-  </div>
-</div>
-<br>
-<div class="card">
-  <div class="card-header">
-    <h4 class="lead"><span class="icon-i-cath-lab"> </span> Differentialdiagnoser</h4>
-  </div>
-  <% if @illness.differentials.empty? %>
     <div class="card-block">
-      <div class="alert alert-danger">
-        <center><p class="lead" style="font-size: large">Ingen differentialdiagnoser.</p></center>
+      <div class="fr-view">
+        <%= @illness.try(:description).html_safe %>
       </div>
     </div>
-  <% end %>
-  <div class="list-group">
-    <% @illness.differentials.each do |diff| %>
-      <%= link_to diff.differential.name, illness_path(diff.differential.id), class: "list-group-item list-group-item-action border-0" %>
-    <% end %>
   </div>
 </div>
+<!-- ------------- -->
 <br>
+<!-- Differential diagnoses -->
+  <%= render 'diffs' %>
+<!-- ------------- -->
+
+<!-- End of row -->
+</div>
+<br>
+<!-- Clinical and Paraclinical -->
 <div class="card-group">
   <div class="card">
     <div class="card-header">
-      <h4 class="lead"><span class="icon-i-cath-lab"> </span> Indikerede blodprøver</h4>
+      <h4 class="lead"><span class="fa fa-eyedropper"> </span> Indikerede blodprøver</h4>
     </div>
     <div class="card-block">
       <%= @illness.blood_sample %>
@@ -65,45 +64,47 @@
     </div>
   </div>
 </div>
+<!-- ------------- -->
 <br>
 <div id="accordion" role="tablist" aria-multiselectable="true">
-  <!-- Etiology and pathogenesis -->
-   <div class="card">
-    <div class="card-header" role="tab" id="headingPato">
-      <h5 class="mb-0">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsePato" aria-expanded="false" aria-controls="collapsePato">
-          Ætiologi og patogenese
-        </a>
-      </h5>
-    </div>
-    <div id="collapsePato" class="collapse show" role="tabpanel" aria-labelledby="headingPato">
-      <div class="card-block">
-        <div class="row">
-          <div class="col-md-12">
-              <div class="fr-view">
-                <%= @illness.etio_and_pato.html_safe %>
-              </div>
-          </div>
+<!-- Etiology and pathogenesis -->
+ <div class="card">
+  <div class="card-header" role="tab" id="headingPato">
+    <h5 class="mb-0">
+      <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsePato" aria-expanded="false" aria-controls="collapsePato">
+        Ætiologi og patogenese
+      </a>
+    </h5>
+  </div>
+  <div id="collapsePato" class="collapse show" role="tabpanel" aria-labelledby="headingPato">
+    <div class="card-block">
+      <div class="row">
+        <div class="col-md-12">
+            <div class="fr-view">
+              <%= @illness.etio_and_pato.html_safe %>
+            </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Treatment and prognosis -->
-  <div class="card">
-    <div class="card-header" role="tab" id="headingTreatment">
-      <h5 class="mb-0">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTreatment" aria-expanded="false" aria-controls="collapseTreatment">
-          Behandling, forløb og prognose
-        </a>
-      </h5>
-    </div>
-    <div id="collapseTreatment" class="collapse" role="tabpanel" aria-labelledby="headingTreatment">
-      <div class="card-block">
-        Der kommer nok noget engang.
-      </div>
+</div>
+<!-- ------------- -->
+<br>
+<!-- Treatment and prognosis -->
+<div class="card">
+  <div class="card-header" role="tab" id="headingTreatment">
+    <h5 class="mb-0">
+      <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTreatment" aria-expanded="false" aria-controls="collapseTreatment">
+        Behandling, forløb og prognose
+      </a>
+    </h5>
+  </div>
+  <div id="collapseTreatment" class="collapse" role="tabpanel" aria-labelledby="headingTreatment">
+    <div class="card-block">
+      Der kommer nok noget engang.
     </div>
   </div>
+</div>
 </div>
 <br>
 
