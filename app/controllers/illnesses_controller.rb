@@ -2,11 +2,20 @@ class IllnessesController < ApplicationController
   before_action :set_illness, only: [:show, :edit, :update, :destroy]
   add_breadcrumb "<span class='lead' style='font-size: medium;'>Forsiden</span>".html_safe, :root_path
 
-  CATEGORIES = ['Tema A', 'Tema B', 'Tema C', 'Tema D', 'Tema E', 'Tema F', 'Tema G', 'Tema H', 'Tema I', 'Tema J', 'Tema K']
+  CATEGORIES = ['Tema F', 'Tema G', 'Tema H', 'Tema E']
 
+  def category
+    @category = Illness.where(category: params[:category])
+    add_breadcrumb "<span class='lead' style='font-size: medium;'>#{params[:category]}</span>".html_safe
+    if @category.empty?
+      redirect_to root_path, alert: "#{params[:category]} er desværre tom. Kig igen senere eller skriv til mig @ gjt439 for at få adgang til at tilføje sygdomme."
+    end
+
+  end
   # GET /illnesses
   def index
     @illnesses = Illness.all
+    @categories = CATEGORIES
   end
 
   # GET /illness/1

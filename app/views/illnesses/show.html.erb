@@ -30,8 +30,8 @@
         </li>
         <li class="media">
           <div class="media-body">
-            <h6 class="mt-0 lead">Incidens</h6>
-            <p class="mt-0"><%= @illness.incidence %> om året, måske</p>
+            <h6 class="mt-0 lead">Incidens (WIP)</h6>
+            <p class="mt-0"><%= @illness.incidence %></p>
           </div>
           <h2 class="d-flex align-self-center mr-3"><span class="fa fa-area-chart"> </span></h2>
         </li>
@@ -69,7 +69,7 @@
   <div class="col-md-4">
     <div class="card">
       <div class="card-header">
-        <h4 class="lead"><span class="icon-i-cath-lab"> </span> Indikeret billediagnostik</h4>
+        <h4 class="lead"><span class="icon-i-cath-lab"> </span> Indikeret billediagnostik (WIP)</h4>
       </div>
       <div class="card-block">
         <%= imaging_indicated(@illness.test) %>
@@ -128,10 +128,25 @@
   </div>
   <div id="collapseTreatment" class="collapse" role="tabpanel" aria-labelledby="headingTreatment">
     <div class="card-block">
-      Der kommer nok noget engang.
+     <div class="row">
+      <div class="col-md-4">
+       <h5 class="lead">Diagnose:</h5>
+       <p><%= @illness.diagnosis %></p>
+     </div>
+       <div class="col-md-4">
+         <h5 class="lead">Behandling:</h5>
+         <p><%= @illness.treatment %></p>
+       </div>
+       <div class="col-md-4">
+         <h5 class="lead">Prognose:</h5>
+         <p><%= @illness.prognosis %></p>
+       </div>
     </div>
+   </div>
   </div>
 </div>
+
+<!-- End of Accordion -->
 </div>
 <br>
 
