@@ -72,14 +72,10 @@
         <h4 class="lead"><span class="icon-i-cath-lab"> </span> Indikeret billediagnostik (WIP)</h4>
       </div>
       <div class="card-block">
-        <%= imaging_indicated(@illness.test) %>
         <% if @illness.test.mri.empty? %>
-            Jeg er empty
-            <% else %>
+        <% else %>
         <%= @illness.test.inspect %>
         <% end %>
-        og her:<br><br>
-        <%= @illness.test.blank? %>
       </div>
     </div>
   </div>
