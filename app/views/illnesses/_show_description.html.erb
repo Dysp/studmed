@@ -1,0 +1,10 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="lead"><span class="fa fa-info-circle"></span> Beskrivelse</h4>
+  </div>
+  <div class="card-block">
+    <div class="fr-view">
+      <%= @illness.try(:description).html_safe %>
+    </div>
+  </div>
+</div>
