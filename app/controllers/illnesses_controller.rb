@@ -5,9 +5,10 @@ class IllnessesController < ApplicationController
   CATEGORIES = ['Tema F', 'Tema G', 'Tema H', 'Tema E']
 
   def category
-    @category = Illness.where(category: params[:category])
+    @categories = Illness.where(category: params[:category])
+    @category = params[:category]
     add_breadcrumb "<span class='lead' style='font-size: medium;'>#{params[:category]}</span>".html_safe
-    if @category.empty?
+    if @categories.empty?
       redirect_to root_path, alert: "#{params[:category]} er desværre tom. Kig igen senere eller skriv til mig @ gjt439 for at få adgang til at tilføje sygdomme."
     end
 
