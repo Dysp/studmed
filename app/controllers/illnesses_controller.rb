@@ -19,7 +19,7 @@ class IllnessesController < ApplicationController
   end
   # GET /illnesses
   def index
-    @new_illnesses = Illness.order('created_at').last(5)
+    @new_illnesses = Illness.order('created_at').last(5).reverse
     @counter = 0
     @categories = CATEGORIES
     @category_names = CATEGORY_NAMES
