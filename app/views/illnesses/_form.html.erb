@@ -92,7 +92,7 @@
           <div class="col-md-4">
             <%= f.simple_fields_for :clinical do |clinic| %>
               <h1 class="lead"><span class="form-control-feedback fa fa-commenting"></span> Symptomer</h1>
-              <p><%= clinic.input_field :symptoms, placeholder: 'Hvad fortæller patienten?', class: 'form-control' %></p>
+              <p><%= clinic.input_field :symptoms, placeholder: 'Angiv symptomer adskilt med komma', class: 'form-control' %></p>
 
               <h1 class="lead"><span class="form-control-feedback fa fa-search"></span> Endoskopi</h1>
               <p><%= clinic.input_field :endoscopy, placeholder: 'Hvad kan man se?', class: 'form-control' %></p>
