@@ -28,7 +28,11 @@ class IllnessesController < ApplicationController
   # GET /illness/1
   def show
     add_breadcrumb "<span class='lead' style='font-size: medium;'>#{@illness.name}</span>".html_safe, :illness_path
-    @symptoms = @illness.clinical.symptoms.split(',')
+    if @illness.clinical.symptoms.nil?
+      @symptoms = ['Ingen angivne symptomer']
+    else
+      @symptoms = @illness.clinical.symptoms.split(',')
+    end
   end
 
   # GET /illness/new
