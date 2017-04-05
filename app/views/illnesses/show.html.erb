@@ -20,11 +20,9 @@
       <div class="card-header">
         <h4 class="lead"><span class="fa fa-comment-o"></span> Symptomer</h4>
       </div>
-          <ul class="list-group border-0">
-          <% for symptom in @symptoms %>
-            <li class="list-group-item border-0">‣ <%= symptom %></li>
-          <% end %>
-          </ul>
+          <div class="card-block">
+          <%= @symptoms %>
+          </div>
     </div>
   </div>
   <!-- ------------- -->
