@@ -2,12 +2,6 @@ class IllnessesController < ApplicationController
   before_action :set_illness, only: [:show, :edit, :update, :destroy]
   add_breadcrumb "<span class='lead' style='font-size: medium;'>Forsiden</span>".html_safe, :root_path
 
-  CATEGORIES = ['Tema F', 'Tema G', 'Tema H', 'Tema E']
-  CATEGORY_NAMES = {'Tema F' => 'Hæmatologi, onkologi og plastikkirurgi',
-                    'Tema G' => 'Gastroenterologi',
-                    'Tema H' => 'Nefro-Urologi',
-                    'Tema E' => 'Hjerte-kar sygdomme'}
-
   def category
     @categories = Illness.where(category: params[:category]).order('name ASC')
     @category = params[:category]
@@ -15,14 +9,11 @@ class IllnessesController < ApplicationController
     if @categories.empty?
       redirect_to root_path, alert: "#{params[:category]} er desværre tom. Kig igen senere eller skriv til mig @ gjt439 for at få adgang til at tilføje sygdomme."
     end
-
   end
   # GET /illnesses
   def index
     @new_illnesses = Illness.order('created_at').last(5).reverse
     @counter = 0
-    @categories = CATEGORIES
-    @category_names = CATEGORY_NAMES
   end
 
   # GET /illness/1
@@ -43,7 +34,6 @@ class IllnessesController < ApplicationController
     @illness.test = Test.new(illness_id: @illness.id)
 
     @differential_diagnoses = get_differential_diagnoses
-    @categories = CATEGORIES
   end
 
   # GET /illness/1/edit
@@ -51,7 +41,6 @@ class IllnessesController < ApplicationController
     add_breadcrumb "<span class='lead' style='font-size: medium;'>Ændr sygdom</span>".html_safe
     @differential_diagnoses = get_differential_diagnoses
     @differential = @illness.differentials.build(:differential_id => params[:differential_id])
-    @categories = CATEGORIES
   end
 
   # POST /illness

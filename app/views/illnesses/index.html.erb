@@ -4,8 +4,8 @@
     <h1 class="display-3 text-center">Vælg en kategori!</h1>
     <br>
     <div class="card-group">
-      <% for category in @categories %>
-          <%= render 'index_card', category: category %>
+      <% @category_names.each_key do |key| %>
+          <%= render 'index_card', category: key %>
       <% end %>
     </div>
   </div>

@@ -17,6 +17,7 @@
 //= require froala_editor.min.js
 //= require plugins/image.min.js
 //= require plugins/draggable.min.js
+//= require plugins/link.min.js
 //= require plugins/align.min.js
 //= require plugins/table.min.js
 //= require turbolinks
