@@ -9,7 +9,7 @@ class IllnessesController < ApplicationController
                     'Tema E' => 'Hjerte-kar sygdomme'}
 
   def category
-    @categories = Illness.where(category: params[:category])
+    @categories = Illness.where(category: params[:category]).order('name ASC')
     @category = params[:category]
     add_breadcrumb "<span class='lead' style='font-size: medium;'>#{params[:category]}</span>".html_safe
     if @categories.empty?
