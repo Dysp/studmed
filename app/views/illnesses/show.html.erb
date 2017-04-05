@@ -10,12 +10,25 @@
 
 <div class="row">
 <!-- Description -->
-<div class="col-md-9">
+<div class="col-md-6">
   <%= render 'show_description' %>
 </div>
 <!-- ------------- -->
-<br>
-<!-- Differential diagnoses -->
+  <!-- Symptoms -->
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="lead"><span class="fa fa-comment-o"></span> Symptomer</h4>
+      </div>
+          <ul class="list-group border-0">
+          <% for symptom in @symptoms %>
+            <li class="list-group-item border-0">‣ <%= symptom %></li>
+          <% end %>
+          </ul>
+    </div>
+  </div>
+  <!-- ------------- -->
+<!-- Quick info box -->
 <div class="col-md-3">
   <div class="card">
     <div class="card-header lead">Hurtig info (WIP)</div>

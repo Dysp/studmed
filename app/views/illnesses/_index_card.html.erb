@@ -2,7 +2,9 @@
   <%= link_to(controller: :illnesses, action: :category, category: category) do %>
   <div class="card-block">
     <%= category_image(category) %>
-    <p class="lead"><%= category %></p>
+    <p class="lead"><strong><%= category %></strong>
+    <br>
+    <%= @category_names[category] %></p>
   </div>
   <% end %>
 </div>

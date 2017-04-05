@@ -17,19 +17,20 @@
   <%= render_breadcrumbs :separator => "<span class='lead'> » </span>".html_safe %>
 </ol>
 
+<% if alert %>
 <div class="container-fluid">
-    <% if alert %>
-      <div class="col-md-6 offset-md-3">
-        <p id="alert" class="alert alert-danger text-center"><%= alert %></p>
-      </div>
-    <% end %>
-    <% if notice %>
-      <div class="col-md-6 offset-md-3">
-        <p id="notice" class="alert alert-info text-center"><%= notice %></p>
-      </div>
-    <% end %>
+  <div class="col-md-6 offset-md-3">
+    <p id="alert" class="alert alert-danger text-center"><%= alert %></p>
+  </div>
 </div>
-
+<% end %>
+<% if notice %>
+<div class="container-fluid">
+  <div class="col-md-6 offset-md-3">
+    <p id="notice" class="alert alert-info text-center"><%= notice %></p>
+  </div>
+</div>
+<% end %>
 
 <%= yield %>
 

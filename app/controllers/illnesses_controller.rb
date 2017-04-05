@@ -3,6 +3,10 @@ class IllnessesController < ApplicationController
   add_breadcrumb "<span class='lead' style='font-size: medium;'>Forsiden</span>".html_safe, :root_path
 
   CATEGORIES = ['Tema F', 'Tema G', 'Tema H', 'Tema E']
+  CATEGORY_NAMES = {'Tema F' => 'Hæmatologi, onkologi og plastikkirurgi',
+                    'Tema G' => 'Gastroenterologi',
+                    'Tema H' => 'Nefro-Urologi',
+                    'Tema E' => 'Hjerte-kar sygdomme'}
 
   def category
     @categories = Illness.where(category: params[:category])
@@ -15,13 +19,16 @@ class IllnessesController < ApplicationController
   end
   # GET /illnesses
   def index
-    @illnesses = Illness.all
+    @new_illnesses = Illness.order('created_at').last(5)
+    @counter = 0
     @categories = CATEGORIES
+    @category_names = CATEGORY_NAMES
   end
 
   # GET /illness/1
   def show
     add_breadcrumb "<span class='lead' style='font-size: medium;'>#{@illness.name}</span>".html_safe, :illness_path
+    @symptoms = @illness.clinical.symptoms.split(',')
   end
 
   # GET /illness/new
@@ -123,5 +130,4 @@ class IllnessesController < ApplicationController
       differential = @illness.differentials.build(:differential_id => diff)
       differential.save
     end
-
 end

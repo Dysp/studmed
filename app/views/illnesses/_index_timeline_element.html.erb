@@ -1,0 +1,10 @@
+<li class="<%= timeline(counter) %>">
+  <div class="timeline-badge warning"><i class="fa fa-plus"></i></div>
+  <div class="timeline-panel">
+    <div class="timeline-body">
+      <h6 class="timeline-title lead text-center"><%= link_to illness.name, illness_path(illness) %></h6>
+      <p><small><i class="fa fa-clock-o"></i> Oprettet: <%= illness.created_at.strftime('%H:%M, %d-%m-%Y') %></small></p>
+      <p><small><i class="fa fa-drivers-license"></i> <%= illness.category %></small></p>
+    </div>
+  </div>
+</li>

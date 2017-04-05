@@ -1,9 +1,27 @@
-<div class="container">
-  <h1 class="display-3 text-center">Vælg en kategori!</h1>
-  <br>
+<div class="container-fluid">
+<div class="row">
+  <div class="col-md-8">
+    <h1 class="display-3 text-center">Vælg en kategori!</h1>
+    <br>
     <div class="card-group">
       <% for category in @categories %>
-      <%= render 'index_card', category: category %>
+          <%= render 'index_card', category: category %>
       <% end %>
     </div>
+  </div>
+
+  <div class="col-md-4 bg-faded">
+      <div style="padding-top: 0px; padding-bottom: 0px;">
+        <ul class="timeline">
+          <li><h1 class="lead">Aktivitet</h1></li>
+        <% for illness in @new_illnesses %>
+          <%= render 'index_timeline_element', illness: illness, counter: @counter %>
+          <% @counter += 1 %>
+         <% end %>
+        </ul>
+      </div>
+  </div>
+<!-- end of row -->
 </div>
+</div>
+
