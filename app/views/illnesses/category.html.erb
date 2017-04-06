@@ -64,7 +64,7 @@
         <% for illness in @categories %>
         <tr onclick="window.location='<%= illness_path(illness) %>'">
           <td><%= illness.name %></td>
-          <td><%= illness.clinical.symptoms %></td>
+          <td><%= illness.symptoms %></td>
           <td><%= illness.incidence %></td>
         </tr>
             <% end %>

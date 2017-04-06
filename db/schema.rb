@@ -10,19 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403164607) do
+ActiveRecord::Schema.define(version: 20170406200407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "clinicals", force: :cascade do |t|
-    t.integer  "illness_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "other"
-    t.string   "endoscopy"
-    t.string   "symptoms"
-  end
 
   create_table "differentials", force: :cascade do |t|
     t.integer  "illness_id"
@@ -40,23 +31,9 @@ ActiveRecord::Schema.define(version: 20170403164607) do
     t.string   "name"
     t.text     "description"
     t.string   "synonyms"
-    t.text     "blood_sample"
-    t.text     "biopsy"
-    t.text     "diagnosis"
     t.text     "treatment"
-    t.text     "prognosis"
-  end
-
-  create_table "tests", force: :cascade do |t|
-    t.integer  "illness_id"
-    t.string   "xray"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "mri"
-    t.string   "ct"
-    t.string   "pet"
-    t.string   "pet_mri"
-    t.string   "ultrasound"
+    t.text     "symptoms"
+    t.text     "paraclinical"
   end
 
   create_table "users", force: :cascade do |t|

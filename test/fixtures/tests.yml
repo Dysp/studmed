@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  paraclinical_id: 1
-  xray: MyText
-
-two:
-  paraclinical_id: 2
-  xray: XrayTest

@@ -1,12 +1,31 @@
 <div class="container">
+
+
+<div class="row">
 <!-- Title -->
-<h3><span class="icon-i-first-aid badge badge-primary"> </span>
-  <%= @illness.try(:name).humanize %> <%= link_to('Edit', edit_illness_path(@illness), class: "btn btn-sm btn-warning") if user_signed_in? %>
-</h3>
-<small>Synonymer: <%= @illness.try(:synonyms) %></small>
-<br>
-<br>
+<div class="col-md-8">
+  <h3><span class="icon-i-first-aid badge badge-primary"> </span>
+    <%= @illness.try(:name).humanize %> <%= link_to('Edit', edit_illness_path(@illness), class: "btn btn-sm btn-warning") if user_signed_in? %>
+  </h3>
+  <small>Synonymer: <%= @illness.try(:synonyms) %></small>
+</div>
 <!-- ------------- -->
+<!-- Quick info -->
+<div class="col-md-2 offset-md-2">
+  <ul class="list-unstyled">
+    <li class="media">
+      <h2 class="d-flex align-self-center mr-3"><span class="fa fa-pencil"> </span></h2>
+      <div class="media-body">
+        <h6 class="mt-0 lead">Oprettet</h6>
+        <p class="mt-0"><%= @illness.created_at.strftime('%d-%m-%Y') %></p>
+      </div>
+    </li>
+  </ul>
+</div>
+<!-- ------------- -->
+<!-- End of row -->
+</div>
+
 
 <div class="row">
 <!-- Description -->
@@ -14,99 +33,58 @@
   <%= render 'show_description' %>
 </div>
 <!-- ------------- -->
-  <!-- Symptoms -->
-  <div class="col-md-3">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="lead"><span class="fa fa-comment-o"></span> Symptomer</h4>
-      </div>
-          <div class="card-block">
-          <%= @symptoms %>
-          </div>
-    </div>
-  </div>
-  <!-- ------------- -->
-<!-- Quick info box -->
-<div class="col-md-3">
+<!-- Symptoms -->
+<div class="col-md-6">
   <div class="card">
-    <div class="card-header lead">Hurtig info (WIP)</div>
-    <div class="card-block">
-      <ul class="list-unstyled">
-        <li class="media">
-            <div class="media-body">
-              <h6 class="mt-0 lead">Oprettet</h6>
-              <p class="mt-0"><%= @illness.created_at.strftime('%d-%m-%Y') %></p>
-            </div>
-          <h2 class="d-flex align-self-center mr-3"><span class="fa fa-pencil"> </span></h2>
-        </li>
-        <li class="media">
-          <div class="media-body">
-            <h6 class="mt-0 lead">Incidens (WIP)</h6>
-            <p class="mt-0"><%= @illness.incidence %></p>
-          </div>
-          <h2 class="d-flex align-self-center mr-3"><span class="fa fa-area-chart"> </span></h2>
-        </li>
-      </ul>
+    <div class="card-header">
+      <h4 class="lead"><span class="fa fa-comment-o"></span> Symptomer og fund</h4>
     </div>
+        <div class="card-block">
+        <%= @symptoms %>
+        </div>
   </div>
 </div>
 <!-- ------------- -->
 
 <!-- End of row -->
 </div>
-<br>
-<!-- Clinical and Paraclinical row -->
-<div class="row">
-
-  <!-- Blood samples -->
-  <div class="col-md-4">
-   <div class="card">
-    <% if @illness.blood_sample.empty? %>
-      <div class="card-header">
-        <h4 class="lead"><span class="fa fa-eyedropper"> </span> <del>Blodprøver</del></h4>
-      </div>
-    <% else %>
-      <div class="card-header">
-        <h4 class="lead"><span class="fa fa-eyedropper"> </span> Blodprøver</h4>
-      </div>
-      <div class="card-block">
-        <%= @illness.blood_sample %>
-      </div>
-    <% end %>
-    </div>
-  </div>
-  <!-- ------------- -->
-  <!-- Imaging -->
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="lead"><span class="icon-i-cath-lab"> </span> Indikeret billediagnostik (WIP)</h4>
-      </div>
-      <div class="card-block">
-      </div>
-    </div>
-  </div>
-  <!-- ------------- -->
-  <div class="col-md-4">
-  <%= render 'show_diffs' %>
-  </div>
-<!-- End of row -->
-</div>
-<!-- ------------- -->
 
 <br>
 
 <div id="accordion" role="tablist" aria-multiselectable="true">
+<!-- Paraclinical -->
+<div class="card">
+  <div class="card-header" role="tab" id="headingParaclinical">
+    <h5 class="mb-0">
+      <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseParaclinical" aria-expanded="false" aria-controls="collapseParaclinical">
+        <span class="form-control-feedback fa fa-search"> </span> Parakliniske undersøgelser
+      </a>
+    </h5>
+  </div>
+  <div id="collapseParaclinical" class="collapse show" role="tabpanel" aria-labelledby="headingParaclinical">
+    <div class="card-block">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="fr-view">
+            <%= @illness.paraclinical %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ------------- -->
+<br>
 <!-- Etiology and pathogenesis -->
  <div class="card">
   <div class="card-header" role="tab" id="headingPato">
     <h5 class="mb-0">
       <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsePato" aria-expanded="false" aria-controls="collapsePato">
-        Ætiologi og patogenese
+        <span class="form-control-feedback fa fa-thermometer-1"> </span> Ætiologi og patogenese
       </a>
     </h5>
   </div>
-  <div id="collapsePato" class="collapse show" role="tabpanel" aria-labelledby="headingPato">
+  <div id="collapsePato" class="collapse" role="tabpanel" aria-labelledby="headingPato">
     <div class="card-block">
       <div class="row">
         <div class="col-md-12">
@@ -120,38 +98,25 @@
 </div>
 <!-- ------------- -->
 <br>
-<!-- Treatment and prognosis -->
+<!-- Treatment -->
 <div class="card">
   <div class="card-header" role="tab" id="headingTreatment">
     <h5 class="mb-0">
       <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTreatment" aria-expanded="false" aria-controls="collapseTreatment">
-        Behandling, forløb og prognose
+        <span class="form-control-feedback fa fa-medkit"> </span> Behandling
       </a>
     </h5>
   </div>
   <div id="collapseTreatment" class="collapse" role="tabpanel" aria-labelledby="headingTreatment">
     <div class="card-block">
-     <div class="row">
-      <div class="col-md-4">
-       <h5 class="lead">Diagnose:</h5>
-       <p><%= @illness.diagnosis %></p>
-     </div>
-       <div class="col-md-4">
-         <h5 class="lead">Behandling:</h5>
-         <p><%= @illness.treatment %></p>
-       </div>
-       <div class="col-md-4">
-         <h5 class="lead">Prognose:</h5>
-         <p><%= @illness.prognosis %></p>
-       </div>
+      <%= @illness.treatment.html_safe %>
     </div>
-   </div>
   </div>
 </div>
 
 <!-- End of Accordion -->
 </div>
 <br>
-
+  <%= render 'show_diffs' %>
 <!-- end of container -->
 </div>

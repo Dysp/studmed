@@ -1,7 +1,6 @@
-<script> $(function() { $('#description, #etio_and_pato').froalaEditor( {
+<script> $(function() { $('#description, #etio_and_pato, #paraclinical').froalaEditor( {
     toolbarButtons: ['undo', 'redo', '|' , 'bold', 'italic', 'underline', 'subscript', 'superscript', 'align', '|', 'insertImage', 'insertTable', 'insertLink'],
-    height: 317,
-    placeholderText: 'Skriv noget...'
+    placeholderText: 'Skriv her'
     }) });
 </script>
 
@@ -17,168 +16,93 @@
       </ul>
     </div>
   <% end %>
-<div class="row">
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        <%= f.button :submit, 'Gem', class: 'btn btn-sm btn-success pull-right' %><h6 class="lead">Sygdom</h6>
-      </div>
-      <div class="card-block">
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-6">
-              <h1 class="lead"><span class="form-control-feedback fa fa-id-card"></span> Sygdommens navn</h1>
-              <p><%= f.input_field :name, placeholder: 'fx: aorta stenose', class: 'form-control' %></p>
-            </div>
-            <div class="col-md-6">
-              <h1 class="lead"><span class="form-control-feedback fa fa-comments-o"></span> Synonymer</h1>
-              <p><%= f.input_field :synonyms, placeholder: 'Synonymer adskilt med komma', class: 'form-control' %></p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <h1 class="lead"><span class="form-control-feedback fa fa-sitemap"></span> Kategori</h1>
-              <p><%= f.input_field :category, collection: @categories, class: 'form-control' %></p>
-              <br>
-              <h1 class="lead"><span class="form-control-feedback fa fa-pie-chart"></span> Incidens</h1>
-              <p><%= f.input_field :incidence, hint: 'Antallet af nye tilfælde pr. tidsperiode', class: 'form-control' %></p>
-            </div>
-            <div class="col-md-6">
-             <% unless @differential_diagnoses.nil? %>
-              <h1 class="lead"><span class="form-control-feedback fa fa-exchange"></span> Differentialdiagnoser</h1>
-              <%= select_tag 'differential_id', options_from_collection_for_select(@differential_diagnoses, 'id', 'name'), prompt: "Vælg differential diagnoser", class: 'form-control', multiple: true %>
-              <i> Vælg flere ved at holde CTRL i bund</i>
-             <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-8">
-    <div class="card-group">
-      <div class="card">
-        <div class="card-header">
-          <h1 class="lead"><span class="form-control-feedback fa fa-file-text-o"></span> Beskrivelse</h1>
-        </div>
-          <%= f.input_field :description, hint: 'Beskriv kort sygdommen', class: 'form-control', id: 'description', as: :text %>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <h1 class="lead"><span class="form-control-feedback fa fa-gavel"></span> Ætiologi og patogenese</h1>
-        </div>
-          <%= f.input_field :etio_and_pato, hint: 'Sygdommens årsag', class: 'form-control', id: 'etio_and_pato', as: :text %>
-      </div>
-    </div>
-  </div>
-  <!-- End of row -->
-</div>
 
-<br>
-
+<div class="card">
 <div id="accordion" role="tablist" aria-multiselectable="true">
-  <!-- Clinical & Paraclinical -->
-  <div class="card">
-    <div class="card-header" role="tab" id="headingClinic">
-      <h5 class="mb-0">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseClinic" aria-expanded="false" aria-controls="collapseClinic">
-          Klinik & Paraklinik
-        </a>
-      </h5>
-    </div>
-    <div id="collapseClinic" class="collapse" role="tabpanel" aria-labelledby="headingClinic">
-      <div class="card-block">
-        <div class="row">
-          <div class="col-md-4">
-            <%= f.simple_fields_for :clinical do |clinic| %>
-              <h1 class="lead"><span class="form-control-feedback fa fa-commenting"></span> Symptomer</h1>
-              <p><%= clinic.input_field :symptoms, placeholder: 'Angiv symptomer adskilt med komma', class: 'form-control' %></p>
-
-              <h1 class="lead"><span class="form-control-feedback fa fa-search"></span> Endoskopi</h1>
-              <p><%= clinic.input_field :endoscopy, placeholder: 'Hvad kan man se?', class: 'form-control' %></p>
-
-              <h1 class="lead"><span class="form-control-feedback fa fa-hand-o-down"></span> Andet</h1>
-              <p><%= clinic.input_field :other, placeholder: 'Hvad kan man føle og mærke?', class: 'form-control' %></p>
-            <% end %>
-          </div>
-          <div class="col-md-4">
-            <h1 class="lead"><span class="form-control-feedback icon-i-pathology"></span> Biopsi</h1>
-            <p><%= f.input_field :biopsy, placeholder: 'Er biopsi indikeret? Hvilken?', class: 'form-control' %></p>
-
-            <h1 class="lead"><span class="form-control-feedback fa fa-flask"></span> Blodprøver</h1>
-            <p><%= f.input_field :blood_sample, placeholder: 'Hvilke blodprøver er indikerede? Hvad forventes?', class: 'form-control' %></p>
-          </div>
-          <div class="col-md-4">
-            <%= f.simple_fields_for :test do |test| %>
-              <a data-toggle="collapse" data-parent="#imaging" href="#collapseXRAY" aria-expanded="true" aria-controls="collapseXRAY" class="lead"> Røntgen</a>
-              <div id="collapseXRAY" class="collapse" role="tabpanel" aria-labelledby="headingXRAY">
-                <%= test.input_field :xray, placeholder: 'Hvilke fund forventes at ses på røntgen?', class: 'form-control' %>
-              </div>
-              <br>
-              <a data-toggle="collapse" data-parent="#imaging" href="#collapseMRI" aria-expanded="true" aria-controls="collapseMRI" class="lead"> MRI</a>
-              <div id="collapseMRI" class="collapse" role="tabpanel" aria-labelledby="headingMRI">
-                <%= test.input_field :mri, placeholder: 'Hvilke fund forventes at ses ved MRI?', class: 'form-control' %>
-              </div>
-              <br>
-
-              <a data-toggle="collapse" data-parent="#imaging" href="#collapsePET" aria-expanded="true" aria-controls="collapsePET" class="lead"> PET</a>
-              <div id="collapsePET" class="collapse" role="tabpanel" aria-labelledby="headingPET">
-                <%= test.input_field :pet, placeholder: 'Hvilke fund forventes at ses ved PET?', class: 'form-control' %>
-              </div>
-              <br>
-
-              <a data-toggle="collapse" data-parent="#imaging" href="#collapseCT" aria-expanded="true" aria-controls="collapseCT" class="lead"> CT</a>
-              <div id="collapseCT" class="collapse" role="tabpanel" aria-labelledby="headingCT">
-                <%= test.input_field :ct, placeholder: 'Hvilke fund forventes at ses på CT?', class: 'form-control' %>
-              </div>
-              <br>
-
-              <a data-toggle="collapse" data-parent="#imaging" href="#collapsePET_MRI" aria-expanded="true" aria-controls="collapsePET_MRI" class="lead"> PET MRI</a>
-              <div id="collapsePET_MRI" class="collapse" role="tabpanel" aria-labelledby="headingPET_MRI">
-                <%= test.input_field :pet_mri, placeholder: 'Hvilke fund forventes at ses på PET-MRI?', class: 'form-control' %>
-              </div>
-              <br>
-
-              <a data-toggle="collapse" data-parent="#imaging" href="#collapseULTRASOUND" aria-expanded="true" aria-controls="collapseULTRASOUND" class="lead">Ultralyd</a>
-              <div id="collapseULTRASOUND" class="collapse" role="tabpanel" aria-labelledby="headingULTRASOUND">
-                <%= test.input_field :ultrasound, placeholder: 'Hvilke fund forventes at ses med ultralyd?', class: 'form-control' %>
-              </div>
-            <% end %>
-          </div>
+<!-- General -->
+<div class="card-header" role="tab" id="headingGeneral">
+  <h5 class="mb-0">
+    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseGeneral" aria-expanded="false" aria-controls="collapseGeneral">
+      <span class="form-control-feedback fa fa-info-circle"> </span> Generelt
+    </a>
+  </h5>
+</div>
+<div id="collapseGeneral" class="collapse show" role="tabpanel" aria-labelledby="headingGeneral">
+  <div class="card-block">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-6">
+          <h1 class="lead"><span class="form-control-feedback fa fa-id-card"></span> Sygdommens navn</h1>
+          <p><%= f.input_field :name, placeholder: 'fx: aorta stenose', class: 'form-control' %></p>
+        </div>
+        <div class="col-md-6">
+          <h1 class="lead"><span class="form-control-feedback fa fa-sitemap"></span> Kategori (virker ikke, den smider navnet afsted)</h1>
+          <p><%= f.input_field :category, collection: @category_names, class: 'form-control' %></p>
         </div>
       </div>
-    </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h1 class="lead"><span class="form-control-feedback fa fa-pie-chart"></span> Incidens</h1>
+          <p><%= f.input_field :incidence, hint: 'Antallet af nye tilfælde pr. tidsperiode', class: 'form-control' %></p>
+        </div>
+        <div class="col-md-6">
+          <% unless @differential_diagnoses.nil? %>
+            <h1 class="lead"><span class="form-control-feedback fa fa-exchange"></span> Differentialdiagnoser</h1>
+            <%= select_tag 'differential_id', options_from_collection_for_select(@differential_diagnoses, 'id', 'name'), prompt: "Vælg differential diagnoser", class: 'form-control', multiple: true %>
+            <i> Vælg flere ved at holde CTRL i bund</i>
+          <% end %>
+        </div>
+      </div>
+   </div>
+  </div>
+</div>
+<!-- Description -->
+  <div class="card-header" role="tab" id="headingDescription">
+    <h5 class="mb-0">
+      <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseDescription" aria-expanded="false" aria-controls="collapseDescription">
+        <span class="form-control-feedback fa fa-file-text-o"> </span> Beskrivelse
+      </a>
+    </h5>
+  </div>
+  <div id="collapseDescription" class="collapse" role="tabpanel" aria-labelledby="headingDescription">
+    <%= f.input_field :description, hint: 'Sygdommens årsag', class: 'form-control', id: 'description', as: :text %>
+  </div>
+<!-- Etiology and patogenesis -->
+  <div class="card-header" role="tab" id="headingPato">
+    <h5 class="mb-0">
+      <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsePato" aria-expanded="false" aria-controls="collapsePato">
+        <span class="form-control-feedback fa fa-thermometer-1"> </span> Ætiologi og patogenese
+      </a>
+    </h5>
+  </div>
+  <div id="collapsePato" class="collapse" role="tabpanel" aria-labelledby="headingPato">
+  <%= f.input_field :etio_and_pato, hint: 'Sygdommens årsag', class: 'form-control', id: 'etio_and_pato', as: :text %>
+  </div>
+<!-- Paraclinical -->
+  <div class="card-header" role="tab" id="headingClinic">
+    <h5 class="mb-0">
+      <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseClinic" aria-expanded="false" aria-controls="collapseClinic">
+        <span class="form-control-feedback fa fa-search"> </span> Parakliniske undersøgelser
+      </a>
+    </h5>
+  </div>
+  <div id="collapseClinic" class="collapse" role="tabpanel" aria-labelledby="headingClinic">
+    <%= f.input_field :paraclinical, placeholder: 'Hvilke parakliniske undersøgelser er indikerede? Hvad viser de?', class: 'form-control', id: 'paraclinical', as: :text %>
   </div>
   <!-- Treatment and prognosis -->
-  <div class="card">
     <div class="card-header" role="tab" id="headingTreatment">
       <h5 class="mb-0">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTreatment" aria-expanded="false" aria-controls="collapseTreatment">
-          Diagnose, behandling & prognose
+          <span class="form-control-feedback fa fa-medkit"> </span> Behandling
         </a>
       </h5>
     </div>
     <div id="collapseTreatment" class="collapse" role="tabpanel" aria-labelledby="headingTreatment">
-      <div class="card-block">
-        <div class="row">
-          <div class="col-md-4">
-            <h1 class="lead"><span class="form-control-feedback fa fa-commenting"></span> Diagnose</h1>
-            <p><%= f.input_field :diagnosis, placeholder: 'Hvad er de diagnostiske kriterier?', class: 'form-control' %></p>
-          </div>
-          <div class="col-md-4">
-            <h1 class="lead"><span class="form-control-feedback fa fa-commenting"></span> Behandling</h1>
-            <p><%= f.input_field :treatment, placeholder: 'Hvilke behandlingsretningslinjer er der?', class: 'form-control' %></p>
-          </div>
-          <div class="col-md-4">
-            <h1 class="lead"><span class="form-control-feedback fa fa-commenting"></span> Prognose</h1>
-            <p><%= f.input_field :prognosis, placeholder: 'Hvad er prognosen?', class: 'form-control' %></p>
-          </div>
-        </div>
-      <!-- End of card block -->
-      </div>
+      <%= f.input_field :treatment, placeholder: 'Hvilke parakliniske undersøgelser er indikerede? Hvad viser de?', class: 'form-control', id: 'paraclinical', as: :text %>    </div>
     </div>
-  </div>
 
-<!-- End of Accordion -->
+ <!-- End of Accordion -->
 </div>
+<br>
+<%= f.button :submit, 'Gem', class: 'btn btn-lg btn-success' %>
 <% end %>

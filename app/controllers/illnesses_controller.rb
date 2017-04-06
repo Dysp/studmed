@@ -19,10 +19,10 @@ class IllnessesController < ApplicationController
   # GET /illness/1
   def show
     add_breadcrumb "<span class='lead' style='font-size: medium;'>#{@illness.name}</span>".html_safe, :illness_path
-    if @illness.clinical.symptoms.nil?
+    if @illness.symptoms.nil?
       @symptoms = 'Ingen angivne symptomer'
     else
-      @symptoms = @illness.clinical.symptoms
+      @symptoms = @illness.symptoms
     end
   end
 
@@ -30,9 +30,6 @@ class IllnessesController < ApplicationController
   def new
     add_breadcrumb "<span class='lead' style='font-size: medium;'>Opret ny sygdom</span>".html_safe
     @illness = Illness.new
-    @illness.clinical = Clinical.new(illness_id: @illness.id)
-    @illness.test = Test.new(illness_id: @illness.id)
-
     @differential_diagnoses = get_differential_diagnoses
   end
 
@@ -95,20 +92,16 @@ class IllnessesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def illness_params
       params.require(:illness).permit(:name,
-                                      :description,
-                                      :synonyms,
                                       :etio_and_pato,
                                       :incidence,
-                                      :prevalence,
                                       :category,
-                                      :blood_sample,
-                                      :biopsy,
-                                      :differential_id,
-                                      :diagnosis,
-                                      :prognosis,
+                                      :name,
+                                      :description,
+                                      :synonyms,
                                       :treatment,
-                                      clinical_attributes: [:id, :symptoms, :endoscopy, :other, :_destroy],
-                                      test_attributes: [:id, :xray, :mri, :ct, :pet, :pet_mri, :ultrasound, :_destroy])
+                                      :symptoms,
+                                      :paraclinical,
+                                      :differential_id)
     end
 
     def get_differential_diagnoses
