@@ -4,7 +4,7 @@
   </div>
   <div class="card-block">
     <div class="fr-view">
-      <%= @illness.try(:description).html_safe %>
+      <%= @illness.description.html_safe unless @illness.try(:description).nil? %>
     </div>
   </div>
 </div>
