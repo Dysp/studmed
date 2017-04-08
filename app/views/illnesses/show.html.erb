@@ -109,7 +109,7 @@
   </div>
   <div id="collapseTreatment" class="collapse" role="tabpanel" aria-labelledby="headingTreatment">
     <div class="card-block">
-      <%= @illness.(:treatment).html_safe %>
+      <%= @illness.try(:treatment).html_safe %>
     </div>
   </div>
 </div>
