@@ -1,4 +1,4 @@
-<script> $(function() { $('#description, #etio_and_pato, #paraclinical').froalaEditor( {
+<script> $(function() { $('#description, #etio_and_pato, #paraclinical, #symptoms').froalaEditor( {
     toolbarButtons: ['undo', 'redo', '|' , 'bold', 'italic', 'underline', 'subscript', 'superscript', 'align', '|', 'insertImage', 'insertTable', 'insertLink'],
     placeholderText: 'Skriv her'
     }) });
@@ -28,33 +28,44 @@
   </h5>
 </div>
 <div id="collapseGeneral" class="collapse show" role="tabpanel" aria-labelledby="headingGeneral">
-  <div class="card-block">
-    <div class="form-group">
-      <div class="row">
-        <div class="col-md-6">
-          <h1 class="lead"><span class="form-control-feedback fa fa-id-card"></span> Sygdommens navn</h1>
-          <p><%= f.input_field :name, placeholder: 'fx: aorta stenose', class: 'form-control' %></p>
-        </div>
-        <div class="col-md-6">
-          <h1 class="lead"><span class="form-control-feedback fa fa-sitemap"></span> Kategori (virker ikke, den smider navnet afsted)</h1>
-          <p><%= f.input_field :category, collection: @category_names, class: 'form-control' %></p>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card-block">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6">
+              <h1 class="lead"><span class="form-control-feedback fa fa-id-card"></span> Sygdommens navn</h1>
+              <p><%= f.input_field :name, placeholder: 'fx: aorta stenose', class: 'form-control' %></p>
+            </div>
+            <div class="col-md-6">
+              <h1 class="lead"><span class="form-control-feedback fa fa-sitemap"></span> Kategori</h1>
+              <p><%= f.input_field :category, collection: @category_array, class: 'form-control' %></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <h1 class="lead"><span class="form-control-feedback fa fa-pie-chart"></span> Incidens</h1>
+              <p><%= f.input_field :incidence, hint: 'Antallet af nye tilfælde pr. tidsperiode', class: 'form-control' %></p>
+            </div>
+            <div class="col-md-6">
+              <% unless @differential_diagnoses.nil? %>
+                  <h1 class="lead"><span class="form-control-feedback fa fa-exchange"></span> Differentialdiagnoser</h1>
+                  <%= select_tag 'differential_id', options_from_collection_for_select(@differential_diagnoses, 'id', 'name'), prompt: "Vælg differential diagnoser", class: 'form-control', multiple: true %>
+                  <i> Vælg flere ved at holde CTRL i bund</i>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <h1 class="lead"><span class="form-control-feedback fa fa-pie-chart"></span> Incidens</h1>
-          <p><%= f.input_field :incidence, hint: 'Antallet af nye tilfælde pr. tidsperiode', class: 'form-control' %></p>
-        </div>
-        <div class="col-md-6">
-          <% unless @differential_diagnoses.nil? %>
-            <h1 class="lead"><span class="form-control-feedback fa fa-exchange"></span> Differentialdiagnoser</h1>
-            <%= select_tag 'differential_id', options_from_collection_for_select(@differential_diagnoses, 'id', 'name'), prompt: "Vælg differential diagnoser", class: 'form-control', multiple: true %>
-            <i> Vælg flere ved at holde CTRL i bund</i>
-          <% end %>
-        </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card-block">
+        <h1 class="lead"><span class="form-control-feedback fa fa-comments-o"></span> Symptomer og fund</h1>
+        <%= f.input_field :symptoms, hint: 'Symptomer', class: 'form-control', id: 'symptoms', as: :text %>
       </div>
-   </div>
+    </div>
   </div>
+
 </div>
 <!-- Description -->
   <div class="card-header" role="tab" id="headingDescription">

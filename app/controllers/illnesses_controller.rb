@@ -31,6 +31,8 @@ class IllnessesController < ApplicationController
     add_breadcrumb "<span class='lead' style='font-size: medium;'>Opret ny sygdom</span>".html_safe
     @illness = Illness.new
     @differential_diagnoses = get_differential_diagnoses
+    @category_array = []
+    @category_names.each_key {|key| @category_array << key}
   end
 
   # GET /illness/1/edit
@@ -38,6 +40,8 @@ class IllnessesController < ApplicationController
     add_breadcrumb "<span class='lead' style='font-size: medium;'>Ændr sygdom</span>".html_safe
     @differential_diagnoses = get_differential_diagnoses
     @differential = @illness.differentials.build(:differential_id => params[:differential_id])
+    @category_array = []
+    @category_names.each_key {|key| @category_array << key}
   end
 
   # POST /illness
