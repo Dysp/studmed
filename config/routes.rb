@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   root 'illnesses#index'
 
   authenticate :user do
-    resources :illnesses, only: [:new, :create, :edit, :update, :destroy]
+    resources :illnesses, only: [:new, :create, :edit, :update, :category, :destroy]
     resources :differentials
   end
 
-  resources :illnesses, only: [:index, :show]
+  resources :illnesses, only: [:index, :category, :show]
 end

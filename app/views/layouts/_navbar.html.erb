@@ -12,7 +12,7 @@
       </li>
       <% @category_names.each_key do |key| %>
         <li class="nav-item">
-          <%= link_to @category_names[key], { controller: :illnesses, action: :category, category: key}, { :class => 'nav-link' } %>
+          <%= link_to @category_names[key], { controller: illnesses_path, action: :category, category: key}, { :class => 'nav-link' } %>
         </li>
       <% end %>
     </ul>
