@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   get 'categorizations/create'
   get 'categorizations/destroy'
   get 'illnesses/category'
-
   root 'illnesses#index'
+  get 'quizzes/check_answer'
+  get 'quizzes/show'
 
   authenticate :user do
     resources :illnesses, only: [:new, :create, :edit, :update, :category, :destroy]

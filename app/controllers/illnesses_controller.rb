@@ -3,9 +3,10 @@ class IllnessesController < ApplicationController
   add_breadcrumb "<span class='lead' style='font-size: medium;'>Forsiden</span>".html_safe, :root_path
 
   def category
+    add_breadcrumb "<span class='lead' style='font-size: medium;'>#{params[:category]}</span>".html_safe
+
     @categories = Illness.where(category: params[:category]).order('name ASC')
     @category = params[:category]
-    add_breadcrumb "<span class='lead' style='font-size: medium;'>#{params[:category]}</span>".html_safe
     if @categories.empty?
       redirect_to root_path, alert: "#{params[:category]} er desværre tom. Kig igen senere eller skriv til mig @ gjt439 for at få adgang til at tilføje sygdomme."
     end
@@ -19,6 +20,7 @@ class IllnessesController < ApplicationController
   # GET /illness/1
   def show
     add_breadcrumb "<span class='lead' style='font-size: medium;'>#{@illness.name}</span>".html_safe, :illness_path
+
     if @illness.symptoms.nil?
       @symptoms = 'Ingen angivne symptomer'
     else
@@ -29,6 +31,7 @@ class IllnessesController < ApplicationController
   # GET /illness/new
   def new
     add_breadcrumb "<span class='lead' style='font-size: medium;'>Opret ny sygdom</span>".html_safe
+
     @illness = Illness.new
     @differential_diagnoses = get_differential_diagnoses
     @category_array = []
@@ -38,6 +41,7 @@ class IllnessesController < ApplicationController
   # GET /illness/1/edit
   def edit
     add_breadcrumb "<span class='lead' style='font-size: medium;'>Ændr sygdom</span>".html_safe
+
     @differential_diagnoses = get_differential_diagnoses
     @differential = @illness.differentials.build(:differential_id => params[:differential_id])
     @category_array = []

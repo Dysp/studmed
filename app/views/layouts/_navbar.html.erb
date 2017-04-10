@@ -2,32 +2,32 @@
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <%= link_to root_path, class: "navbar-brand mr-auto" do %>
-      <span class="icon-neurology d-inline-block align-top" style="font-size: 4em;"> </span>
+  <%= link_to root_path, class: "btn btn-primary btn-lg btn3d" do %>
+      <span class="icon-i-mental-health d-inline-block align-top" style="font-size: 4em;"> </span>
   <% end %>
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Sygdomme er nederen</a>
+      <li class="nav-item active btn btn3d">
+        <%= link_to "Sygdomme er nederen", root_path, class: "nav-link" %>
       </li>
       <% @category_names.each_key do |key| %>
-        <li class="nav-item">
-          <%= link_to @category_names[key], { controller: illnesses_path, action: :category, category: key}, { :class => 'nav-link' } %>
+        <li>
+          <%= link_to @category_names[key], { controller: illnesses_path, action: :category, category: key}, {class: "btn btn-primary btn-xs btn3d mr-auto"} %>
         </li>
       <% end %>
     </ul>
     <ul class="navbar-nav ml-auto">
     <% if user_signed_in? %>
         <li class="nav-item">
-          <%= link_to 'Ny sygdom', new_illness_path, class: 'btn btn-sm btn-success' %>
+          <%= link_to 'Ny sygdom', new_illness_path, class: 'btn btn-info btn-lg btn3d' %>
         </li>
          
         <li class="nav-item">
-          <%= link_to 'Log ud', destroy_user_session_path, method: :delete, class: 'btn btn-sm btn-danger' %>
+          <%= link_to 'Log ud', destroy_user_session_path, method: :delete, class: 'btn btn-danger btn-lg btn3d' %>
         </li>
     <% else %>
         <li>
-          <%= link_to 'Login', new_user_session_path, class: 'btn btn-sm btn-primary nav-link' %>
+          <%= link_to 'Login', new_user_session_path, class: 'btn btn-primary btn-lg btn3d' %>
         </li>
     <% end %>
 
