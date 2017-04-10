@@ -6,7 +6,8 @@ class QuizzesController < ApplicationController
     add_breadcrumb "<span class='lead' style='font-size: medium;'>Quiz</span>".html_safe
 
     @illnesses = Illness.order('RANDOM()').first(4)
-    session[:correct] = @illnesses.sample.id
+    @correct = @illnesses.sample
+    session[:correct] = @correct.id
   end
 
   def check_answer

@@ -1,13 +1,23 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-10">
+      <div class="fr-view">
+        <%= @correct.symptoms.html_safe %>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <h2>Score: <%= session[:score] %></h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
      <div class="card-group">
         <% counter = 1 %>
         <% @illnesses.each do |illness| %>
         <div class="card">
           <div class="card-header">Svar <%= counter %></div>
           <div class="card-block">
-            <%= illness.symptoms.html_safe unless illness.try(:symptoms).nil? %>
+            <%= illness.name.html_safe unless illness.try(:name).nil? %>
           </div>
           <div class="card-footer text-center">
           <%= link_to(action: 'check_answer', answer: illness) do %>
@@ -19,23 +29,6 @@
         <% end %>
      </div>
     </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-header">
-          <div class="progress">
-            <div class="progress-bar progress-bar" style="width: 20%;"></div>
-          </div>
-        </div>
-        </div>
-
-      <div class="progress">
-        <% if session[:score].nil? %>
-            <% session[:score] = 0 %>
-        <% end %>
-        <h2>Score: <%= session[:score] %></h2>
-        <span class="green" style="width: <%= (session[:score] / 10.0) * 100 %>%;"><span><% (session[:score] / 10.0) * 100 %></span>
-      </span>
-      </div>
-    </div>
   </div>
 </div>
+<br>

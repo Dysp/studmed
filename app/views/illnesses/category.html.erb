@@ -56,7 +56,6 @@
         <thead class="thead-default">
         <tr class="filters">
           <th><input type="text" class="form-control" placeholder="Sygdom" disabled></th>
-          <th><input type="text" class="form-control" placeholder="Symptomer" disabled></th>
           <th><input type="text" class="form-control" placeholder="Incidens" disabled></th>
         </tr>
         </thead>
@@ -64,7 +63,6 @@
         <% for illness in @categories %>
         <tr onclick="window.location='<%= illness_path(illness) %>'">
           <td><%= illness.name %></td>
-          <td><%= illness.symptoms %></td>
           <td><%= illness.incidence %></td>
         </tr>
             <% end %>

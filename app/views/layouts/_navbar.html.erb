@@ -12,7 +12,11 @@
       </li>
       <% @category_names.each_key do |key| %>
         <li>
-          <%= link_to @category_names[key], { controller: illnesses_path, action: :category, category: key}, {class: "btn btn-primary btn-xs btn3d mr-auto"} %>
+          <%= link_to controller: illnesses_path, action: :category, category: key do %>
+            <div class="snip1303">
+              <%= category_image(key, 'center-block', 'width: 50px;display: block; margin-left: 10px; margin-right: 10px; margin-top: 8px; margin-bottom: 8px;') %>
+            </div>
+          <% end %>
         </li>
       <% end %>
     </ul>
@@ -27,7 +31,10 @@
         </li>
     <% else %>
         <li>
-          <%= link_to 'Login', new_user_session_path, class: 'btn btn-primary btn-lg btn3d' %>
+          <%= link_to new_user_session_path do %>
+            <div class="snip1303 ion-android-unlock">
+            </div>
+          <% end %>
         </li>
     <% end %>
 

@@ -1,8 +1,10 @@
 <div class="card border-0 text-center">
   <%= link_to(controller: :illnesses, action: :category, category: category) do %>
   <div class="card-block">
+    <h1><strong><%= category %></strong> </h1>
+    <div class="btn3d btn btn-primary btn-lg">
     <%= category_image(category) %>
-    <p class="lead"><strong><%= category %></strong>
+    </div>
     <br>
     <%= @category_names[category] %></p>
   </div>
