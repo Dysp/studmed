@@ -21,6 +21,12 @@ class IllnessesController < ApplicationController
   def show
     add_breadcrumb "<span class='lead' style='font-size: medium;'>#{@illness.name}</span>".html_safe, :illness_path
 
+    inelligible_illnesses_ids = @illness.differentials.all.map do |differential|
+      differential.differential.id
+    end
+    inelligible_illnesses_ids << @illness.id
+
+    @other_illnesses = Illness.where.not(id: inelligible_illnesses_ids)
     if @illness.symptoms.nil?
       @symptoms = 'Ingen angivne symptomer'
     else

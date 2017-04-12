@@ -1,4 +1,7 @@
 <div class="card">
+<% @other_illnesses.each do |illness| %>
+  <h1><%= illness.name %></h1> <a href = "/differentials/create?illness_id=<%=@illness.id%>;differential_id=<%= illness.id%>">associate</a>
+<% end %>
   <% if @illness.differentials.empty? %>
     <div class="card-header">
       <h4 class="lead"><span class="fa fa-book"> </span> <del>Differentialdiagnoser</del> (WIP)</h4>
@@ -9,7 +12,7 @@
     </div>
     <div class="list-group">
       <% @illness.differentials.each do |diff| %>
-          <%= link_to diff.differential.name, illness_path(diff.differential.id), class: "list-group-item list-group-item-action border-0" %>
+          <%= link_to diff.differential.name, illness_path(diff.differential.id), class: "list-group-item list-group-item-action border-0" %><a href = "/differentials/destroy?differential_id=<%= diff.id%>">remove</a>
       <% end %>
     </div>
   <% end %>
