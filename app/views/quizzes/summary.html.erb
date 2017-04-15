@@ -1,0 +1,21 @@
+<h1 class="lead text-center">Opsummering</h1>
+<div class="card-group text-center">
+  <% counter = 1 %>
+  <% session[:summary].each do |correct_id, answer_id| %>
+      <% correct = Illness.find(correct_id) %>
+      <% answer = Illness.find(answer_id) %>
+      <div class="card" style="box-shadow: 0 0 3px #dedede;">
+        <h4 class="lead">Spørgsmål #<%= counter %></h4>
+        <div class="card-block p-2">
+          <h5 class=""><%= correct.symptoms %></h5>
+          <h5>Du svarede: <%= answer.name %></h5>
+
+        </div>
+        <div class="card-footer">
+              <div type="button" class="btn btn-success btn btn3d"><span class="fa fa-check"></span>
+              </div>
+        </div>
+      </div>
+      <% counter += 1 %>
+  <% end %>
+</div>

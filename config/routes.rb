@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root 'illnesses#index'
   get 'quizzes/check_answer'
   get 'quizzes/show'
+  get 'quizzes/reset_game'
+  get 'quizzes/summary'
 
   authenticate :user do
     resources :illnesses, only: [:new, :create, :edit, :update, :category, :destroy]

@@ -1,10 +1,26 @@
 <div class="container-fluid">
   <div class="row">
-      <div class="offset-md-2 col-md-8 img-thumbnail bg-faded p-3" style="box-shadow: 0 0 3px #dedede;">
-      <h1 class="display-4 text-center">Hvilken sygdom tilhører disse symptomer?</h1>
+    <div class="col-md-2 text-center">
+      <div class="btn3d btn btn-info btn-lg">
+       <span class="fa fa-hashtag fa-2x"></span><br>
+        Spørgsmål #<%= session[:score] + session[:wrong_answers] %>
+      </div>
+    </div>
+      <div class="col-md-8 img-thumbnail bg-faded p-3" style="box-shadow: 0 0 3px #dedede;">
+      <h1 class="lead text-center">Hvad er den mest sandsynlige diagnose i denne case?</h1>
       <div class="fr-view text-center">
         <%= @correct.symptoms.html_safe %>
       </div>
+    </div>
+
+    <div class="col-md-2 text-center">
+      <%= link_to 'reset_game' do %>
+          <div class="btn3d btn btn-warning btn-lg">
+            <span class="fa fa-refresh fa-2x"></span>
+            <br>
+            Reset quiz
+          </div>
+      <% end %>
     </div>
   </div>
   <br>
@@ -12,27 +28,25 @@
     <div class="col-md-2 rounded-bottom">
       <h1 class="lead text-center">Dit sidste svar</h1>
       <% if session[:was_answer_correct].nil? %>
-          <div class="card alert-info text-center" style="box-shadow: 0 0 3px #dedede;">
-            <div class="card-block">answer was nil</div>
-            <div class="card-block">
-              <p>Nuttin' here</p>
-            </div>
+          <div class="counter" style="box-shadow: 0 0 4px #161616;">
+            <i class="fa fa-play fa-3x"></i>
+            <h2 class="count-title">Sæt i gang!</h2>
+            <br>
+            <h2 class="count-text"><i>Her kommer dit seneste svar til at stå</i></h2>
           </div>
       <% elsif session[:was_answer_correct] == true %>
-        <div class="card alert-success text-center" style="box-shadow: 0 0 3px #dedede;">
-          <div class="card-block"><%= @last_correct.symptoms.html_safe %></div>
-          <div class="card-block">
-            <p>Det korrekte svar på sidste spørgsmål, var:</p>
-            <p class=""><%= @last_correct.name.html_safe unless @last_correct.try(:name).nil? %></p>
+          <div class="counter" style="box-shadow: 0 0 4px #161616;">
+            <i class="fa fa-thumbs-up fa-3x"></i>
+            <h2 class="count-title">Rigtigt! :D</h2>
+            <br>
+            <h2 class="count-text"><b><%= @last_correct.name.html_safe unless @last_correct.try(:name).nil? %></b> var korrekt.</h2>
           </div>
-        </div>
       <% else %>
-          <div class="card alert-danger text-center" style="box-shadow: 0 0 3px #dedede;">
-            <div class="card-block"><%= @last_correct.symptoms.html_safe %></div>
-            <div class="card-block">
-              <p>Det korrekte svar på sidste spørgsmål, var:</p>
-              <p class=""><%= @last_correct.name.html_safe unless @last_correct.try(:name).nil? %></p>
-            </div>
+          <div class="counter" style="box-shadow: 0 0 4px #161616;">
+            <i class="fa fa-thumbs-down fa-3x red"></i>
+            <h2 class="count-title">Forkert! :(</h2>
+            <br>
+            <h2 class="count-text">Den rigtige diagnose var <b><%= @last_correct.name.html_safe unless @last_correct.try(:name).nil? %></b></h2>
           </div>
       <% end %>
     </div>
@@ -48,7 +62,8 @@
           </div>
           <div class="card-footer">
           <%= link_to(action: 'check_answer', answer: illness) do %>
-            <button type="button" class="btn btn-success btn btn3d"><span class="fa fa-check"></span></button>
+            <div type="button" class="btn btn-success btn btn3d"><span class="fa fa-check"></span>
+            </div>
           <% end %>
           </div>
         </div>
@@ -73,3 +88,11 @@
     </div>
   </div>
 </div>
+<% if user_signed_in? %>
+  <%= session[:start_time] %>
+
+  <% session.each do |key, value| %>
+    <br><%= key.to_s %> =>
+    <%= value.to_s %>
+  <% end %>
+<% end %>
