@@ -1,5 +1,6 @@
 class DifferentialsController < ApplicationController
   def create
+    @illness = Illness.where(id: params[:illness_id]).first
     @differential = @illness.differentials.build(:differential_id => params[:differential_id])
     if @differential.save
       flash[:notice] = "Added diff."
@@ -11,6 +12,7 @@ class DifferentialsController < ApplicationController
   end
 
   def destroy
+    @illness = Differential.find(params[:differential_id]).destroy
   end
 
 
