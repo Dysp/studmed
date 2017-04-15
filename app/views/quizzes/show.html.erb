@@ -36,7 +36,7 @@
           </div>
       <% elsif session[:was_answer_correct] == true %>
           <div class="counter" style="box-shadow: 0 0 4px #161616;">
-            <i class="fa fa-thumbs-up fa-3x"></i>
+            <i class="fa fa-thumbs-up fa-3x green-inverse"></i>
             <h2 class="count-title">Rigtigt! :D</h2>
             <br>
             <h2 class="count-text"><b><%= @last_correct.name.html_safe unless @last_correct.try(:name).nil? %></b> var korrekt.</h2>

@@ -1,21 +1,59 @@
-<h1 class="lead text-center">Opsummering</h1>
-<div class="card-group text-center">
-  <% counter = 1 %>
-  <% session[:summary].each do |correct_id, answer_id| %>
-      <% correct = Illness.find(correct_id) %>
-      <% answer = Illness.find(answer_id) %>
-      <div class="card" style="box-shadow: 0 0 3px #dedede;">
-        <h4 class="lead">Spørgsmål #<%= counter %></h4>
-        <div class="card-block p-2">
-          <h5 class=""><%= correct.symptoms %></h5>
-          <h5>Du svarede: <%= answer.name %></h5>
-
-        </div>
-        <div class="card-footer">
-              <div type="button" class="btn btn-success btn btn3d"><span class="fa fa-check"></span>
+<div class="container-fluid text-center">
+<div class="row">
+  <div class="col-md-10">
+    <h1 class="display-4">Opsummering</h1>
+    <hr>
+    <div class="card-group">
+      <% counter = 1 %>
+      <% session[:summary].each do |correct_id, answer_id| %>
+          <% correct = Illness.find(correct_id) %>
+          <% answer = Illness.find(answer_id) %>
+          <% if answer_id == correct_id %>
+            <div class="card card-outline-success" style="box-shadow: 0 0 3px #dedede;">
+              <div class="card-header"><h4 class="lead">Spørgsmål #<%= counter %></h4></div>
+                <span class="fa fa-thumbs-up fa-4x green p-2"></span>
+              <div class="card-block p-2">
+                <h5 class=""><%= correct.symptoms.html_safe %></h5>
+                <h5 class="lead">Du svarede korrekt <i><%= answer.name %>!</i></h5>
               </div>
-        </div>
+            </div>
+              <% else %>
+              <div class="card card-outline-danger" style="box-shadow: 0 0 3px #dedede;">
+                <div class="card-header"><h4 class="lead">Spørgsmål #<%= counter %></h4></div>
+                <span class="fa fa-thumbs-down fa-4x red p-2"></span>
+                <div class="card-block p-2">
+                  <h5 class=""><%= correct.symptoms.html_safe %></h5>
+                  <h5 class="lead">Dit svar var <i><%= answer.name %></i>, medens det rigtige svar var <b><%= correct.name %></b></h5>
+                </div>
+              </div>
+          <% end %>
+
+          <% counter += 1 %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <h1 class="lead text-center">Statistik</h1>
+    <hr>
+    <div class="counter" style="box-shadow: 0 0 4px #161616;">
+      <i class="fa fa-star fa-3x"></i>
+      <h2 class="timer count-title count-number" data-to="<%= session[:score] %>" data-speed="500"></h2>
+      <p class="count-text  ">Korrekte svar</p>
+    </div>
+    <br>
+    <div class="counter" style="box-shadow: 0 0 4px #161616;">
+      <i class="fa fa-times fa-3x red"></i>
+      <h2 class="timer count-title count-number" data-to="<%= session[:wrong_answers] %>" data-speed="500"></h2>
+      <p class="count-text">Forkerte svar</p>
+    </div>
+  </div>
+</div>
+  <hr>
+  <%= link_to 'reset_game' do %>
+      <div class="btn3d btn btn-warning btn-lg">
+        <span class="fa fa-refresh fa-2x"></span>
+        <br>
+        Reset quiz
       </div>
-      <% counter += 1 %>
   <% end %>
 </div>
