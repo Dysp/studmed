@@ -1,25 +1,52 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-10">
-      <div class="fr-view">
+      <div class="offset-md-2 col-md-8 img-thumbnail bg-faded p-3" style="box-shadow: 0 0 3px #dedede;">
+      <h1 class="display-4 text-center">Hvilken sygdom tilhører disse symptomer?</h1>
+      <div class="fr-view text-center">
         <%= @correct.symptoms.html_safe %>
       </div>
     </div>
-    <div class="col-md-2">
-      <h2>Score: <%= session[:score] %></h2>
-    </div>
   </div>
+  <br>
   <div class="row">
-    <div class="col-md-12">
-     <div class="card-group">
+    <div class="col-md-2 rounded-bottom">
+      <h1 class="lead text-center">Dit sidste svar</h1>
+      <% if session[:was_answer_correct].nil? %>
+          <div class="card alert-info text-center" style="box-shadow: 0 0 3px #dedede;">
+            <div class="card-block">answer was nil</div>
+            <div class="card-block">
+              <p>Nuttin' here</p>
+            </div>
+          </div>
+      <% elsif session[:was_answer_correct] == true %>
+        <div class="card alert-success text-center" style="box-shadow: 0 0 3px #dedede;">
+          <div class="card-block"><%= @last_correct.symptoms.html_safe %></div>
+          <div class="card-block">
+            <p>Det korrekte svar på sidste spørgsmål, var:</p>
+            <p class=""><%= @last_correct.name.html_safe unless @last_correct.try(:name).nil? %></p>
+          </div>
+        </div>
+      <% else %>
+          <div class="card alert-danger text-center" style="box-shadow: 0 0 3px #dedede;">
+            <div class="card-block"><%= @last_correct.symptoms.html_safe %></div>
+            <div class="card-block">
+              <p>Det korrekte svar på sidste spørgsmål, var:</p>
+              <p class=""><%= @last_correct.name.html_safe unless @last_correct.try(:name).nil? %></p>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  <div class="col-md-8">
+    <h1 class="lead text-center">Vælg dit svar</h1>
+    <div class="card-group text-center">
         <% counter = 1 %>
         <% @illnesses.each do |illness| %>
-        <div class="card">
-          <div class="card-header">Svar <%= counter %></div>
-          <div class="card-block">
-            <%= illness.name.html_safe unless illness.try(:name).nil? %>
+        <div class="card" style="box-shadow: 0 0 3px #dedede;">
+          <h4 class="lead">Svar #<%= counter %></h4>
+          <div class="card-block p-2">
+            <h5 class=""><%= illness.name.html_safe unless illness.try(:name).nil? %></h5>
           </div>
-          <div class="card-footer text-center">
+          <div class="card-footer">
           <%= link_to(action: 'check_answer', answer: illness) do %>
             <button type="button" class="btn btn-success btn btn3d"><span class="fa fa-check"></span></button>
           <% end %>
@@ -29,6 +56,20 @@
         <% end %>
      </div>
     </div>
+
+    <div class="col-md-2 rounded-bottom">
+      <h1 class="lead text-center">Statistik</h1>
+      <div class="counter" style="box-shadow: 0 0 4px #161616;">
+        <i class="fa fa-star fa-3x"></i>
+        <h2 class="timer count-title count-number" data-to="<%= session[:score] %>" data-speed="500"></h2>
+        <p class="count-text  ">Korrekte svar</p>
+      </div>
+      <br>
+      <div class="counter" style="box-shadow: 0 0 4px #161616;">
+        <i class="fa fa-times fa-3x red"></i>
+        <h2 class="timer count-title count-number" data-to="<%= session[:wrong_answers] %>" data-speed="500"></h2>
+        <p class="count-text">Forkerte svar</p>
+      </div>
+    </div>
   </div>
 </div>
-<br>

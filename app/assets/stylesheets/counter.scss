@@ -1,0 +1,32 @@
+/*-=-=-=-=-=-=-=-=-=-=-=- */
+/* Column Grids */
+/*-=-=-=-=-=-=-=-=-=-=-=- */
+
+.col_half { width: 49%; }
+.col_third { width: 32%; }
+.col_fourth { width: 23.5%; }
+.col_fifth { width: 18.4%; }
+.col_sixth { width: 15%; }
+.col_three_fourth { width: 74.5%;}
+.col_twothird{ width: 66%;}
+.col_half,
+.col_third,
+.col_twothird,
+.col_fourth,
+.col_three_fourth,
+.col_fifth{
+  position: relative;
+  display:inline;
+  display: inline-block;
+  float: left;
+  margin-right: 2%;
+  margin-bottom: 20px;
+}
+.end { margin-right: 0 !important; }
+/* Column Grids End */
+
+.counter { background-color: #4a4a4a; padding: 20px; border-radius: 10px;}
+.count-title { font-size: 40px; font-weight: normal;  margin-top: 5px; margin-bottom: 0; text-align: center; color: #ffffff; }
+.count-text { font-size: 13px; font-weight: normal;  margin-top: 0px; margin-bottom: 0; text-align: center; color: #ffffff; }
+.fa-3x { margin: 0 auto; float: none; display: table; color: #72e55b; }
+.red { color: #e5605a;}

@@ -13,8 +13,18 @@
 <body class="site-background">
 <!-- Render navbar. -->
 <%= render 'layouts/navbar' %>
-
-
+<% if alert %>
+    <div class="container-fluid">
+      <div class="col-md-6 offset-md-3">
+        <p id="alert" class="alert alert-danger text-center"><%= alert %></p>
+      </div>
+    </div>
+<% end %>
+<% if notice %>
+    <div class="container-fluid">
+        <p id="notice" class="alert alert-info text-center"><%= notice %></p>
+    </div>
+<% end %>
 <%= yield %>
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->

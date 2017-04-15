@@ -1,61 +1,47 @@
-<nav class="navbar navbar-toggleable-md navbar-inverse sticky-top bg-inverse">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+<ul class="nav bg-inverse p-2">
+  <button class="navbar-toggler btn-primary btn-lg btn3d" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="icon-i-mental-health d-inline-block align-top" style="font-size: 4em;"></span>
   </button>
-  <%= link_to root_path, class: "btn btn-primary btn-lg btn3d" do %>
-      <span class="icon-i-mental-health d-inline-block align-top" style="font-size: 4em;"> </span>
-  <% end %>
-  <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active btn btn3d">
-        <%= link_to "Sygdomme er nederen", root_path, class: "nav-link" %>
-      </li>
-      <% @category_names.each_key do |key| %>
-        <li>
-          <%= link_to controller: illnesses_path, action: :category, category: key do %>
-            <div class="snip1303">
-              <%= category_image(key, 'center-block', 'width: 50px;display: block; margin-left: 10px; margin-right: 10px; margin-top: 8px; margin-bottom: 8px;') %>
-            </div>
-          <% end %>
-        </li>
+  <nav class="navbar navbar-inverse bg-inverse justify-content-center">
+    <div class="collapse " id="navbarToggleExternalContent">
+      <%= link_to root_path do %>
+        <h4 class="text-white pull-left">Sygdomme er nederen.</h4>
       <% end %>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-    <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to 'Ny sygdom', new_illness_path, class: 'btn btn-info btn-lg btn3d' %>
-        </li>
-         
-        <li class="nav-item">
-          <%= link_to 'Log ud', destroy_user_session_path, method: :delete, class: 'btn btn-danger btn-lg btn3d' %>
-        </li>
-    <% else %>
-        <li>
-          <%= link_to new_user_session_path do %>
-            <div class="snip1303 ion-android-unlock">
-            </div>
-          <% end %>
-        </li>
-    <% end %>
+      <br>
+      <span class="text-muted pull-left">Sådan, <i>rimelig</i> nederen.</span>
+      <ul class="navbar-nav">
+        <% @category_names.each_key do |key| %>
+            <li class="">
+              <%= link_to controller: illnesses_path, action: :category, category: key do %>
+                  <div class="snip1303">
+                    <%= category_image(key, 'center-block', 'width: 50px;display: block; margin-left: 10px; margin-right: 10px; margin-top: 8px; margin-bottom: 8px;') %>
+                  </div>
+              <% end %>
+            </li>
+        <% end %>
+      </ul>
+      </div>
+      <ul class="navbar-nav pull-right">
+        <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to 'Ny sygdom', new_illness_path, class: 'btn btn-info btn-lg btn3d' %>
+            </li>
+             
+            <li class="nav-item">
+              <%= link_to 'Log ud', destroy_user_session_path, method: :delete, class: 'btn btn-danger btn-lg btn3d' %>
+            </li>
+        <% else %>
+            <li>
+              <%= link_to new_user_session_path do %>
+                  <div class="snip1303 ion-android-unlock">
+                  </div>
+              <% end %>
+            </li>
+        <% end %>
+      </ul>
+  </nav>
+</ul>
 
-  </ul>
-  </div>
-</nav>
 <ol class="breadcrumb" style="box-shadow: 0px 0px 5px #b4b4b4">
   <%= render_breadcrumbs :separator => "<span class='lead'> » </span>".html_safe %>
-
-<% if alert %>
-    <div class="container-fluid">
-      <div class="col-md-6 offset-md-3">
-        <p id="alert" class="alert alert-danger text-center"><%= alert %></p>
-      </div>
-    </div>
-<% end %>
-<% if notice %>
-    <div class="container-fluid">
-      <div class="col-md-6 offset-md-3">
-        <p id="notice" class="alert alert-info text-center"><%= notice %></p>
-      </div>
-    </div>
-<% end %>
 </ol>

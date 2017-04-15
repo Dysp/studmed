@@ -20,6 +20,7 @@
 //= require plugins/link.min.js
 //= require plugins/align.min.js
 //= require plugins/table.min.js
+//= require counter.js
 //= require turbolinks
 // require_tree .
 
