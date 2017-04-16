@@ -54,7 +54,6 @@ class QuizzesController < ApplicationController
     reset_game if session[:score].nil?
     return true if session[:score] + session[:wrong_answers] > 4
     false
-    end
   end
 
   def get_illnesses(amount)
