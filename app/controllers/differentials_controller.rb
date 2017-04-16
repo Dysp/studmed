@@ -1,19 +1,19 @@
 class DifferentialsController < ApplicationController
   def create
-    @illness = Illness.where(id: params[:illness_id]).first
-    @differential = @illness.differentials.build(:differential_id => params[:differential_id])
+    @illness = Illness.find(params[:diff][:illness_id])
+    @differential = @illness.differentials.build(:differential_id => params[:diff][:differential_id])
     if @differential.save
-      flash[:notice] = "Added diff."
-      redirect_to root_url
+      flash[:notice] = "Tilføjede differentialdiagnose"
+      redirect_back fallback_location: root_url
     else
-      flash[:error] = "Unable to add friend."
-      redirect_to root_url
+      flash[:error] = "Kunne ikke tilføje differentialdiagnose"
+      redirect_back fallback_location: root_url
     end
   end
 
   def destroy
     @illness = Differential.find(params[:differential_id]).destroy
+    flash[:notice] = "Fjernede differentialdiagnose"
+    redirect_back fallback_location: root_url
   end
-
-
 end
