@@ -75,8 +75,6 @@ class IllnessesController < ApplicationController
 
   # PATCH/PUT /illness/1
   def update
-    # TODO: Den opretter ny differential i stedet for at redigere den allerede eksisterende.
-    #@differential = @illness.differentials.build(:differential_id => params[:differential_id])
     respond_to do |format|
       if @illness.update(illness_params)
         format.html { redirect_to @illness, notice: 'Illness was successfully updated.' }

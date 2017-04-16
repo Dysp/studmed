@@ -1,3 +1,6 @@
+<!-- Disables Turbolinks for the quiz -->
+<%= content_for(:body_attributes, "data-turbolink='false'") %>
+
 <script>
     $(document)
         .on('turbolinks:click', function() {
@@ -14,13 +17,13 @@
     <div class="col-md-2 text-center">
       <div class="btn3d btn btn-info btn-lg">
        <span class="fa fa-hashtag fa-2x"></span><br>
-        Spørgsmål #<%= session[:score] + session[:wrong_answers] %>
+        Spørgsmål #<%= session[:score] + session[:wrong_answers] + 1 %>
       </div>
     </div>
       <div class="col-md-8 img-thumbnail bg-faded p-3" style="box-shadow: 0 0 3px #dedede;">
       <h1 class="lead text-center">Hvad er den mest sandsynlige diagnose i denne case?</h1>
       <div class="fr-view text-center">
-        <%= @correct.symptoms.html_safe unless @correct.symptoms.nil? %>
+        <%= @case.content.html_safe unless @case.content.nil? %>
       </div>
     </div>
 
@@ -40,7 +43,7 @@
       <h1 class="lead text-center">Dit sidste svar</h1>
       <% if session[:was_answer_correct].nil? %>
           <div class="counter" style="box-shadow: 0 0 4px #161616;">
-            <i class="fa fa-play fa-3x"></i>
+            <i class="fa fa-play fa-3x light-blue"></i>
             <h2 class="count-title">Sæt i gang!</h2>
             <br>
             <h2 class="count-text"><i>Her kommer dit seneste svar til at stå</i></h2>
@@ -86,24 +89,23 @@
     <div class="col-md-2 rounded-bottom">
       <h1 class="lead text-center">Statistik</h1>
       <div class="counter" style="box-shadow: 0 0 4px #161616;">
-        <i class="fa fa-star fa-3x"></i>
-        <h2 class="timer count-title count-number" data-to="<%= session[:score] %>" data-speed="500"></h2>
+        <i class="fa fa-star fa-3x green-inverse"></i>
+        <h2 class="timer count-title count-number" data-to="<%= session[:score] %>"></h2>
         <p class="count-text  ">Korrekte svar</p>
       </div>
       <br>
       <div class="counter" style="box-shadow: 0 0 4px #161616;">
         <i class="fa fa-times fa-3x red"></i>
-        <h2 class="timer count-title count-number" data-to="<%= session[:wrong_answers] %>" data-speed="500"></h2>
+        <h2 class="timer count-title count-number" data-to="<%= session[:wrong_answers] %>"></h2>
         <p class="count-text">Forkerte svar</p>
       </div>
     </div>
   </div>
 </div>
 <% if user_signed_in? %>
-  <%= session[:start_time] %>
-
-  <% session.each do |key, value| %>
-    <br><%= key.to_s %> =>
-    <%= value.to_s %>
-  <% end %>
+  <h5>Debug:</h5>
+    <% session.each do |key, value| %>
+      <br><%= key.to_s %> =>
+      <%= value.to_s %>
+   <% end %>
 <% end %>

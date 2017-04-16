@@ -1,0 +1,24 @@
+<%= simple_form_for(@case) do |f| %>
+
+   <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :content, class: 'form-control',
+                          label: 'Skriv case',
+                          placeholder: '42 årig mand præsenterer sig med...',
+                          required: true
+
+    %>
+    <%= f.input :illness_id,  collection: @illnesses,
+                error: 'Du bliver nødt til at vælge én sygdom at hæfte casen op på',
+                class: 'form-control',
+                placeholder: 'Vælg svaret',
+                prompt: 'Hvilken sygdom er svaret på denne case?',
+                required: true
+    %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

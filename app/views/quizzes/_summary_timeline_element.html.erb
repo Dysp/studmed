@@ -1,0 +1,26 @@
+<% if correct %>
+<li class="<%= timeline(counter)%>">
+  <div class="timeline-badge success">
+    <span class="fa fa-check">
+    </span>
+  </div>
+  <div class="timeline-panel">
+    <div class="timeline-body">
+      <h6 class="timeline-title lead text-center">Du svarede korrekt.</h6>
+      <p><i><%= truncate(casen.content, length: 150) %></i></p>
+      <p>Dit svar <i><%= your_answer.name %></i> var korrekt!</p>
+    </div>
+  </div>
+</li>
+<% else %>
+<li class="<%= timeline(counter)%>">
+  <div class="timeline-badge danger"><span class="fa fa-times"></span></div>
+  <div class="timeline-panel">
+    <div class="timeline-body">
+      <h6 class="timeline-title lead text-center">Du svarede forkert.</h6>
+      <p><i><%= truncate(casen.content, length: 150) %></i></p>
+      <p>Du svarede <i><%= your_answer.name %></i>, medens det rigtige svar var <b><%= correct_answer.name %></b></p>
+    </div>
+  </div>
+</li>
+<% end %>

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   authenticate :user do
     resources :illnesses, only: [:new, :create, :edit, :update, :category, :destroy]
+    resources :cases
   end
 
   get "/differentials/create", to: "differentials#create"

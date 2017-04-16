@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cases</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Tilhører</th>
+      <th>Case</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <!-- Cannot be named 'case', as it is a ruby function -->
+    <% @cases.each do |casen| %>
+      <tr>
+        <td><%= link_to Illness.find(casen.illness_id).name, illness_path(casen.illness_id) %></td>
+        <td><%= truncate(casen.content) %></td>
+        <td><%= link_to 'Show', casen %></td>
+        <td><%= link_to 'Edit', edit_case_path(casen) %></td>
+        <td><%= link_to 'Destroy', casen, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Case', new_case_path %>
