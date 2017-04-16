@@ -20,7 +20,7 @@
       <div class="col-md-8 img-thumbnail bg-faded p-3" style="box-shadow: 0 0 3px #dedede;">
       <h1 class="lead text-center">Hvad er den mest sandsynlige diagnose i denne case?</h1>
       <div class="fr-view text-center">
-        <%= @correct.symptoms.html_safe %>
+        <%= @correct.symptoms.html_safe unless @correct.symptoms.nil? %>
       </div>
     </div>
 
