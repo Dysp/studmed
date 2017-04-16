@@ -1,3 +1,14 @@
+<script>
+    $(document)
+        .on('turbolinks:click', function() {
+            NProgress.start();
+        })
+        .on('turbolinks:render', function() {
+            NProgress.done(); // to work with the above method on first visit
+            NProgress.remove(); // to work on back btn click, restore event
+        });
+</script>
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-2 text-center">

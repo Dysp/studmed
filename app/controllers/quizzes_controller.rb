@@ -24,13 +24,13 @@ class QuizzesController < ApplicationController
       session[:summary].merge!({ session[:correct] => params[:answer] })
       respond_to do |format|
         if params[:answer].to_i == session[:correct]
-          sleep(0.3.second)
+          #sleep(0.3.second)
           session[:last_correct] = session[:correct]
           session[:score] += 1
           session[:was_answer_correct] = true
           format.html { redirect_to quizzes_show_path }
         else
-          sleep(0.3.second)
+          #sleep(0.3.second)
           session[:last_correct] = session[:correct]
           session[:wrong_answers] += 1
           session[:was_answer_correct] = false

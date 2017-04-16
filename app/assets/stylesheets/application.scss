@@ -11,6 +11,9 @@
 @import "3dbuttons";
 @import "menubuttons";
 @import "counter";
+@import "nprogress";
+@import "nprogress-bootstrap";
+@import "nprogress-turbolinks5";
 
 // Box shadow helper
 @mixin BoxShadowHelper($level: 1){

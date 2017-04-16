@@ -1,47 +1,56 @@
-<ul class="nav bg-inverse p-2">
-  <button class="navbar-toggler btn-primary btn-lg btn3d" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="icon-i-mental-health d-inline-block align-top" style="font-size: 4em;"></span>
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
   </button>
-  <nav class="navbar navbar-inverse bg-inverse justify-content-center">
-    <div class="collapse " id="navbarToggleExternalContent">
-      <%= link_to root_path do %>
-        <h4 class="text-white pull-left">Sygdomme er nederen.</h4>
+  <%= link_to root_path do %>
+    <div class="navbar-brand btn-primary btn-lg btn3d"><span class="icon-i-mental-health d-inline-block align-top" style="font-size: 4em;"></span></div>
+  <% end %>
+  <!-- Collapsable menu items -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active p-2">
+        <%= link_to root_path do %>
+            <h4 class="text-white pull-left">Sygdomme er nederen.</h4>
+            <br>
+            <span class="text-muted pull-left">Sådan, <i>rimelig</i> nederen.</span>
+        <% end %>
+      </li>
+      <% @category_names.each_key do |key| %>
+          <li class="nav-item">
+            <%= link_to controller: illnesses_path, action: :category, category: key do %>
+                <div class="snip1303">
+                  <%= category_image(key, 'center-block', 'width: 50px;display: block; margin-left: 10px; margin-right: 10px; margin-top: 8px; margin-bottom: 8px;') %>
+                </div>
+            <% end %>
+          </li>
       <% end %>
-      <br>
-      <span class="text-muted pull-left">Sådan, <i>rimelig</i> nederen.</span>
-      <ul class="navbar-nav">
-        <% @category_names.each_key do |key| %>
-            <li class="">
-              <%= link_to controller: illnesses_path, action: :category, category: key do %>
-                  <div class="snip1303">
-                    <%= category_image(key, 'center-block', 'width: 50px;display: block; margin-left: 10px; margin-right: 10px; margin-top: 8px; margin-bottom: 8px;') %>
-                  </div>
-              <% end %>
-            </li>
+      <li class="nav-item">
+        <%= link_to(controller: :quizzes, action: :reset_game) do %>
+            <div class="snip1303">
+              <span class="fa fa-gamepad center-block" style="width: 50px;display: block; padding-bottom: 4px; margin-left: 10px; margin-right: 10px; margin-top: 8px; margin-bottom: 10px;"></span>
+            </div>
         <% end %>
-      </ul>
-      </div>
-      <ul class="navbar-nav pull-right">
-        <% if user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to 'Ny sygdom', new_illness_path, class: 'btn btn-info btn-lg btn3d' %>
-            </li>
-             
-            <li class="nav-item">
-              <%= link_to 'Log ud', destroy_user_session_path, method: :delete, class: 'btn btn-danger btn-lg btn3d' %>
-            </li>
-        <% else %>
-            <li>
-              <%= link_to new_user_session_path do %>
-                  <div class="snip1303 ion-android-unlock">
-                  </div>
-              <% end %>
-            </li>
+      </li>
+    </ul>
+   </div>
+  <!-- End of collapsable menu items -->
+  <% if user_signed_in? %>
+      <li class="nav-item">
+        <%= link_to 'Ny sygdom', new_illness_path, class: 'btn btn-info btn-lg btn3d' %>
+      </li>
+       
+      <li class="nav-item">
+        <%= link_to 'Log ud', destroy_user_session_path, method: :delete, class: 'btn btn-danger btn-lg btn3d' %>
+      </li>
+  <% else %>
+      <li class="nav-item">
+        <%= link_to new_user_session_path do %>
+            <div class="snip1303 ion-android-unlock">
+            </div>
         <% end %>
-      </ul>
-  </nav>
-</ul>
-
+      </li>
+  <% end %>
+</nav>
 <ol class="breadcrumb" style="box-shadow: 0px 0px 5px #b4b4b4">
   <%= render_breadcrumbs :separator => "<span class='lead'> » </span>".html_safe %>
 </ol>
