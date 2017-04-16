@@ -51,10 +51,9 @@ class QuizzesController < ApplicationController
   end
 
   def game_over?
-    unless session[:score].nil?
-      return true if session[:score] + session[:wrong_answers] > 5.0
-    else
-      false
+    reset_game if session[:score].nil?
+    return true if session[:score] + session[:wrong_answers] > 4
+    false
     end
   end
 
