@@ -11,95 +11,117 @@
             NProgress.remove(); // to work on back btn click, restore event
         });
 </script>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2 text-center">
-      <div class="btn3d btn btn-info btn-lg">
-       <span class="fa fa-hashtag fa-2x"></span><br>
-        Spørgsmål #<%= session[:score] + session[:wrong_answers] + 1 %>
+<div class="container-fluid" style="background-color: #1c1c1c;">
+<div class="row">
+<!-- LEFT SIDE CONTAINER -->
+<div class="col-md-2 p-0">
+  <div class="quiz-container">
+    <div class="banner2 two" style="left: 28px;">
+      <div class="main2">
+        <div class="text-center text-white">
+          <span class="fa fa-caret-left fa-2x" style="margin-top: 3px;"></span><br>
+            Sidste spørgsmål
+        </div>
       </div>
+      <div class="skew r" style="z-index:8; background-color: #6c3625; right: 15px; top: 5px;"></div>
     </div>
-      <div class="col-md-8 img-thumbnail bg-faded p-3" style="box-shadow: 0 0 3px #dedede;">
-      <h1 class="lead text-center">Hvad er den mest sandsynlige diagnose i denne case?</h1>
-      <div class="fr-view text-center">
-        <%= @case.content.html_safe unless @case.content.nil? %>
-      </div>
-    </div>
-
-    <div class="col-md-2 text-center">
-      <%= link_to 'reset_game' do %>
-          <div class="btn3d btn btn-warning btn-lg">
-            <span class="fa fa-refresh fa-2x"></span>
-            <br>
-            Reset quiz
-          </div>
-      <% end %>
-    </div>
+    <% if session[:was_answer_correct].nil? %>
+        <div class="quiz box" style="box-shadow: 0 0 4px #161616; margin: 25px; margin-left: 55px;">
+          <i class="fa fa-play fa-3x light-blue"></i>
+          <h2 class="count-title">Sæt i gang!</h2>
+          <br>
+          <h2 class="count-text"><i>Her kommer dit seneste svar til at stå</i></h2>
+        </div>
+    <% elsif session[:was_answer_correct] == true %>
+        <div class="quiz box" style="box-shadow: 0 0 4px #161616; margin: 25px; margin-left: 55px;">
+          <i class="fa fa-thumbs-up fa-3x green-inverse"></i>
+          <h2 class="count-title">Rigtigt! :D</h2>
+          <br>
+          <h2 class="count-text"><b><%= @last_correct.name.html_safe unless @last_correct.try(:name).nil? %></b> var korrekt.</h2>
+        </div>
+    <% else %>
+        <div class="quiz box" style="box-shadow: 0 0 4px #161616; margin: 25px; margin-left: 55px;">
+          <i class="fa fa-thumbs-down fa-3x red"></i>
+          <h2 class="count-title">Forkert! :(</h2>
+          <br>
+          <h2 class="count-text">Den rigtige diagnose var <b><%= @last_correct.name.html_safe unless @last_correct.try(:name).nil? %></b></h2>
+        </div>
+    <% end %>
+    <%= link_to 'reset_game' do %>
+        <center><btn class="btn3d btn btn-warning btn-lg">
+          <span class="fa fa-refresh fa-2x"></span>
+          <br>
+          Reset quiz
+        </btn></center>
+    <% end %>
   </div>
+</div>
+<!-- END OF LEFT SIDE CONTAINER -->
+
+<!-- CENTER CONTAINER -->
+<div class="col-md-8 quiz center-container rounded-circle">
+      <div class="banner one" style="padding-bottom: 10px;">
+        <div class="bk l">
+          <div class="arrow top"></div>
+          <div class="arrow bottom"></div>
+        </div>
+        <div class="skew l"></div>
+        <div class="main">
+            <div class="fr-view text-center display-4 text-white">
+              Case #<%= session[:score] + session[:wrong_answers] + 1 %>
+            </div>
+        </div>
+        <div class="skew r"></div>
+              <div class="bk r">
+          <div class="arrow top"></div>
+          <div class="arrow bottom"></div>
+        </div>
+        <div class="paper" style="height: 100%;">
+          <p><%= @case.content.html_safe unless @case.content.nil? %></p>
+        </div>
+      </div>
+      <h1 class="display-4 text-center text-white" style="font-size: 200%;">Vælg dit svar</h1>
   <br>
-  <div class="row">
-    <div class="col-md-2 rounded-bottom">
-      <h1 class="lead text-center">Dit sidste svar</h1>
-      <% if session[:was_answer_correct].nil? %>
-          <div class="counter" style="box-shadow: 0 0 4px #161616;">
-            <i class="fa fa-play fa-3x light-blue"></i>
-            <h2 class="count-title">Sæt i gang!</h2>
-            <br>
-            <h2 class="count-text"><i>Her kommer dit seneste svar til at stå</i></h2>
-          </div>
-      <% elsif session[:was_answer_correct] == true %>
-          <div class="counter" style="box-shadow: 0 0 4px #161616;">
-            <i class="fa fa-thumbs-up fa-3x green-inverse"></i>
-            <h2 class="count-title">Rigtigt! :D</h2>
-            <br>
-            <h2 class="count-text"><b><%= @last_correct.name.html_safe unless @last_correct.try(:name).nil? %></b> var korrekt.</h2>
-          </div>
-      <% else %>
-          <div class="counter" style="box-shadow: 0 0 4px #161616;">
-            <i class="fa fa-thumbs-down fa-3x red"></i>
-            <h2 class="count-title">Forkert! :(</h2>
-            <br>
-            <h2 class="count-text">Den rigtige diagnose var <b><%= @last_correct.name.html_safe unless @last_correct.try(:name).nil? %></b></h2>
-          </div>
-      <% end %>
-    </div>
-  <div class="col-md-8">
-    <h1 class="lead text-center">Vælg dit svar</h1>
-    <div class="card-group text-center">
+      <div class="card-deck" style="padding-left:30px; padding-right:30px;">
         <% counter = 1 %>
         <% @illnesses.each do |illness| %>
-        <div class="card" style="box-shadow: 0 0 3px #dedede;">
-          <h4 class="lead">Svar #<%= counter %></h4>
-          <div class="card-block p-2">
-            <h5 class=""><%= illness.name.html_safe unless illness.try(:name).nil? %></h5>
-          </div>
-          <div class="card-footer">
-          <%= link_to(action: 'check_answer', answer: illness) do %>
-            <div type="button" class="btn btn-success btn btn3d"><span class="fa fa-check"></span>
+            <div class="card quiz box rounded text-center">
+              <div class="box">
+                <div class="ribbon"><span>Svar #<%= counter %></span></div>
+              </div>
+              <div class="p-2 text-white">
+                <h5 class="lead"><%= illness.name.html_safe unless illness.try(:name).nil? %></h5>
+              </div>
+              <div class="">
+                <%= link_to(action: 'check_answer', answer: illness) do %>
+                    <div type="button" class="btn btn-success btn btn3d pull-left"><span class="fa fa-check"></span>
+                    </div>
+                <% end %>
+              </div>
             </div>
-          <% end %>
-          </div>
-        </div>
-        <% counter += 1 %>
+            <% counter += 1 %>
         <% end %>
-     </div>
-    </div>
+      </div>
 
-    <div class="col-md-2 rounded-bottom">
-      <h1 class="lead text-center">Statistik</h1>
-      <div class="counter" style="box-shadow: 0 0 4px #161616;">
-        <i class="fa fa-star fa-3x green-inverse"></i>
-        <h2 class="timer count-title count-number" data-to="<%= session[:score] %>"></h2>
-        <p class="count-text  ">Korrekte svar</p>
-      </div>
-      <br>
-      <div class="counter" style="box-shadow: 0 0 4px #161616;">
-        <i class="fa fa-times fa-3x red"></i>
-        <h2 class="timer count-title count-number" data-to="<%= session[:wrong_answers] %>"></h2>
-        <p class="count-text">Forkerte svar</p>
-      </div>
+</div>
+<!-- END OF CENTER CONTAINER -->
+
+<!-- SIDE CONTAINER-->
+    <div class="col-md-2 quiz side-container text-center text-white">
+        <h1 class="lead text-center">Statistik</h1>
+        <div class="counter quiz box" style="box-shadow: 0 0 4px #161616;">
+          <i class="fa fa-star fa-3x green-inverse"></i>
+          <h2 class="timer count-title count-number" data-to="<%= session[:score] %>"></h2>
+          <p class="count-text  ">Korrekte svar</p>
+        </div>
+        <br>
+        <div class="counter quiz box" style="box-shadow: 0 0 4px #161616;">
+          <i class="fa fa-times fa-3x red"></i>
+          <h2 class="timer count-title count-number" data-to="<%= session[:wrong_answers] %>"></h2>
+          <p class="count-text">Forkerte svar</p>
+        </div>
     </div>
+<!-- END OF RIGHT SIDE CONTAINER -->
   </div>
 </div>
 <% if user_signed_in? %>

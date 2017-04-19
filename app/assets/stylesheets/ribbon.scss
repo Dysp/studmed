@@ -1,0 +1,228 @@
+.ribbon {
+  position: absolute;
+  right: -5px; top: -5px;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px; height: 75px;
+  text-align: right;
+}
+.ribbon span {
+  font-size: 10px;
+  font-weight: bold;
+  color: #FFF;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 20px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  width: 100px;
+  display: block;
+  background: #79A70A;
+  background: linear-gradient(#9BC90D 0%, #79A70A 100%);
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 19px; right: -21px;
+}
+.ribbon span::before {
+  content: "";
+  position: absolute; left: 0px; top: 100%;
+  z-index: -1;
+  border-left: 3px solid #79A70A;
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid #79A70A;
+}
+.ribbon span::after {
+  content: "";
+  position: absolute; right: 0px; top: 100%;
+  z-index: -1;
+  border-left: 3px solid transparent;
+  border-right: 3px solid #79A70A;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid #79A70A;
+}
+
+.banner {
+  width: 80%;
+  max-width: 1000px;
+  height: auto;
+  margin: 40px auto;
+  position: relative;
+}
+
+.banner2 {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  margin:40px auto;
+
+  position: relative;
+}
+
+.one > div {
+  height: 84px;
+}
+
+.two > div {
+  height: 74px;
+}
+
+.main {
+  background: #0fadc0;
+  position: relative;
+  display: block;
+  width: 90%;
+  left: 50%;
+  top: 0;
+  padding: 5px;
+  margin-left: -45%;
+  z-index: 10;
+}
+
+.main2 {
+  background: #c04d3a;
+  position: relative;
+  display: block;
+  width: 90%;
+  left: 50%;
+  top: 0;
+  padding: 5px;
+  margin-left: -45%;
+  z-index: 10;
+}
+
+
+.main > div {
+  border: 1px dashed #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+  height: 74px;
+}
+
+.main2 > div {
+  border: 1px dashed #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+  height: 64px;
+}
+
+.bk {
+  background: #1199a9;
+  position: absolute;
+  width: 8%;
+  top: 12px;
+}
+
+.bk.l {
+  left: 0;
+}
+
+.bk.r {
+  right: 0;
+}
+
+.skew {
+  position: absolute;
+  background: #0c7582;
+  width: 3%;
+  top: 6px;
+  z-index: 5;
+}
+
+.skew.l {
+  left: 5%;
+  transform: skew(00deg,20deg);
+}
+
+.skew.r {
+  right: 5%;
+  transform: skew(00deg,-20deg);
+}
+
+.bk.l > div {
+  left: -25px;
+}
+
+.bk.r > div {
+  right: -25px;
+}
+
+.arrow {
+  height: 25px !important;
+  position: absolute;
+  z-index: 2;
+  width: 0;
+  height: 0;
+}
+
+.arrow.top {
+  top: 0px;
+  border-top: 0px solid transparent;
+  border-bottom: 25px solid transparent;
+  border-right: 30px solid #1199a9;
+}
+
+.arrow.bottom {
+  top: 84-25px;
+  border-top: 25px solid transparent;
+  border-bottom:0px solid transparent;
+  border-right: 30px solid #1199a9;
+}
+
+.paper {
+  margin: auto;
+  width: 84%;
+  background-color: #fff3f3;
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  box-shadow: inset 1px 4px 9px -6px;
+}
+
+.r .bottom {
+  border-top: 25px solid transparent;
+  border-bottom: 0px solid transparent;
+  border-left: 30px solid #1199a9;
+  border-right: none;
+}
+
+.r .top {
+  border-bottom: 25px solid transparent;
+  border-top: 0px solid transparent;
+  border-left: 30px solid #1199a9;
+  border-right: none;
+}
+
+@media all and (max-width: 1020px) {
+  .skew.l {
+    left: 5%;
+    transform: skew(00deg,25deg);
+  }
+
+  .skew.r {
+    right: 5%;
+    transform: skew(00deg,-25deg);
+  }
+}
+
+@media all and (max-width: 680px) {
+  .skew.l {
+    left: 5%;
+    transform: skew(00deg,30deg);
+  }
+
+  .skew.r {
+    right: 5%;
+    transform: skew(00deg,-30deg);
+  }
+}
+
+@media all and (max-width: 460px) {
+  .skew.l {
+    left: 5%;
+    transform: skew(00deg,40deg);
+  }
+  .skew.r {
+    right: 5%;
+    transform: skew(00deg,-40deg);
+  }
+}

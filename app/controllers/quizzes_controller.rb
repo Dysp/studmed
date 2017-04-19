@@ -2,7 +2,8 @@ class QuizzesController < ApplicationController
   add_breadcrumb "<span class='lead' style='font-size: medium;'>Forsiden</span>".html_safe, :root_path
 
   def summary
-    add_breadcrumb "<span class='lead' style='font-size: medium;'>Opsummering</span>".html_safe
+    @no_bar = true
+    #add_breadcrumb "<span class='lead' style='font-size: medium;'>Opsummering</span>".html_safe
   end
 
   def reset_game
@@ -11,7 +12,8 @@ class QuizzesController < ApplicationController
   end
 
   def show
-    add_breadcrumb "<span class='lead' style='font-size: medium;'>Quiz</span>".html_safe
+    @no_bar = true
+    #add_breadcrumb "<span class='lead' style='font-size: medium;'>Quiz</span>".html_safe
     start_new_game if session[:score].nil? || session[:wrong_answers].nil? || session[:summary].nil?
 
     @last_correct = Illness.find(session[:last_correct]) unless session[:last_correct].nil?

@@ -47,11 +47,11 @@
   background-color:#4274D7;
 }
 .btn3d.btn-success {
-  box-shadow:0 0 0 1px #31c300 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #5eb924, 0 8px 8px 1px rgba(0,0,0,0.5);
-  background-color:#78d739;
-}
+  box-shadow:0 0 0 1px #99d00d inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #69950b, 0 8px 8px 1px rgba(0,0,0,0.5);
+  background: linear-gradient(#9BC90D 0%, #79A70A 100%);}
+
 .btn3d.btn-success:active, .btn3d.btn-success.active {
-  box-shadow:0 0 0 1px #30cd00 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+  box-shadow:0 0 0 1px #99d00d inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
   background-color: #78d739;
 }
 .btn3d.btn-info {
