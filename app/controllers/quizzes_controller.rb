@@ -62,9 +62,7 @@ class QuizzesController < ApplicationController
     # Tell the session which case is used
     session[:case] = @case.id
     # Find some random illnesses
-    @illnesses = Illness.where.not(id: @case.illness_id)
-    @illnesses.shuffle!
-    @illnesses.first(amount - 1)
+    @illnesses = Illness.where.not(id: @case.illness_id).order('random()').first(amount - 1)
     # Append the correct illness
     @illnesses << Illness.find(@case.illness_id)
     # Shuffle it up a bit
