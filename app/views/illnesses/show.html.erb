@@ -1,32 +1,39 @@
 <div class="container">
 
-
-<div class="row">
+<div class="col-md-12">
 <!-- Title -->
-<div class="col-md-8">
-  <h3><span class="icon-i-first-aid badge badge-primary"> </span>
-    <%= @illness.try(:name).humanize %> <%= link_to('Edit', edit_illness_path(@illness), class: "btn btn-sm btn-warning") if user_signed_in? %>
-  </h3>
-  <small>Synonymer: <%= @illness.try(:synonyms) %></small>
-</div>
+  <div class="pull-left">
+    <h2><span class="fa fa-id-card badge badge-primary"> </span>
+      <%= @illness.try(:name).humanize %> <%= link_to('Edit', edit_illness_path(@illness), class: "btn btn-sm btn-warning") if user_signed_in? %>
+    </h2>
+    <small>Synonymer: <%= @illness.try(:synonyms) %></small>
+  </div>
 <!-- ------------- -->
 <!-- Quick info -->
-<div class="col-md-2 offset-md-2">
-  <ul class="list-unstyled">
-    <li class="media">
-      <h2 class="d-flex align-self-center mr-3"><span class="fa fa-pencil"> </span></h2>
-      <div class="media-body">
-        <h6 class="mt-0 lead">Oprettet</h6>
-        <p class="mt-0"><%= @illness.created_at.strftime('%d-%m-%Y') unless @illness.try(:created_at).nil? %></p>
-      </div>
-    </li>
-  </ul>
+<div class="media pull-right" style="margin: 5px; padding: 5px;">
+  <h2 class="d-flex align-self-center mr-3"><span class="fa fa-plus"> </span></h2>
+  <div class="media-body">
+    <h6 class="mt-0 lead">Oprettet</h6>
+    <p class="mt-0"><%= @illness.created_at.strftime('%d-%m-%Y') unless @illness.try(:created_at).nil? %></p>
+  </div>
+</div>
+
+<div class="media pull-right" style="margin: 5px; padding: 5px;">
+  <h2 class="d-flex align-self-center mr-3"><span class="fa fa-refresh"> </span></h2>
+  <div class="media-body">
+    <h6 class="mt-0 lead">Opdateret</h6>
+    <p class="mt-0"><%= @illness.created_at.strftime('%d-%m-%Y') unless @illness.try(:updated_at).nil? %></p>
+  </div>
 </div>
 <!-- ------------- -->
-<!-- End of row -->
 </div>
+</div>
+<!-- end of column -->
+<br>
+<br>
+<br><br>
 
-
+<div class="container">
 <div class="row">
 <!-- Description -->
 <div class="col-md-6">

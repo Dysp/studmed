@@ -44,15 +44,12 @@
           </div>
           <div class="row">
             <div class="col-md-6">
-              <h1 class="lead"><span class="form-control-feedback fa fa-pie-chart"></span> Incidens</h1>
-              <p><%= f.input_field :incidence, hint: 'Antallet af nye tilfælde pr. tidsperiode', class: 'form-control' %></p>
+              <h1 class="lead"><span class="form-control-feedback fa fa-id-card-o"></span> Synonymer</h1>
+              <%= f.input_field :synonyms, hint: 'Synonymer', class: 'form-control' %>
             </div>
             <div class="col-md-6">
-              <% unless @differential_diagnoses.nil? %>
-                  <h1 class="lead"><span class="form-control-feedback fa fa-exchange"></span> Differentialdiagnoser</h1>
-                  <%= select_tag 'differential_id', options_from_collection_for_select(@differential_diagnoses, 'id', 'name'), prompt: "Vælg differential diagnoser", class: 'form-control', multiple: true %>
-                  <i> Vælg flere ved at holde CTRL i bund</i>
-              <% end %>
+              <h1 class="lead"><span class="form-control-feedback fa fa-pie-chart"></span> Forekomst</h1>
+              <p><%= f.input_field :incidence, hint: 'Antallet af nye tilfælde pr. tidsperiode', class: 'form-control' %></p>
             </div>
           </div>
         </div>
