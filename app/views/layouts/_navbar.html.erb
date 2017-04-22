@@ -1,4 +1,4 @@
-<nav class="navbar navbar-toggleable-md navbar-inverse nav-bg-color">
+<nav class="navbar navbar-toggleable-md navbar-inverse navbar-bg">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -10,9 +10,9 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active p-2">
         <%= link_to root_path do %>
-            <h4 class="text-white pull-left">Sygdomme er nederen.</h4>
+            <h4 class="text-white pull-left">Sygdomme er nederen</h4>
             <br>
-            <span class="text-muted pull-left">Sådan, <i>rimelig</i> nederen.</span>
+            <span class="text-white pull-left">Sådan, <i>rimelig</i> nederen</span>
         <% end %>
       </li>
       <% @category_names.each_key do |key| %>
@@ -35,20 +35,13 @@
    </div>
   <!-- End of collapsable menu items -->
   <% if user_signed_in? %>
-      <li class="nav-item">
-        <%= link_to 'Ny sygdom', new_illness_path, class: 'btn btn-info btn-lg btn3d' %>
-      </li>
-       
-      <li class="nav-item">
+        <%= link_to 'Ny sygdom', new_illness_path, class: 'btn btn-info btn-lg btn3d' %>  
         <%= link_to 'Log ud', destroy_user_session_path, method: :delete, class: 'btn btn-danger btn-lg btn3d' %>
-      </li>
   <% else %>
-      <li class="nav-item">
         <%= link_to new_user_session_path do %>
             <div class="snip1303 ion-android-unlock">
             </div>
         <% end %>
-      </li>
   <% end %>
 </nav>
 

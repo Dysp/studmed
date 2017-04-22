@@ -1,73 +1,124 @@
-<div class="container-fluid text-center">
-<div class="row">
-  <div class="col-md-4">
-    <h1 class="display-4 text-center">Statistik</h1>
-    <hr>
-    <div class="row">
-      <div class="col-md-6">
-        <br>
-        <div class="counter" style="box-shadow: 0 0 4px #161616;">
-          <i class="fa fa-star fa-3x gold"></i>
-          <h2 class="timer count-title count-number" data-to="<%= (session[:score].to_f/(session[:wrong_answers].to_f + session[:score].to_f))*100.0 %>" data-speed="1500"></h2>
-          <p class="count-text">Score</p>
+<div class="container-fluid quiz containerz" style="height:100%;">
+  <br>
+  <div class="row">
+    <!-- LEFT SIDE CONTAINER -->
+    <div class="col-md-1 p-0">
+
+      <%= link_to 'reset_game' do %>
+          <div class="banner2 two">
+            <div class="main2" style="background: #ee7c1b;">
+              <div class="text-center text-white">
+                <span class="fa fa-refresh fa-2x" style="margin-top: 3px;"></span><br>Restart quiz</div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+    <!-- END OF LEFT SIDE CONTAINER -->
+
+    <!-- CENTER CONTAINER -->
+    <div class="col-md-10 quiz center-container">
+      <div class="grid">
+        <div class="banner one" style="padding-bottom: 10px;">
+          <div class="bk l">
+            <div class="arrow top"></div>
+            <div class="arrow bottom"></div>
+          </div>
+          <div class="skew l"></div>
+          <div class="main">
+            <div class="fr-view text-center display-4 text-white">
+              Opsummering
+            </div>
+          </div>
+          <div class="skew r"></div>
+          <div class="bk r">
+            <div class="arrow top"></div>
+            <div class="arrow bottom"></div>
+          </div>
+          <div class="paper">
+            <ul class="timeline">
+              <% counter = 0 %>
+              <% session[:summary].each do |array| %>
+                  <% correct_answer = Illness.find(array[0].to_i) %>
+                  <% your_answer = Illness.find(array[1].to_i) %>
+                  <% casen = Case.find(array[2]) %>
+
+                  <% if array[0] == array[1] %>
+                      <%= render 'summary_timeline_element',  counter: counter, correct: true,
+                                 casen: casen, correct_answer: correct_answer,
+                                 your_answer: your_answer %>
+                  <% else %>
+                      <%= render 'summary_timeline_element',  counter: counter, correct: false,
+                                 casen: casen, correct_answer: correct_answer,
+                                 your_answer: your_answer %>
+                  <% end %>
+                  <% counter += 1 %>
+              <% end %>
+            </ul>
+          </div>
         </div>
-        <br>
-        <div class="counter" style="box-shadow: 0 0 4px #161616;">
-          <i class="fa fa-hashtag fa-3x light-blue"></i>
-          <h2 class="timer count-title count-number" data-to="<%= session[:score] + session[:wrong_answers] %>" data-speed="1500"></h2>
-          <p class="count-text">Antal spørgsmål</p>
-        </div>
-      </div>
-       <div class="col-md-6">
-         <br>
-         <div class="counter" style="box-shadow: 0 0 4px #161616;">
-           <i class="fa fa-check fa-3x green-inverse"></i>
-           <h2 class="timer count-title count-number" data-to="<%= session[:score] %>" data-speed="1500"></h2>
-           <p class="count-text">Korrekte svar</p>
-         </div>
-         <br>
-         <div class="counter" style="box-shadow: 0 0 4px #161616;">
-           <i class="fa fa-times fa-3x red"></i>
-           <h2 class="timer count-title count-number" data-to="<%= session[:wrong_answers] %>" data-speed="1500"></h2>
-           <p class="count-text">Forkerte svar</p>
-         </div>
       </div>
     </div>
-    <%= link_to 'reset_game' do %>
-        <br>
-        <div class="btn3d btn btn-warning btn-lg">
-          <span class="fa fa-refresh fa-2x"></span>
-          <br>
-          Ny quiz
-        </div>
-    <% end %>
-  </div>
-  <div class="col-md-8">
-  <div style="padding-top: 0px; padding-bottom: 0px;">
-    <h1 class="display-4">Opsummering</h1>
-    <hr>
-    <ul class="timeline">
-       <% counter = 0 %>
-      <% session[:summary].each do |array| %>
-        <% correct_answer = Illness.find(array[0].to_i) %>
-        <% your_answer = Illness.find(array[1].to_i) %>
-        <% casen = Case.find(array[2]) %>
+    <!-- END OF CENTER CONTAINER -->
 
-        <% if array[0] == array[1] %>
-          <%= render 'summary_timeline_element',  counter: counter, correct: true,
-                                                  casen: casen, correct_answer: correct_answer,
-                                                  your_answer: your_answer %>
-        <% else %>
-          <%= render 'summary_timeline_element',  counter: counter, correct: false,
-                                                  casen: casen, correct_answer: correct_answer,
-                                                  your_answer: your_answer %>
-        <% end %>
-        <% counter += 1 %>
-      <% end %>
-    </ul>
+    <!-- SIDE CONTAINER-->
+    <div class="col-md-1 quiz side-container text-center text-white">
+      <div class="banner2 two" style="right: 37px;">
+        <div class="main2" style="background: #4c9a7f;">
+          <div class="text-center text-white">
+            <span class="fa fa-area-chart fa-2x" style="margin-top: 3px;"></span><br>
+            Statistik
+          </div>
+        </div>
+        <div class="skew l" style="z-index:8; background-color: #33684f; right: 15px; top: 5px;"></div>
+      </div>
+      <div class="card quiz box rounded text-center">
+        <div class="p-2 text-white">
+          <i class="fa fa-star fa-3x green"></i>
+          <h2 class="timer count-title count-number" data-to="<%= session[:score] %>"></h2>
+          <p class="count-text">Korrekte svar</p>
+        </div>
+      </div>
+      <br>
+      <div class="card quiz box rounded text-center">
+        <div class="p-2 text-white">
+          <i class="fa fa-times fa-3x red"></i>
+          <h2 class="timer count-title count-number" data-to="<%= session[:wrong_answers] %>"></h2>
+          <p class="count-text">Forkerte svar</p>
+        </div>
+      </div>
+    </div>
+    <!-- END OF RIGHT SIDE CONTAINER -->
   </div>
+  <div class="row">
+    <div class="col-md-6">
+      <br>
+      <div class="counter" style="box-shadow: 0 0 4px #161616;">
+        <i class="fa fa-star fa-3x gold"></i>
+        <h2 class="timer count-title count-number" data-to="<%= (session[:score].to_f/(session[:wrong_answers].to_f + session[:score].to_f))*100.0 %>" data-speed="1500"></h2>
+        <p class="count-text">Score</p>
+      </div>
+      <br>
+      <div class="counter" style="box-shadow: 0 0 4px #161616;">
+        <i class="fa fa-hashtag fa-3x light-blue"></i>
+        <h2 class="timer count-title count-number" data-to="<%= session[:score] + session[:wrong_answers] %>" data-speed="1500"></h2>
+        <p class="count-text">Antal spørgsmål</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <br>
+      <div class="counter" style="box-shadow: 0 0 4px #161616;">
+        <i class="fa fa-check fa-3x green-inverse"></i>
+        <h2 class="timer count-title count-number" data-to="<%= session[:score] %>" data-speed="1500"></h2>
+        <p class="count-text">Korrekte svar</p>
+      </div>
+      <br>
+      <div class="counter" style="box-shadow: 0 0 4px #161616;">
+        <i class="fa fa-times fa-3x red"></i>
+        <h2 class="timer count-title count-number" data-to="<%= session[:wrong_answers] %>" data-speed="1500"></h2>
+        <p class="count-text">Forkerte svar</p>
+      </div>
+    </div>
+  <!-- End of row -->
   </div>
-<!-- End of row -->
-</div>
 <!-- End of container -->
 </div>

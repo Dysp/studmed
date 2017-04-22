@@ -6,20 +6,42 @@
 .quiz {
 }
 
+.quiz.containerz {
+  background: repeating-linear-gradient(
+                  -40deg,
+                  #242424,
+                  #242424 10px,
+                  #222222 10px,
+                  #222222 25px
+  );
+  height: 100%;
+}
+
 .quiz.center-container {
   height: 900px;
   border-radius: 10px;
+  box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.35) inset;
 
   background: #292929; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(#292929, #222222); /* Safari 5.1 to 6.0 */
   background: -o-linear-gradient(#292929, #222222); /* For Opera 11.6 to 12.0 */
-  background: -moz-linear-gradient(#292929, #222222); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(#292929, #222222); /* Standard syntax */
+  background: -moz-linear-gradient(#2d2d2d 0%, #333333 35%); /* For Firefox 3.6 to 15 */
   padding: 20px;
 }
 
+.quiz.center-container:before {
+  content: '';
+  position: absolute;
+  border-radius: 10px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0.5px 0.5px 1px 0px rgba(207, 241, 255, 0.25) inset;
+}
+
 .quiz.box {
-  box-shadow:0 0 0 1px #414141 inset, 0 0 0 2px rgba(255,255,255, 0.1) inset, 0 8px 0 0 #414141, 0 10px 10px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 1px #414141 inset, 0 0 0 2px rgba(255,255,255, 0.1) inset, 0 8px 0 0 #414141, 0 10px 10px 3px rgba(0, 0, 0, 0.25);
   background: #4b4b4b;
   border-radius: 10px;
   padding: 10px;

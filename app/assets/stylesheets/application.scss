@@ -24,14 +24,37 @@
 .gold { color: #e5c55b
 }
 
-
-.nav-bg-color {
-  background: #161616; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(#1c1c1c, #262626, #1c1c1c); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(#1c1c1c, #262626, #1c1c1c); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(#1c1c1c, #262626, #1c1c1c); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(#1c1c1c, #262626, #1c1c1c); /* Standard syntax */
+.navbar-bg {
+  background: -moz-linear-gradient(right, #135473, #255f58); /* For Firefox 3.6 to 15 */
+  /* Inner shadow */
+  box-shadow: -2px -2px 50px 3px rgba(0, 0, 0, 0.15) inset, 0px 0px 5px 3px rgba(0, 0, 0, 0.35);
 }
+
+.navbar-bg:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-bottom: solid;
+  border-color: rgba(0,0,0, 0.2);
+  border-width: 1px;
+  box-shadow: -0.5px 0 1px 0px rgba(207, 241, 255, 1) inset, 0px 2px 5px 0px rgba(0, 0, 0, 0.05);
+}
+
+/* Star pattern in navbar */
+.navbar-bg:before {
+  background-image:
+          radial-gradient(rgba(255,255,255,.3), rgba(255,255,255,.03) 2px, transparent 55px),
+          radial-gradient(rgba(255,255,255,.3), rgba(255,255,255,.05) 1px, transparent 50px),
+          radial-gradient(rgba(255,255,255,.5), rgba(255,255,255,.07) 1px, transparent 60px),
+          radial-gradient(rgba(255,255,255,.5), rgba(255,255,255,.09) 1px, transparent 40px);
+  background-size: 750px 750px, 900px 900px, 600px 600px, 450px 450px;
+  background-position: 0 0, 64px -393px, 100px 318px, 164px -131px;
+}
+
+
 // Box shadow helper
 @mixin BoxShadowHelper($level: 1){
   @if $level == 1 {

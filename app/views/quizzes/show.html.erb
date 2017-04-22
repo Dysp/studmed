@@ -1,21 +1,11 @@
 <!-- Disables Turbolinks for the quiz -->
 <%= content_for(:body_attributes, "data-turbolink=false") %>
-
-<script>
-    $(document)
-        .on('turbolinks:click', function() {
-            NProgress.start();
-        })
-        .on('turbolinks:render', function() {
-            NProgress.done(); // to work with the above method on first visit
-            NProgress.remove(); // to work on back btn click, restore event
-        });
-</script>
-<div class="container-fluid" style="background-color: #1c1c1c;">
+<div class="container-fluid quiz containerz">
+  <br>
 <div class="row">
 <!-- LEFT SIDE CONTAINER -->
 <div class="col-md-2 p-0">
-    <div class="banner2 two" style="left: 25px;">
+    <div class="banner2 two" style="left: 28px;">
       <div class="main2">
         <div class="text-center text-white">
           <span class="fa fa-question fa-2x" style="margin-top: 3px;"></span><br>
@@ -32,7 +22,7 @@
           <h2 class="count-text"><i>Her kommer dit seneste svar til at stå</i></h2>
         </div>
     <% elsif session[:was_answer_correct] == true %>
-        <div class=""  style="margin-left: 50px;">
+        <div class="" style="margin-left: 50px;">
           <i class="fa fa-thumbs-up fa-3x green"></i>
           <h2 class="count-title">Rigtigt! :D</h2>
           <br>
@@ -48,7 +38,7 @@
     <% end %>
 
   <%= link_to 'reset_game' do %>
-    <div class="banner2 two" style="left: 25px;">
+    <div class="banner2 two" style="left: 28px;">
       <div class="main2" style="background: #ee7c1b;">
         <div class="text-center text-white">
           <span class="fa fa-refresh fa-2x" style="margin-top: 3px;"></span><br>Restart quiz</div>
