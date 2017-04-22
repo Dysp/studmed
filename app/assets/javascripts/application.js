@@ -21,14 +21,5 @@
 //= require plugins/align.min.js
 //= require plugins/table.min.js
 //= require counter.js
-//= require nprogress
-//= require nprogress-turbolinks
 //= require turbolinks
 // require_tree .
-
-NProgress.configure({
-    showSpinner: false,
-    ease: 'ease',
-    speed: 500
-});
-
