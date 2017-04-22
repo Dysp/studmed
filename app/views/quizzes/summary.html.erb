@@ -1,4 +1,4 @@
-<div class="container-fluid quiz containerz" style="height:100%;">
+<div class="container-fluid quiz containerz">
   <br>
   <div class="row">
     <!-- LEFT SIDE CONTAINER -->
@@ -25,16 +25,18 @@
           </div>
           <div class="skew l"></div>
           <div class="main">
-            <div class="fr-view text-center display-4 text-white">
-              Opsummering
+            <%= link_to '#' do %>
+            <div class="text-center text-white" style="cursor:pointer">
+                <a data-toggle="collapse" data-target="#paper" class="display-4" style="text-decoration: none">Opsummering <span class="fa fa-plus pull-right" style="position: relative; top: 11px; right: 25px;"> </span></a>
             </div>
+            <% end %>
           </div>
           <div class="skew r"></div>
           <div class="bk r">
             <div class="arrow top"></div>
             <div class="arrow bottom"></div>
           </div>
-          <div class="paper">
+          <div class="paper collapse" id="paper">
             <ul class="timeline">
               <% counter = 0 %>
               <% session[:summary].each do |array| %>
@@ -89,36 +91,35 @@
     </div>
     <!-- END OF RIGHT SIDE CONTAINER -->
   </div>
-  <div class="row">
-    <div class="col-md-6">
-      <br>
-      <div class="counter" style="box-shadow: 0 0 4px #161616;">
+  <div class="row" style="padding: 35px;">
+    <div class="col-md-3">
+      <div class="card quiz box rounded text-center">
         <i class="fa fa-star fa-3x gold"></i>
         <h2 class="timer count-title count-number" data-to="<%= (session[:score].to_f/(session[:wrong_answers].to_f + session[:score].to_f))*100.0 %>" data-speed="1500"></h2>
         <p class="count-text">Score</p>
       </div>
-      <br>
-      <div class="counter" style="box-shadow: 0 0 4px #161616;">
+    </div>
+    <div class="col-md-3">
+      <div class="card quiz box rounded text-center">
         <i class="fa fa-hashtag fa-3x light-blue"></i>
         <h2 class="timer count-title count-number" data-to="<%= session[:score] + session[:wrong_answers] %>" data-speed="1500"></h2>
         <p class="count-text">Antal spørgsmål</p>
       </div>
     </div>
-    <div class="col-md-6">
-      <br>
-      <div class="counter" style="box-shadow: 0 0 4px #161616;">
+    <div class="col-md-3">
+      <div class="card quiz box rounded text-center">
         <i class="fa fa-check fa-3x green-inverse"></i>
         <h2 class="timer count-title count-number" data-to="<%= session[:score] %>" data-speed="1500"></h2>
         <p class="count-text">Korrekte svar</p>
       </div>
-      <br>
-      <div class="counter" style="box-shadow: 0 0 4px #161616;">
+    </div>
+    <div class="col-md-3">
+      <div class="card quiz box rounded text-center">
         <i class="fa fa-times fa-3x red"></i>
         <h2 class="timer count-title count-number" data-to="<%= session[:wrong_answers] %>" data-speed="1500"></h2>
         <p class="count-text">Forkerte svar</p>
       </div>
     </div>
-  <!-- End of row -->
   </div>
 <!-- End of container -->
 </div>
