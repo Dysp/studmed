@@ -4,7 +4,9 @@
 <!-- Title -->
   <div class="pull-left">
     <h2><span class="fa fa-id-card badge badge-primary"> </span>
-      <%= @illness.try(:name).humanize %> <%= link_to('Edit', edit_illness_path(@illness), class: "btn btn-sm btn-warning") if user_signed_in? %> <%= link_to 'Slet sygdom', @illness, method: :delete, data: { confirm: 'Er du sikker? Alt går tabt.' }, class: "btn btn-sm btn-danger" if user_signed_in? %>
+      <%= @illness.try(:name).humanize %>
+      <%= link_to('Edit', edit_illness_path(@illness), class: "btn btn-sm btn-warning") if user_signed_in? %>
+      <%= link_to 'Slet sygdom', @illness, method: :delete, data: { confirm: 'Er du sikker? Alt går tabt.' }, class: "btn btn-sm btn-danger disabled" if user_signed_in? %>
     </h2>
     <small>Synonymer: <%= @illness.try(:synonyms) %></small>
   </div>
