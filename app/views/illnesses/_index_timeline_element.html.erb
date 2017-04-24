@@ -1,10 +1,14 @@
 <li class="<%= timeline(counter) %>">
-  <div class="timeline-badge warning"><i class="<%= icon %>"></i></div>
+  <div class="timeline-badge <%= if newest; "success"; else; "warning"; end %>"><i class="<%= icon %>"></i></div>
   <div class="timeline-panel">
     <div class="timeline-body">
       <h6 class="timeline-title lead text-center"><%= link_to illness.name, illness_path(illness) %></h6>
-      <p><small><i class="fa fa-clock-o"></i> Oprettet: <%= illness.created_at.strftime('%H:%M, %d-%m-%Y') %></small></p>
-      <p><small><i class="fa fa-drivers-license"></i> <%= illness.category %></small></p>
+      <p><small><i class="fa fa-clock-o"> </i><%= if newest; "Oprettet: #{illness.created_at.strftime('%d-%m-%Y')}"; else "Opdateret: #{illness.updated_at.strftime('%d-%m-%Y')}"; end; %></small></p>
+      <div style="text-decoration: none !important;">
+      <%= link_to controller: :illnesses, action: :category, category: illness.category do %>
+          <small><p><i class="fa fa-drivers-license"></i> illness.category</p></small>
+      <% end %>
+      </div>
     </div>
   </div>
 </li>

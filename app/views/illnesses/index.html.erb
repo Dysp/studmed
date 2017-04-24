@@ -15,7 +15,7 @@
       <div style="padding-top: 0px; padding-bottom: 0px;">
         <ul class="timeline">
           <% for illness in @new_illnesses %>
-            <%= render 'index_timeline_element', illness: illness, counter: @counter, icon: 'fa fa-plus' %>
+            <%= render 'index_timeline_element', illness: illness, counter: @counter, icon: 'fa fa-plus', newest: true %>
             <% @counter += 1 %>
          <% end %>
         </ul>
@@ -26,7 +26,7 @@
     <div style="padding-top: 0px; padding-bottom: 0px;">
       <ul class="timeline">
         <% for illness in @updated_illnesses %>
-            <%= render 'index_timeline_element', illness: illness, counter: @counter2, icon: 'fa fa-refresh'%>
+            <%= render 'index_timeline_element', illness: illness, counter: @counter2, icon: 'fa fa-refresh', newest: false %>
             <% @counter2 += 1 %>
         <% end %>
       </ul>

@@ -22,7 +22,7 @@
   <h2 class="d-flex align-self-center mr-3"><span class="fa fa-refresh"> </span></h2>
   <div class="media-body">
     <h6 class="mt-0 lead">Opdateret</h6>
-    <p class="mt-0"><%= @illness.created_at.strftime('%d-%m-%Y') unless @illness.try(:updated_at).nil? %></p>
+    <p class="mt-0"><%= @illness.updated_at.strftime('%d-%m-%Y') unless @illness.try(:updated_at).nil? %></p>
   </div>
 </div>
 <!-- ------------- -->
