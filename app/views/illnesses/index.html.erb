@@ -1,16 +1,41 @@
-<div class="container">
-  <div class="col-md-12">
-    <h1 class="display-3 text-center">Vælg en kategori!</h1>
-    <br>
-    <div class="card-group">
-      <% @category_names.each_key do |key| %>
-          <%= render 'index_card', category: key %>
-      <% end %>
+<div class="container-fluid p-0">
+    <div class="col-md-12">
+     <div class="text-white" style="min-height: 0;">
+       <%= link_to(quizzes_reset_game_path) do %>
+         <div class="banner one" style="padding-bottom: 10px;">
+           <div class="bk l">
+             <div class="arrow top"></div>
+             <div class="arrow bottom"></div>
+           </div>
+           <div class="skew l"></div>
+           <div class="main">
+             <div class="text-center display-4 text-white">
+               Quiz
+             </div>
+           </div>
+           <div class="skew r"></div>
+           <div class="bk r">
+             <div class="arrow top"></div>
+             <div class="arrow bottom"></div>
+           </div>
+         </div>
+       <% end %>
+     </div>
+      <p class="lead text-center">eller...</p>
     </div>
-  </div>
-
+    <div class="col-md-12 text-center">
+      <h1 class="display-3">Vælg en kategori!</h1>
+      <p class="lead">Start med at læse om sygdommene ved at klikke på en kategori.</p>
+      <div class="card-group">
+        <% @category_names.each_key do |key| %>
+            <%= render 'index_card', category: key %>
+        <% end %>
+      </div>
+    </div>
+  <hr>
+  <h1 class="display-4 text-center">Aktivitet</h1>
   <div class="row">
-    <div class="col-md-6">
+    <div class="offset-md-1 col-md-5">
       <h1 class="lead text-center"><span class="fa fa-plus"></span> Seneste nye tilføjelser</h1>
       <div style="padding-top: 0px; padding-bottom: 0px;">
         <ul class="timeline">
@@ -21,7 +46,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
       <h1 class="lead text-center"><span class="fa fa-refresh"></span> Seneste opdateringer</h1>
     <div style="padding-top: 0px; padding-bottom: 0px;">
       <ul class="timeline">
