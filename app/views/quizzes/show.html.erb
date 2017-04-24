@@ -92,6 +92,7 @@
                     <div type="button" class="btn btn-success btn btn3d pull-left"><span class="fa fa-check"></span>
                     </div>
                 <% end %>
+                <%= button_to('Alright', controller: 'quizzes', action: 'check_answer', data: { confirm: 'Are you sure?', disable_with: 'loading...' }, answer: illness) %>
               </div>
             </div>
             <% counter += 1 %>
