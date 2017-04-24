@@ -2,7 +2,9 @@
   <div class="timeline-badge <%= if newest; "success"; else; "warning"; end %>"><i class="<%= icon %>"></i></div>
   <div class="timeline-panel">
     <div class="timeline-body">
-      <h6 class="timeline-title lead text-center"><span class="fa fa-drivers-license"> </span><%= link_to illness.name, illness_path(illness) %></h6>
+      <%= link_to illness_path(illness) do %>
+        <h6 class="timeline-title lead text-center"><span class="fa fa-drivers-license"> </span><%= illness.name %></h6>
+      <% end %>
       <p><small><i class="fa fa-clock-o"> </i><%= if newest; "Oprettet: #{illness.created_at.strftime('%d-%m-%Y')}"; else "Opdateret: #{illness.updated_at.strftime('%d-%m-%Y')}"; end; %></small></p>
       <div style="text-decoration: none !important;">
       <%= link_to controller: :illnesses, action: :category, category: illness.category do %>
